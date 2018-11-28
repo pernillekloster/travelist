@@ -13,7 +13,7 @@ const userSchema = new Schema({
   _trip: {type: Schema.Types.ObjectId, ref:"Trip"},
   _friends: [{
     _friendsId: {type: Schema.Types.ObjectId, ref:"User"},
-    status: {enum: ['pending', 'accepted'], default: 'pending'}
+    status: {type: String, enum: ['pending', 'accepted'], default: 'pending'}
   }]
 }, {
     timestamps: {
