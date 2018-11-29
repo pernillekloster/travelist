@@ -6,8 +6,17 @@ const Trip = require("../models/Trip");
 const Tip = require("../models/Tip");
 
 router.get("/", isLoggedIn, (req, res, next) => {
-  User.find({}).then(data => {
-    res.send(data);
+  let id = req.user._id
+  User.findById(id)
+    .then(data => {
+    res.json(data);
+  });
+});
+
+router.get("/all", isLoggedIn, (req, res, next) => {
+  User.find()
+    .then(data => {
+    res.json(data);
   });
 });
 
@@ -25,22 +34,25 @@ router.get("/followers", isLoggedIn, (req, res, next) => {
   });
 });
 
-router.post("/:username/follow", isLoggedIn, (req, res, next) => {
-  let username = req.params.username;
+// POST Route to follow users - id in url is NOT of the logged in user but 
+// the id of the person the user wants to follow!
+router.post("/:id/follow", isLoggedIn, (req, res, next) => {
+  let id = req.params.id;
+console.log(id)
 
-  User.findOne({ username }).then(user => {
+  User.findById(id).then(user => {
     // if it does NOT find user = -1
-    if (req.user.following.indexOf(user.username) === -1) {
+    if (req.user.following.indexOf(user._id) === -1) {
       console.log("FOLLOWING");
       User.findByIdAndUpdate(
         { _id: req.user._id },
-        { $push: { following: user.username } },
+        { $push: { following: user._id } },
         { new: true }
       )
         .then(user => {
           User.findOneAndUpdate(
-            { username: username },
-            { $push: { followers: req.user.username } },
+            { _id: id },
+            { $push: { followers: req.user._id } },
             { new: true }
           ).then(followedUser => {
             res.json(followedUser);
@@ -55,13 +67,13 @@ router.post("/:username/follow", isLoggedIn, (req, res, next) => {
       console.log("UNFOLLOWED");
       User.findByIdAndUpdate(
         { _id: req.user._id },
-        { $pull: { following: user.username } },
+        { $pull: { following: user._id } },
         { new: true }
       )
         .then(user => {
           User.findOneAndUpdate(
-            { username: username },
-            { $pull: { followers: req.user.username } },
+            { _id: id },
+            { $pull: { followers: req.user._id } },
             { new: true }
           ).then(user => {
             res.send(user);
@@ -75,5 +87,6 @@ router.post("/:username/follow", isLoggedIn, (req, res, next) => {
     }
   });
 });
+
 
 module.exports = router;
