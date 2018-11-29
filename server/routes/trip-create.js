@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 
 // Route to get all trips
 router.get('/get-trip', isLoggedIn, (req, res, next) => {
-  // let _trip = req.params.id
+  let _trip = req.params.id
   Trip.find()
     .then(trip => {
       res.json(trip);
@@ -70,6 +70,30 @@ router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
     })
   })
   .catch(err => next(err))
+  })
+
+  // router.post("/trip-delete/:id", isLoggedIn, (req, res, next) => {
+  //   let id = req.params._id;
+  //   Trip.findByIdAndDelete(id)
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // });
+
+  router.delete('/trip-delete/:id', (req, res, next)=>{
+    let id = req.params.id
+    // if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    //   res.status(400).json({ message: 'Specified id is not valid' });
+    //   return;
+    // }
+  
+    Trip.findByIdAndRemove(id)
+      .then(() => {
+        res.json({message: `Task with ${id} is removed successfully.`});
+      })
+      .catch(err => {
+        res.json(err);
+      })
   })
 
 module.exports = router;
