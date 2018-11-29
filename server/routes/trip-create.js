@@ -51,19 +51,25 @@ router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
   let _trip = req.params.id
   let { category, description, title, location } = req.body
   let _creator = req.user._id
-  Tip.create({ _creator, _trip, category, description, title, location })
-    .then(tip => {
-      // Tip.findOne({_id: id}, function (err, user) { ... });
 
+  let p1 = Tip.create({ _creator, _trip, category, description, title, location })
+   
+  let p2 = Trip.findById(_trip)
+
+  Promise.all([p1,p2])
+  .then(values => {
+    let tipId = values[0]._id
+    let tipArray = values[1]._tip
+    let newTipArray = [...tipArray, tipId]
+    Trip.findByIdAndUpdate(_trip, {_tip: newTipArray})
+    .then(newTripData => {
       res.json({
         success: true,
-        tip
-      });
+        newTripData
+      })
     })
-    .catch(err => next(err))
-});
-
-
-
+  })
+  .catch(err => next(err))
+  })
 
 module.exports = router;
