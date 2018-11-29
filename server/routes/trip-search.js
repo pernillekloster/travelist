@@ -5,7 +5,7 @@ const User = require("../models/User")
 const Trip = require("../models/Trip")
 const Tip = require("../models/Tip")
 
-
+// GET all trips from friends who have been to the same destination/place
 router.get('/id/friendtrips', isLoggedIn, (req, res, next) => {
   // Get id of users trip
   let id = this.props.match.params.id
@@ -27,7 +27,8 @@ router.get('/id/friendtrips', isLoggedIn, (req, res, next) => {
   })
 });
 
-router.get("/i", isLoggedIn, (req, res, next) => {
+// GET detail of the selected trip from a friend
+router.get("/friendtrips/:id", isLoggedIn, (req, res, next) => {
   // Get id of friends trip
   let id = this.props.match.params.id
 
@@ -39,5 +40,10 @@ router.get("/i", isLoggedIn, (req, res, next) => {
     })
   )
 })
+
+// // POST tip from friends' trip 
+// router.post("/friendtrips/addtip", isLoggedIn, (req, res, next) => {
+
+// })
 
 module.exports = router;
