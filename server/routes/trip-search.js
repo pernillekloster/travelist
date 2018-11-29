@@ -14,13 +14,13 @@ router.get('/:id/friendtrips', isLoggedIn, (req, res, next) => {
   Trip.findById(id)
   .populate("_creator")
   .then(tripData => {
-    console.log("debug tripData", tripData)
     let tripDestination = tripData.destination
     console.log("debug destination", tripDestination)
     let following = tripData._creator.following
     console.log("debug following", following)
 
       Trip.find({destination: tripDestination, _creator: {$in: following}, _id: {$ne: id}})
+      // Trip.find({destination: tripDestination, _id: {$ne: id}})
       .then(tripsData => {
         res.json({
           success: true,
@@ -46,22 +46,22 @@ router.get("/friendtrips/:id", isLoggedIn, (req, res, next) => {
 })
 
 // POST tip from friends' trip 
-router.post("/friendtrips/addtip", isLoggedIn, (req, res, next) => {
-  let tripId = id
-  let newTipId = req.body.tripId
+// router.post("/friendtrips/addtip", isLoggedIn, (req, res, next) => {
+//   let tripId = id
+//   let newTipId = req.body.tripId
 
-  // Find Trip of user first to have access to current tip array
-  Trip.findById(tripId)
-  .then(tripData => {
-    let tipArray = tripData._tips
-    let newTipArray = [...tipArray, tripId]
+//   // Find Trip of user first to have access to current tip array
+//   Trip.findById(tripId)
+//   .then(tripData => {
+//     let tipArray = tripData._tips
+//     let newTipArray = [...tipArray, tripId]
 
-    // Find Trip and update tips with new tip
-      Trip.findByIdAndUpdate(tripId, {
-        _tip: newTipArray,
-      })
-  })
+//     // Find Trip and update tips with new tip
+//       Trip.findByIdAndUpdate(tripId, {
+//         _tip: newTipArray,
+//       })
+//   })
 
-})
+// })
 
 module.exports = router;
