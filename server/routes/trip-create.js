@@ -12,7 +12,8 @@ router.use((req, res, next) => {
 })
 
 // Route to get all trips
-router.get('/', isLoggedIn, (req, res, next) => {
+router.get('/get-trip', isLoggedIn, (req, res, next) => {
+  // let _trip = req.params.id
   Trip.find()
     .then(trip => {
       res.json(trip);
@@ -21,7 +22,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 });
 
 // Route to add a Trip
-router.post('/', isLoggedIn, (req, res, next) => {
+router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
   let _creator = req.user._id
   let _tip= []
@@ -34,5 +35,35 @@ router.post('/', isLoggedIn, (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+//GET the tips added to the DB
+router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
+  let _trip = req.params.id
+  Tip.find()
+    .then(tip => {
+      res.json(tip);
+    })
+    .catch(err => next(err))
+});
+
+//Route to add Tip to trip
+router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
+  let _trip = req.params.id
+  let { category, description, title, location } = req.body
+  let _creator = req.user._id
+  Tip.create({ _creator, _trip, category, description, title, location })
+    .then(tip => {
+      // Tip.findOne({_id: id}, function (err, user) { ... });
+
+      res.json({
+        success: true,
+        tip
+      });
+    })
+    .catch(err => next(err))
+});
+
+
+
 
 module.exports = router;
