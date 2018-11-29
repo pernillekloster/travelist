@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 })
 
 // Route to get all trips
-router.get('/', (req, res, next) => {
+router.get('/', isLoggedIn, (req, res, next) => {
   Trip.find()
     .then(trip => {
       res.json(trip);
@@ -21,9 +21,11 @@ router.get('/', (req, res, next) => {
 });
 
 // Route to add a Trip
-router.post('/', (req, res, next) => {
+router.post('/', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
-  Trip.create({ destination })
+  let _creator = req.user._id
+  let _tip= []
+  Trip.create({ _creator, _tip, destination })
     .then(trip => {
       res.json({
         success: true,
@@ -32,35 +34,5 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => next(err))
 });
-
-//GET route to get all trips
-// router.get('/', (req, res, next) => {
-//   console.log('hello from router.get');
-
-// //POST create a trip in home page
-// router.post('/', (req, res, next) => {
-//   let {destination} = req.body
-//   console.log("destination : ", req.body)
-//   Trip.create({destination})
-//   console.log("destination2 : ", req.body)
-
-//   .then(trip => {
-//   console.log("destination3 : ", req.body)
-
-//     res.json({
-//       sucess: true,
-//       trip
-//     })
-//   })
-//   .catch(err => next(err))
-// })
-
-
-// router.get('/secret', isLoggedIn, (req, res, next) => {
-//   res.json({
-//     secret: 42,
-//     user: req.user
-//   });
-// });
 
 module.exports = router;
