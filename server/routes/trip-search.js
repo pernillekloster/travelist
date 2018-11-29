@@ -14,12 +14,11 @@ router.get('/:id/friendtrips', isLoggedIn, (req, res, next) => {
   Trip.findById(id)
   .populate("_creator")
   .then(tripData => {
-
+    console.log("debug tripData", tripData)
     let tripDestination = tripData.destination
-    let following = _creator.following
+    console.log("debug destination", tripDestination)
+    let following = tripData._creator.following
     console.log("debug following", following)
-    
-    // let friends = tripData._creator._friends - returns array of ids / in trip match single id with _creator
 
       Trip.find({destination: tripDestination, _creator: {$in: following}, _id: {$ne: id}})
       .then(tripsData => {
