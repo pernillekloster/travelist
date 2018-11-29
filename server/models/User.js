@@ -11,10 +11,8 @@ const userSchema = new Schema({
   password: String,
   pictureUrl: String,
   _trip: {type: Schema.Types.ObjectId, ref:"Trip"},
-  _friends: [{
-    _friendsId: {type: Schema.Types.ObjectId, ref:"User"},
-    status: {type: String, enum: ['pending', 'accepted'], default: 'pending'}
-  }]
+  following: [],
+  followers: []
 }, {
     timestamps: {
       createdAt: 'created_at',
