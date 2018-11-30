@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "/api" : "http://:5000/api",
+  baseURL: process.env.NODE_ENV === "production" ? "/api" : "http://localhost:5000/api",
   withCredentials: true
 });
 
 const errHandler = err => {
+  console.log("im in the err handler")
   console.error(err);
   if (err.response && err.response.data) {
     console.error("API response", err.response.data);
@@ -33,6 +34,8 @@ export default {
   },
 
   login(username, password) {
+    console.log("im in the api", username)
+    console.log("im in the api", password)
     return service
       .post("/login", {
         username,
@@ -40,6 +43,7 @@ export default {
       })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
+        console.log("im in the api")
         localStorage.setItem("user", JSON.stringify(res.data));
         return res.data;
       })
@@ -87,14 +91,14 @@ export default {
   
   getTrips(){
     return service
-      .get('/trip-search/get-trip')
+      .get('/trip-create/get-trip')
       .then(res => res.data)
       .catch(errHandler)
   },
 
   postTrip(data){
     return service
-    .post('/trip-search/create-trip', data)
+    .post('/trip-create/create-trip', data)
     .then(res => res.data)
     .catch(errHandler)
   },
@@ -102,22 +106,44 @@ export default {
 
   getTip(id){
     return service
-    .get('/trip-search/get-tip/'+id)
+    .get('/trip-create/get-tip/'+id)
     .then(res => res.data)
     .catch(errHandler)
   },
 
   postTip(id, data){
     return service
-    .post('/trip-search/create-tip/'+id, data)
+    .post('/trip-create/create-tip/'+id, data)
     .then(res => res.data)
     .catch(errHandler)
   },
 
   deleteTrip(id){
     return service
-    .delete('/trip-search/trip-delete/'+id)
+    .delete('/trip-create/trip-delete/'+id)
     .then(res => res.data)
     .catch(errHandler)
+  },
+
+  getFriendsTrips(id) {
+    return service
+    .get("/trip-search/" + id)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  getSelectedFriendsTrip(id, friendTripId) {
+    return service
+    .get("/trip-search/" + id + "/" + friendTripId)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  getTrip(id) {
+    return service
+    .get("/trip-search/single/" + id)
+    .then (res => res.data)
+    .catch(errHandler)
   }
+
 }

@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Search from "./pages/Search"
+import SearchDetail from "./pages/SearchDetail"
 // import Pernille from './pages/trip-create/Pernille';
 import api from '../api';
 
@@ -35,9 +37,11 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
+          {/* Katrin */}
+          <Route path="/search/:id" exact component={Search} />
+          <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-          <h1>HOME</h1>
           {/* <Pernille /> */}
 
       </div>

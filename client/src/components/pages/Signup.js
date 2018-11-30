@@ -31,6 +31,7 @@ class Signup extends Component {
         this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))
+      console.log("Fail signup")
   }
 
   render() {
