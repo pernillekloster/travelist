@@ -21,7 +21,7 @@ router.get('/get-trip', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
-// Route to add a Trip
+// Route to create a Trip
 router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
   let _creator = req.user._id
@@ -71,14 +71,6 @@ router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
   })
   .catch(err => next(err))
   })
-
-  // router.post("/trip-delete/:id", isLoggedIn, (req, res, next) => {
-  //   let id = req.params._id;
-  //   Trip.findByIdAndDelete(id)
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // });
 
   router.delete('/trip-delete/:id', (req, res, next)=>{
     let id = req.params.id

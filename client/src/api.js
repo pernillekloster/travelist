@@ -82,6 +82,42 @@ export default {
         }
       })
       .then(res => res.data)
-      .catch(errHandler);
+      .catch(errHandler)
+  },
+  
+  getTrips(){
+    return service
+      .get('/trip-search/get-trip')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  postTrip(data){
+    return service
+    .post('/trip-search/create-trip', data)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+
+  getTip(id){
+    return service
+    .get('/trip-search/get-tip/'+id)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  postTip(id, data){
+    return service
+    .post('/trip-search/create-tip/'+id, data)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  deleteTrip(id){
+    return service
+    .delete('/trip-search/trip-delete/'+id)
+    .then(res => res.data)
+    .catch(errHandler)
   }
-};
+}
