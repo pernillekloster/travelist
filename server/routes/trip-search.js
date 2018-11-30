@@ -6,7 +6,7 @@ const Trip = require("../models/Trip")
 const Tip = require("../models/Tip")
 
 // GET all trips from friends who have been to the same destination/place
-router.get('/:id/friendtrips', isLoggedIn, (req, res, next) => {
+router.get('/:id', isLoggedIn, (req, res, next) => {
   // Get id of users current trip
   let id = req.params.id
 
@@ -31,12 +31,14 @@ router.get('/:id/friendtrips', isLoggedIn, (req, res, next) => {
 });
 
 // GET detail of the selected trip from a friend
-router.get("/friendtrips/:id", isLoggedIn, (req, res, next) => {
+router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
   // Get id of friends trip
+  let friendsId = req.params.id
+  // Store id of the users trip to use it in next route
   let id = req.params.id
 
   // Find selected friends trip and display details
-  Trip.findById(id)
+  Trip.findById(friendsId)
   .then(tripData => 
 
     res.json({
@@ -46,22 +48,36 @@ router.get("/friendtrips/:id", isLoggedIn, (req, res, next) => {
 })
 
 // POST tip from friends' trip 
-// router.post("/friendtrips/addtip", isLoggedIn, (req, res, next) => {
-//   let tripId = id
-//   let newTipId = req.body.tripId
+router.post("/:id/:friendsId/:newTipId/addtip", isLoggedIn, (req, res, next) => {
+  // Get id of users trip
+  let id = req.params.id
+  let friendsId = req.params.id
+  // For Postman testing purposes in params, finally send by frontend (commented out line below)
+  let newTipId = req.params.id
+  // let newTipId = req.body.tipId
 
-//   // Find Trip of user first to have access to current tip array
-//   Trip.findById(tripId)
-//   .then(tripData => {
-//     let tipArray = tripData._tips
-//     let newTipArray = [...tipArray, tripId]
+  // Find Trip of user first to have access to current tip array
+  Trip.findById(id)
 
-//     // Find Trip and update tips with new tip
-//       Trip.findByIdAndUpdate(tripId, {
-//         _tip: newTipArray,
-//       })
-//   })
+  .then(tripData => {
+    
+    // Create new tip array with existing tips and new one
+    let tipArray = tripData._tip
+    let newTipArray = [...tipArray, newTipId]
 
-// })
+    // Find Trip and update tips with new tip
+      Trip.findByIdAndUpdate(id, {
+        _tip: newTipArray,
+      })
+      .then(updateTrip => {
+        console.log("debug update trip", updateTrip)
+        res.json({
+          success: true,
+          updateTrip
+        })
+      })
+  })
+
+})
 
 module.exports = router;
