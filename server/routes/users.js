@@ -22,7 +22,8 @@ router.get("/all", isLoggedIn, (req, res, next) => {
 
 router.get("/following", isLoggedIn, (req, res, next) => {
   let id = req.user._id
-  User.findById(id).then(data => {
+  User.findById(id)
+    .then(data => {
     res.json(data.following);
   });
 });
@@ -38,20 +39,17 @@ router.get("/followers", isLoggedIn, (req, res, next) => {
 // the id of the person the user wants to follow!
 router.post("/:id/follow", isLoggedIn, (req, res, next) => {
   let id = req.params.id;
-console.log(id)
-
   User.findById(id).then(user => {
-    // if it does NOT find user = -1
+    // if the user is not in my following array "-1", add it. 
     if (req.user.following.indexOf(user._id) === -1) {
-      console.log("FOLLOWING");
       User.findByIdAndUpdate(
-        { _id: req.user._id },
+        { _id: req.user._id }, //this is the logged in user
         { $push: { following: user._id } },
         { new: true }
       )
         .then(user => {
           User.findOneAndUpdate(
-            { _id: id },
+            { _id: id }, // the user that got followed 
             { $push: { followers: req.user._id } },
             { new: true }
           ).then(followedUser => {
