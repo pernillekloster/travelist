@@ -7,13 +7,22 @@ class SearchDetail extends Component {
     super(props)
     this.state = {
       selectedTrip: [],
+      isAdded: false,
     }
   }
 
-  // handleEdit(idFriendTrip) {
-  //   // Redirects the user to '/SearchDetail/'+ id of the selected trip
-  //   this.props.history.push('/SearchDetail/'+idFriendTrip)
-  // }
+  handleAdd(tipId) {
+    let id = this.props.match.params.id
+    let friendTripId = this.props.match.params.friendTripId
+
+    // In BE create copy of tip added and include that one in trip
+    api.addTip(id, friendTripId, tipId)
+    .then(updateTrip =>
+      this.setState({
+        isAdded: true
+      })
+    ) 
+  }
 
   render() {
     console.log("debug render this.state.selectedTrip", this.state.selectedTrip)
@@ -23,22 +32,29 @@ class SearchDetail extends Component {
         <h2>Heres your friends tips and recos</h2>
 
         {/* Take the selected trip from the friend and display the included tips  */}
-        {this.state.selectedTrip.map(e => 
-    
-            e.tripData._tip.map(t =>
-         
-            <div  key={t._id}> 
-                <p>{t.title}</p>
-                <ul>
-                <li>{t.category}</li>
-                <li>{t.description}</li>
-                <li>{t.location}</li>
-                <button onClick={() => this.handleAdd(t._id)}>Add</button>
-                </ul>
-                <br/>
-            </div>
-            )
-        )}
+        {/* Change Tip Model to include isAdded status!! Otherwise all tips will disappear once added */}
+        <div>
+        {this.state.isAdded && <div className="Btn-Tip-Added">Gone</div>}
+        
+        {!this.state.isAdded && 
+          this.state.selectedTrip.map(e => 
+      
+              e.tripData._tip.map(t =>
+           
+              <div  key={t._id}> 
+                  <p>{t.title}</p>
+                  <ul>
+                  <li>{t.category}</li>
+                  <li>{t.description}</li>
+                  <li>{t.location}</li>
+                  <button onClick={() => this.handleAdd(t._id)}>Add</button>
+                  </ul>
+                  <br/>
+              </div>
+              )
+          )
+       }
+        </div>
 
       </div>
     );

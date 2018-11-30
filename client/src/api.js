@@ -139,6 +139,13 @@ export default {
     .catch(errHandler)
   },
 
+  addTip(id, friendTripId, newTipId) {
+    return service
+    .post("/trip-search/" + id + "/" + friendTripId + "/" + newTipId)
+    .then (res => res.data)
+    .catch(errHandler)
+  },
+
   getTrip(id) {
     return service
     .get("/trip-search/single/" + id)

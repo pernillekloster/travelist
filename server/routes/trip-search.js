@@ -58,13 +58,19 @@ router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
 })
 
 // POST tip from friends' trip 
-router.post("/:id/:friendsId/:newTipId/addtip", isLoggedIn, (req, res, next) => {
+router.post("/:id/:friendsId/:newTipId", isLoggedIn, (req, res, next) => {
   // Get id of users trip
   let id = req.params.id
-  let friendsId = req.params.id
-  // For Postman testing purposes in params, finally send by frontend (commented out line below)
-  let newTipId = req.params.id
-  // let newTipId = req.body.tipId
+  let friendsId = req.params.friendsId
+  let newTipId = req.params.newTipId
+
+  // Tip.findById(newTipId)
+  // .then(tipData => {
+  //   console.log("debug tipData", tipData)
+  //   Tip.create(tipData)
+  // })
+
+  // Create copy of tip based on newTipId and pass on that TipId to be added to array!
 
   // Find Trip of user first to have access to current tip array
   Trip.findById(id)
