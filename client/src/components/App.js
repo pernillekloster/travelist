@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import Pernille from './pages/trip-create/Pernille';
+import TripDetail from './pages/TripDetail';
 import api from '../api';
 
 class App extends Component {
@@ -37,8 +37,9 @@ class App extends Component {
           <Route path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-          <h1>HOME</h1>
-          {/* <Pernille /> */}
+          
+
+          {/* <TripDetail /> */}
 
       </div>
     );

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "/api" : "http://:5000/api",
+  baseURL: process.env.NODE_ENV === "production" ? "/api" : "http://localhost:5000/api",
   withCredentials: true
 });
 
@@ -87,36 +87,42 @@ export default {
   
   getTrips(){
     return service
-      .get('/trip-search/get-trip')
+      .get('/trip-create/get-trip')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getUserTrips(){
+    return service
+      .get('/trip-create/get-user-trip')
       .then(res => res.data)
       .catch(errHandler)
   },
 
   postTrip(data){
     return service
-    .post('/trip-search/create-trip', data)
+    .post('/trip-create/create-trip', data)
     .then(res => res.data)
     .catch(errHandler)
   },
 
-
   getTip(id){
     return service
-    .get('/trip-search/get-tip/'+id)
+    .get('/trip-create/get-tip/'+id)
     .then(res => res.data)
     .catch(errHandler)
   },
 
   postTip(id, data){
     return service
-    .post('/trip-search/create-tip/'+id, data)
+    .post('/trip-create/create-tip/'+id, data)
     .then(res => res.data)
     .catch(errHandler)
   },
 
   deleteTrip(id){
     return service
-    .delete('/trip-search/trip-delete/'+id)
+    .delete('/trip-create/trip-delete/'+id)
     .then(res => res.data)
     .catch(errHandler)
   }
