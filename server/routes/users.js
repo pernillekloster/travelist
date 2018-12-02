@@ -6,7 +6,7 @@ const Trip = require("../models/Trip");
 const Tip = require("../models/Tip");
 
 router.get("/", isLoggedIn, (req, res, next) => {
-  let id = req.user._id
+  let id = req.user.id
   User.findById(id)
     .then(data => {
     res.json(data);
@@ -16,6 +16,7 @@ router.get("/", isLoggedIn, (req, res, next) => {
 router.get("/all", isLoggedIn, (req, res, next) => {
   User.find()
     .then(data => {
+      console.log("debug users backend", data)
     res.json(data);
   });
 });
@@ -72,8 +73,8 @@ router.post("/:id/follow", isLoggedIn, (req, res, next) => {
           User.findOneAndUpdate(
             { _id: id },
             { $pull: { followers: req.user._id } },
-            { new: true }
-          ).then(user => {
+            { new: true })
+            .then(user => {
             res.send(user);
           });
         })

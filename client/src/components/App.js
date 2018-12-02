@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 // import Pernille from './pages/trip-create/Pernille';
 import api from '../api';
+import userProfile from './pages/User-profile'
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
+          <Route path="/user-profile" component={userProfile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
           <h1>HOME</h1>
