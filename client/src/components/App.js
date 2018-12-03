@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
-// import Pernille from './pages/trip-create/Pernille';
+// import Pernille from './pages/Pernille';
 import api from '../api';
 
 class App extends Component {
