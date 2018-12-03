@@ -21,6 +21,16 @@ router.get('/get-trip', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
+router.get('/get-user-trip', isLoggedIn, (req, res, next) => {
+  let id = req.user._id
+  console.log("debug logged in user", id)
+  Trip.find({_creator: id})
+    .then(trip => {
+      res.json(trip);
+    })
+    .catch(err => next(err))
+});
+
 // Route to create a Trip
 router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
@@ -28,10 +38,8 @@ router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let _tip= []
   Trip.create({ _creator, _tip, destination })
     .then(trip => {
-      res.json({
-        success: true,
-        trip
-      });
+      res.json(
+        trip);
     })
     .catch(err => next(err))
 });

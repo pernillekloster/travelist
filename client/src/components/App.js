@@ -4,9 +4,13 @@ import Home from './pages/Home';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import TripDetail from './pages/TripDetail';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
+<<<<<<< HEAD
 // import Pernille from './pages/Pernille';
+=======
+>>>>>>> 355af82ace0a5da9177d1f1c6810b2e34c0d7180
 import api from '../api';
 
 class App extends Component {
@@ -34,6 +38,7 @@ class App extends Component {
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/trip-detail/:id" exact component={TripDetail} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
@@ -42,8 +47,6 @@ class App extends Component {
           <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-          {/* <Pernille /> */}
-
       </div>
     );
   }
