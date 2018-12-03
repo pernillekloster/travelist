@@ -92,7 +92,6 @@ export default {
   getTrips(){
     return service
       .get('/trip-create/get-trip')
-<<<<<<< HEAD
       .then(res => res.data)
       .catch(errHandler)
   },
@@ -100,8 +99,6 @@ export default {
   getUserTrips(){
     return service
       .get('/trip-create/get-user-trip')
-=======
->>>>>>> 4163ea75bb4bde5d6805d7189b18c51dea331322
       .then(res => res.data)
       .catch(errHandler)
   },

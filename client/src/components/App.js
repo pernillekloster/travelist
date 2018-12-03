@@ -7,10 +7,7 @@ import Signup from './pages/Signup';
 import TripDetail from './pages/TripDetail';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
-<<<<<<< HEAD
 // import Pernille from './pages/Pernille';
-=======
->>>>>>> 355af82ace0a5da9177d1f1c6810b2e34c0d7180
 import api from '../api';
 
 class App extends Component {
@@ -33,7 +30,7 @@ class App extends Component {
           <NavLink to="/" exact>Home</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+          {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
           <NavLink to="/secret">Secret</NavLink>
         </header>
         <Switch>

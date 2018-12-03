@@ -10,25 +10,27 @@ class SearchDetail extends Component {
     this.state = {
       selectedTrip: [],
       isAdded: false,
-      collapse: false, 
-      // collapseFood: false, 
-      // collapseActivties: false,
-      // collapseStay: false,
+      // collapse: false, 
+      collapseFood: false, 
+      collapseActivities: false,
+      collapseStay: false,
     }
   }
 
   toggle  = (category) => {
-    this.setState({ collapse: !this.state.collapse });
-
-    // if (category === "food & drinks") {
-    //   this.setState({ collapseFood: !this.state.collapseFood });
-    // }
-    // if (category === "activities") {
-    //   this.setState({ collapseActivities: !this.state.collapseActivities })
-    // }
-    // if (category === "where to stay") {
-    //   this.setState({ collapseStay: !this.state.collapseStay })
-    // }
+    console.log("debug button clicked", category)
+    // this.setState({ collapse: !this.state.collapse });
+    if (category === "food & drinks") {
+      this.setState({ collapseFood: !this.state.collapseFood });
+    }
+    if (category === "activities") {
+      this.setState({ collapseActivities: !this.state.collapseActivities })
+    }
+    if (category === "where to stay") {
+      this.setState({ collapseStay: !this.state.collapseStay })
+    }
+    console.log("debug state", this.state.collapseActivities)
+    console.log("debug state", this.state.collapseFood)
   }
 
   render() {
@@ -43,13 +45,13 @@ class SearchDetail extends Component {
     for (let i = 0; i < tips.length; i++) {
     if (i === 0 || tips[i].category !== tips[i-1].category) {
       tipCard.push(
-      <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
+      <Button color="primary" onClick={() => this.toggle(tips[i].category)} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
       )}
 
     // Push each tip to array
       tipCard.push(
-        <Collapse isOpen={this.state.collapse}>
-        {/* <Collapse isOpen={this.state.collapseFood}> */}
+        // <Collapse isOpen={this.state.collapse}>
+        <Collapse isOpen={this.state.collapseFood || this.state.collapseActivities || this.state.collapseStay}> 
         <Card>
           <CardBody>
             <SearchDetailTip 
