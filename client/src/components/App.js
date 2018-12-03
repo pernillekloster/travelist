@@ -38,7 +38,6 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
-          {/* Katrin */}
           <Route path="/trip-detail/search/:id" exact component={Search} />
           <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />

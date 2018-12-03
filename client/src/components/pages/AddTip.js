@@ -15,9 +15,12 @@ class AddTip extends Component {
       description: "",
     };
     this.toggle = this.toggle.bind(this);
+    this.addTip = this.addTip.bind(this);
   }
 
   toggle() {
+    console.log("toogle");
+    
     this.setState({
       modal: !this.state.modal
     });
@@ -29,8 +32,7 @@ class AddTip extends Component {
     this.setState(newState)
   }
 
-  handleClick(e){
-    e.preventDefault()
+  addTip(e) {
     let id = this.props.id
     let data = {
       category: this.state.category,
@@ -38,18 +40,18 @@ class AddTip extends Component {
       location: this.state.location,
       description: this.state.description,
     }
-   
+
     api.postTip(id, data)
-    .then(newTip => {
-      this.toggle()
-      this.setState({
-      category: "",
-      title: '',
-      location: '',
-      description: '',
+      .then(data => {
+        this.toggle()
+        this.setState({
+          category: "",
+          title: '',
+          location: '',
+          description: '',
+        })
+        this.props.onAdd(data.tip) // TODO: change
       })
-      this.props.history.push('/trip-detail/'+ id)
-    })
       .catch(err => console.log(err)
       )
   }
@@ -62,13 +64,19 @@ class AddTip extends Component {
           <ModalHeader toggle={this.toggle}>Add tip</ModalHeader>
           <form>
           <ModalBody>
-            Category: <input type="text" style={{border: 'solid'}} value={this.state.category} onChange={(e) => this.handleInputChange("category", e)} /> <br/>
+            Category: 
+            <select style={{border: 'solid'}} value={this.state.category} onChange={(e) => this.handleInputChange("category", e)} >
+              <option></option>
+              <option value="activities">Activities</option>
+            </select>
+             <br/>
             Title: <input type="text" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
             Location: <input type="text" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
             Description: <input type="text" style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={(e) => this.handleClick(e)}>Do Something</Button>{' '}
+            {/* <Button color="primary" onClick={(e) => this.handleClick(e)}>Do Something</Button>{' '} */}
+            <Button color="primary" onClick={this.addTip}>Do Something</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
           </form>

@@ -55,29 +55,42 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
 });
 
 //Route to add Tip to trip
-router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
-  let _trip = req.params.id
-  let { category, description, title, location } = req.body
-  let _creator = req.user._id
+  router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
+    let _trip = req.params.id
+    let { category, description, title, location } = req.body
+    let _creator = req.user._id
 
-  let p1 = Tip.create({ _creator, _trip, category, description, title, location })
-   
-  let p2 = Trip.findById(_trip)
-
-  Promise.all([p1,p2])
-  .then(values => {
-    let tipId = values[0]._id
-    let tipArray = values[1]._tip
-    let newTipArray = [...tipArray, tipId]
-    Trip.findByIdAndUpdate(_trip, {_tip: newTipArray})
-    .then(newTripData => {
-      res.json({
-        success: true,
-        newTripData
+    Tip.create({ _creator, _trip, category, description, title, location })
+      .then(tipDoc => {
+        Trip.findByIdAndUpdate(_trip, { $push: { _tip: tipDoc._id } }, { new: true })
+          .then(tripDoc => {
+            res.json({
+              success: true,
+              tip: tipDoc,
+              trip: tripDoc
+            })
+          })
       })
-    })
-  })
-  .catch(err => next(err))
+      .catch(err => next(err))
+
+    // let p1 = Tip.create({ _creator, _trip, category, description, title, location })
+
+    // let p2 = Trip.findById(_trip)
+
+    // Promise.all([p1, p2])
+    //   .then(values => {
+    //     let tipId = values[0]._id
+    //     let tipArray = values[1]._tip
+    //     let newTipArray = [...tipArray, tipId]
+    //     Trip.findByIdAndUpdate(_trip, { _tip: newTipArray })
+    //       .then(newTripData => {
+    //         res.json({
+    //           success: true,
+    //           newTripData
+    //         })
+    //       })
+    //   })
+    //   .catch(err => next(err))
   })
 
   router.delete('/trip-delete/:id', (req, res, next)=>{
