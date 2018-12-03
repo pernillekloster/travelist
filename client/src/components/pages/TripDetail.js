@@ -3,50 +3,109 @@ import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import api from '../../api';
 import AddTip from './AddTip';
 import { Link } from 'react-router-dom'
+import TripDetailTip from "./TripDetailTip"
 
 class TripDetail extends Component {
   constructor(props) {
     super(props);
-    this.toggle1 = this.toggle1.bind(this);
-    this.toggle2 = this.toggle2.bind(this);
-    this.toggle3 = this.toggle3.bind(this);
     this.state = { 
-      collapse1: false,
-      collapse2: false,
-      collapse3: false,
+      collapse: false, 
       title: "",
+      selectedTrip: [],
       tips: [],
       location: "",
       description: "",
       category: "",
+      categoryBtn: "",
     };
-
   }
-
-  toggle1() {
-    this.setState({ collapse1: !this.state.collapse1 });
-  }
-
-  toggle2() {
-    this.setState({ collapse2: !this.state.collapse2 });
-  }
-
-  toggle3() {
-    this.setState({ collapse3: !this.state.collapse3 });
-  }
-
-  
 
   addTip(tip) {
-    console.log("DEBUG addTip", tip);
-    
     this.setState({
       tips: [...this.state.tips, tip]
     })
   }
 
+  toggle  = (categoryBtn) => {
+    this.setState({ 
+      categoryBtn: categoryBtn,
+      collapse: !this.state.collapse 
+    });
+  }
+
+  render() {
+    let id = this.props.match.params.id
+
+    const categories = []
+    const tipArray = []
+
+    let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
+    
+    // Push categories to array
+    for (let i = 0; i < tips.length; i++) {
+    if (i === 0 || tips[i].category !== tips[i-1].category) {
+      categories.push(
+      <Button color="primary" onClick={() => this.toggle(tips[i].category)} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
+      )}
+    }
+
+    // Push filtered Tips into array
+    let filteredTips = tips.filter(t => {
+      return t.category === this.state.categoryBtn
+    }) 
+
+    for (let i = 0; i < filteredTips.length; i++) {
+      tipArray.push(
+        <Collapse isOpen={this.state.collapse}>
+          <Card>
+            <CardBody>
+              <TripDetailTip 
+              tipId={filteredTips[i]._id} 
+              title={filteredTips[i].title} 
+              category={filteredTips[i].category}
+              description={filteredTips[i].description} 
+              location= {filteredTips[i].location} 
+              id={this.props.match.params.id}
+              />
+            </CardBody>
+          </Card>
+          </Collapse>
+        )
+        console.log("debug tipArray", tipArray)
+    }
+
+    return (
+      <div>
+
+        <div>{categories}</div>
+        <div>{tipArray}</div>
+      
+        <div>
+          <AddTip 
+          id={this.props.match.params.id}
+          onAdd={tip => this.addTip(tip)}
+          destination={this.state.selectedTrip.destination}
+          />
+        </div>
+
+        <div>
+          <Link to={`search/${id}`}>Search for friends´ tips</Link>
+        </div>
+
+      </div>
+    );
+  }
+
   componentDidMount() {
     let id = this.props.match.params.id
+
+    api.getTrip(id)
+      .then(trip => {
+        this.setState({
+          selectedTrip: trip,
+        })
+        console.log("debug selected trip", this.state.selectedTrip)
+      })
     api.getTips(id)
       .then(tips => {
         this.setState({
@@ -56,64 +115,6 @@ class TripDetail extends Component {
       .catch(err => console.log(err))
   }
 
-
-  render() {
-    let id = this.props.match.params.id
-    return (
-      <div>
-        <table style={{margin: 'auto'}}>  
-          <tbody>
-            {this.state.tips.map(t => (
-              <div>
-                <hr/>
-              <tr key={t._id}>
-              <th>{t.title}</th><br/>
-              <th>{t.location}</th><br/>
-              <th>{t.description}</th><br/>
-              </tr>
-            </div>
-            ))}
-          </tbody>
-        </table>
-      {/* <div>
-        <Button color="primary" onClick={this.toggle1} size="lg" block style={{ marginBottom: '1rem'}}>Food &amp; drinks</Button>
-        <Collapse isOpen={this.state.collapse1}>
-          <Card>
-            <CardBody>
-            This is where food and drinks tip will appear
-            </CardBody>
-          </Card>
-        </Collapse>
-      </div>
-      <div> 
-      <Button color="primary" onClick={this.toggle3} size="lg" block style={{ marginBottom: '1rem' }}>Activities</Button>
-        <Collapse isOpen={this.state.collapse3}>
-          <Card>
-            <CardBody>
-            This is where activities tip will appear
-            </CardBody>
-          </Card>
-        </Collapse>
-      </div>
-      <div> 
-      <Button color="primary" onClick={this.toggle2} size="lg" block style={{ marginBottom: '1rem' }}>Where to stay</Button>
-        <Collapse isOpen={this.state.collapse2}>
-          <Card>
-            <CardBody>
-            This is where where to stay tip will appear
-            </CardBody>
-          </Card>
-        </Collapse>
-      </div> */}
-      <AddTip 
-      id={this.props.match.params.id}
-      onAdd={tip => this.addTip(tip)}
-      />
-      <br/>
-      <Link to={`search/${id}`}>Search for friends´ tips</Link>
-      </div>
-    );
-  }
 }
 
 export default TripDetail;

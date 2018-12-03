@@ -11,7 +11,7 @@ router.use((req, res, next) => {
   next()
 })
 
-// Route to get all trips
+// GET Route to get all trips
 router.get('/get-trip', isLoggedIn, (req, res, next) => {
   let _trip = req.params.id
   Trip.find()
@@ -21,9 +21,9 @@ router.get('/get-trip', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
+// GET Route to get user trip
 router.get('/get-user-trip', isLoggedIn, (req, res, next) => {
   let id = req.user._id
-  console.log("debug logged in user", id)
   Trip.find({_creator: id})
     .then(trip => {
       res.json(trip);
@@ -31,7 +31,7 @@ router.get('/get-user-trip', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
-// Route to create a Trip
+// POST Route to create a Trip
 router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
   let _creator = req.user._id
@@ -54,7 +54,7 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
-//Route to add Tip to trip
+//POST Route to add Tip to trip
   router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
     let _trip = req.params.id
     let { category, description, title, location } = req.body
@@ -93,20 +93,34 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
     //   .catch(err => next(err))
   })
 
-  router.delete('/trip-delete/:id', (req, res, next)=>{
-    let id = req.params.id
-    // if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    //   res.status(400).json({ message: 'Specified id is not valid' });
-    //   return;
-    // }
-  
-    Trip.findByIdAndRemove(id)
-      .then(() => {
-        res.json({message: `Task with ${id} is removed successfully.`});
-      })
-      .catch(err => {
-        res.json(err);
-      })
-  })
+// DELETE Trip from user
+router.delete('/trip-delete/:id', (req, res, next)=>{
+  let id = req.params.id
+
+  Trip.findByIdAndRemove(id)
+    .then(() => {
+      res.json({message: `Trip with ${id} is removed successfully.`});
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
+// DELETE Tip and update
+router.delete('/tip-delete/:id/:tipId', (req, res, next)=>{
+  let id = req.param.id
+  let tipId = req.params.tipId
+
+  // Trip.findByIdAndUpdate(id, {_tip: })
+
+  Tip.findByIdAndRemove(tipId)
+    .then(() => {
+      res.json({message: `Tip with ${tipId} is removed successfully.`});
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
 
 module.exports = router;

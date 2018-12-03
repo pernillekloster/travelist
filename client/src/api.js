@@ -55,20 +55,6 @@ export default {
     return service.get("/logout");
   },
 
-  // getCountries() {
-  //   return service
-  //     .get('/countries')
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
-
-  // postCountries(data) {
-  //   return service
-  //     .post('/countries', data)
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
-
   getSecret() {
     return service
       .get("/secret")
@@ -127,6 +113,13 @@ export default {
   deleteTrip(id){
     return service
     .delete('/trip-create/trip-delete/'+id)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  deleteTip(tipId, id){
+    return service
+    .delete('/trip-create/tip-delete/'+id+ "/" +tipId)
     .then(res => res.data)
     .catch(errHandler)
   },

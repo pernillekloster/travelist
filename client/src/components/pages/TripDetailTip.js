@@ -2,38 +2,37 @@ import React, { Component } from 'react';
 import api from '../../api';
 // import './Sample.css';
 
-class SearchDetailTip extends Component {
+class TripDetailTip extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isAdded: false,
+      isDeleted: false,
     }
   }
 
-  handleAdd(tipId) {
+  handleDelete(tipId) {
     let id = this.props.id
-    let friendTripId = this.props.friendTripId
 
-    api.addTip(id, friendTripId, tipId)
+    api.deleteTip(tipId, id)
     .then(updateTrip =>
       this.setState({
-        isAdded: true
+        isDeleted: true
       })
     ) 
   }
 
   render() {
     return (
-      <div className="SearchDetailTip">
-      {this.state.isAdded && <div className="Btn-Tip-Added">Tip added to your trip!</div>}
-      {!this.state.isAdded && 
+      <div className="TripDetailTip">
+      {this.state.isDeleted && <div className="Btn-Tip-Added">Tip deleted</div>}
+      {!this.state.isDeleted && 
          <div  key={this.props.tipId}> 
                 <ul>
                 <li>Category: {this.props.category}</li>
                 <li>Title: {this.props.title}</li>
                 <li>Description: {this.props.description}</li>
                 <li>Location: {this.props.location}</li>
-                <button onClick={() => this.handleAdd(this.props.tipId)}>Add</button>
+                <button onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
                 </ul>
             </div>
       }
@@ -42,4 +41,4 @@ class SearchDetailTip extends Component {
   }
 }
 
-export default SearchDetailTip;
+export default TripDetailTip;
