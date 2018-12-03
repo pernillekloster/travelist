@@ -19,12 +19,17 @@ class Login extends Component {
 
   handleClick(e) {
     e.preventDefault()
+    console.log("debug handleclick login", this.state.username)
+    console.log("debug handleclick login", this.state.password)
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
         this.props.history.push("/") // Redirect to the home page
       })
-      .catch(err => this.setState({ message: err.toString() }))
+      .catch(err => 
+       
+        this.setState({ message: err.toString() }))
+        console.log("FAIL")
   }
 
   render() {

@@ -24,14 +24,18 @@ router.get("/all", isLoggedIn, (req, res, next) => {
 router.get("/following", isLoggedIn, (req, res, next) => {
   let id = req.user._id
   User.findById(id)
+    .populate("following")
     .then(data => {
+      console.log("debug data following backend", data)
     res.json(data.following);
   });
 });
 
 router.get("/followers", isLoggedIn, (req, res, next) => {
   let id = req.user._id
-  User.findById(id).then(data => {
+  User.findById(id)
+  .populate("followers")
+  .then(data => {
     res.json(data.followers);
   });
 });

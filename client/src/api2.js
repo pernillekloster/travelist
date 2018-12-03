@@ -24,14 +24,13 @@ export default {
     .catch(errHandler)
   },
 
-  getAllUsers(){
+/*   getAllUsers(){
     return service
     .get('/users/all')
     .then(res => 
-      
       res.data)
-    .catch(errHandler)
-  },
+      .catch(errHandler)
+  }, */
 
   getFollowing(){
     return service
