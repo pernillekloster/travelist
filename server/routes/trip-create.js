@@ -47,9 +47,9 @@ router.post('/create-trip', isLoggedIn, (req, res, next) => {
 //GET the tips added to the DB
 router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
   let _trip = req.params.id
-  Tip.find()
-    .then(tip => {
-      res.json(tip);
+  Tip.find({_trip: _trip})
+    .then(tips => {
+      res.json(tips);
     })
     .catch(err => next(err))
 });

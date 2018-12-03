@@ -8,13 +8,11 @@ class AddTip extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _creator: "",
-      _trip: "",
       modal: false,
+      category: "",
       title: "",
       location: "",
       description: "",
-      tips: []
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -33,48 +31,38 @@ class AddTip extends Component {
 
   handleClick(e){
     e.preventDefault()
-    let id = this.props.match.params.id
+    let id = this.props.id
     let data = {
+      category: this.state.category,
       title: this.state.title,
       location: this.state.location,
       description: this.state.description,
     }
+   
     api.postTip(id, data)
     .then(newTip => {
+      this.toggle()
       this.setState({
-      tips: [...this.state.tips, newTip],
+      category: "",
       title: '',
       location: '',
-      description: ''
+      description: '',
       })
+      this.props.history.push('/trip-detail/'+ id)
     })
       .catch(err => console.log(err)
       )
   }
 
-  redirectToTarget = () => {
-    this.context.router.history.push(`/search`)
-  }
-
-  // componentDidMount() {
-  //   api.postTip()
-  //     .then(tips => {
-  //       this.setState({
-  //         tips: tips,
-  //         destination: ""
-  //       })
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>Add new for and drink tip</Button>
+        <Button color="danger" onClick={this.toggle}>Add new tip</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add tip</ModalHeader>
           <form>
           <ModalBody>
+            Category: <input type="text" style={{border: 'solid'}} value={this.state.category} onChange={(e) => this.handleInputChange("category", e)} /> <br/>
             Title: <input type="text" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
             Location: <input type="text" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
             Description: <input type="text" style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
@@ -85,9 +73,6 @@ class AddTip extends Component {
           </ModalFooter>
           </form>
         </Modal> 
-        <Button color="secondary" onClick={this.redirectToTarget}>Search for user</Button>
-      
-        <Link to={`tip-search/`}>Search for tips</Link>
 
         </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import api from '../../api';
 import AddTip from './AddTip';
-
+import { Link } from 'react-router-dom'
 
 class TripDetail extends Component {
   constructor(props) {
@@ -38,7 +38,6 @@ class TripDetail extends Component {
     let id = this.props.match.params.id
     api.getTips(id)
       .then(tips => {
-        console.log(tips)
         this.setState({
           tips: tips
         })
@@ -47,6 +46,7 @@ class TripDetail extends Component {
   }
 
   render() {
+    let id = this.props.match.params.id
     return (
       <div>
         <table style={{margin: 'auto'}}>  
@@ -63,7 +63,7 @@ class TripDetail extends Component {
             ))}
           </tbody>
         </table>
-      <div>
+      {/* <div>
         <Button color="primary" onClick={this.toggle1} size="lg" block style={{ marginBottom: '1rem'}}>Food &amp; drinks</Button>
         <Collapse isOpen={this.state.collapse1}>
           <Card>
@@ -92,8 +92,10 @@ class TripDetail extends Component {
             </CardBody>
           </Card>
         </Collapse>
-      </div>
-      <AddTip />
+      </div> */}
+      <AddTip id={this.props.match.params.id} />
+      <br/>
+      <Link to={`search/${id}`}>Search for friends´ tips</Link>
       </div>
     );
   }

@@ -34,13 +34,12 @@ class App extends Component {
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/trip-detail/:id" exact component={TripDetail} />
-          <Route path="/trip-detail/tip-search" component={Search} />          
+          <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
           {/* Katrin */}
-          <Route path="/search/:id" exact component={Search} />
+          <Route path="/trip-detail/search/:id" exact component={Search} />
           <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
