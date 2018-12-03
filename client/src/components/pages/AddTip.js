@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import api from '../../api'
-import { log } from 'util';
 
-class AddFoodTip extends Component {
+class AddTip extends Component {
   constructor(props) {
     super(props);
     this.state = {
       _creator: "",
       _trip: "",
-      modal: false,
+      // modal: false,
       title: "",
       location: "",
       description: ""
     };
-
     this.toggle = this.toggle.bind(this);
   }
 
@@ -72,4 +70,4 @@ class AddFoodTip extends Component {
   }
 }
 
-export default AddFoodTip;
+export default AddTip;

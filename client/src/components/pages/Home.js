@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import api from '../../api'
-import AddedTips from './AddedTips'
+import AddTip from './AddTip'
+import TripDetail from './TripDetail'
 
 class Home extends Component {
   constructor(props) {
@@ -26,12 +27,10 @@ class Home extends Component {
     }
     api.postTrip(data)
     .then(newTrip => {
-      console.log('SUCCESS, debug newTrip', newTrip);
       this.setState({
         trips: [...this.state.trips, newTrip],
         destination: ""
       })
-      console.log("debug update trips", this.state.trips)
     }) 
     .catch(err => console.log(err))
   }
@@ -51,15 +50,14 @@ class Home extends Component {
     return (
        <div>
       <table style={{margin: 'auto'}}>  
-            <Link to={AddedTips}>{this.state.trips.map(t => (
+            {this.state.trips.map(t => (
               <div>
               <hr/>
                 <tr key={t._id}>
-                <th>{t.destination}</th>
+                <Link to={`trip-detail/${t._id}`}> <th>{t.destination}</th></Link>
               </tr>
             </div>
             ))}
-            </Link>
         </table>
       <form>
       <input type="text" style={{border: 'solid'}} value={this.state.destination} onChange={(e) => { this.handleInputChange("destination", e) }}/>

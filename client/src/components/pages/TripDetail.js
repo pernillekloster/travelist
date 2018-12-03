@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import api from '../../api';
-import AddedTips from './AddedTips';
-import AddFoodTip from './AddFoodTip';
+import AddTip from './AddTip';
 
-class Pernille extends Component {
+
+class TripDetail extends Component {
   constructor(props) {
     super(props);
     this.toggle1 = this.toggle1.bind(this);
@@ -14,18 +14,14 @@ class Pernille extends Component {
       collapse1: false,
       collapse2: false,
       collapse3: false,
-      // category: "",
-      // description: "",
-      // title: "",
-      // location: "",
-      // tips: []
+      title: "",
+      tips: [],
+      location: "",
+      description: "",
+      category: ""
     };
   }
 
-  // api.getTip(id)
-  // .then()
-
-  // }
   toggle1() {
     this.setState({ collapse1: !this.state.collapse1 });
   }
@@ -38,17 +34,41 @@ class Pernille extends Component {
     this.setState({ collapse3: !this.state.collapse3 });
   }
 
+  componentDidMount() {
+    let id = this.props.match.params.id
+    api.getTips(id)
+      .then(tips => {
+        console.log(tips)
+        this.setState({
+          tips: tips
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <div>
+        <table style={{margin: 'auto'}}>  
+          <tbody>
+            {this.state.tips.map(t => (
+              <div>
+                <hr/>
+              <tr key={t._id}>
+              <th>{t.title}</th><br/>
+              <th>{t.location}</th><br/>
+              <th>{t.description}</th><br/>
+              </tr>
+            </div>
+            ))}
+          </tbody>
+        </table>
       <div>
         <Button color="primary" onClick={this.toggle1} size="lg" block style={{ marginBottom: '1rem'}}>Food &amp; drinks</Button>
         <Collapse isOpen={this.state.collapse1}>
           <Card>
             <CardBody>
             This is where food and drinks tip will appear
-            <AddedTips />
-            <AddFoodTip />
             </CardBody>
           </Card>
         </Collapse>
@@ -73,10 +93,10 @@ class Pernille extends Component {
           </Card>
         </Collapse>
       </div>
+      <AddTip />
       </div>
     );
   }
-     
 }
 
-export default Pernille;
+export default TripDetail;

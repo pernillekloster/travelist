@@ -106,7 +106,7 @@ export default {
     .catch(errHandler)
   },
 
-  getTip(id){
+  getTips(id){
     return service
     .get('/trip-create/get-tip/'+id)
     .then(res => res.data)

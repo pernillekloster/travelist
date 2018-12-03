@@ -32,6 +32,7 @@ class App extends Component {
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/trip-detail/:id" exact component={TripDetail} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
