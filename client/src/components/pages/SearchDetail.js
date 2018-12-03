@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import SearchDetailTip from "./SearchDetailTip"
 // import './Sample.css';
 
 class SearchDetail extends Component {
@@ -8,46 +10,61 @@ class SearchDetail extends Component {
     this.state = {
       selectedTrip: [],
       isAdded: false,
+      collapse: false, 
+      // collapseFood: false, 
+      // collapseActivties: false,
+      // collapseStay: false,
     }
   }
 
-  handleAdd(tipId) {
-    let id = this.props.match.params.id
-    let friendTripId = this.props.match.params.friendTripId
+  toggle  = (category) => {
+    this.setState({ collapse: !this.state.collapse });
 
-    api.addTip(id, friendTripId, tipId)
-    .then(updateTrip =>
-      this.setState({
-        isAdded: true
-      })
-    ) 
+    // if (category === "food & drinks") {
+    //   this.setState({ collapseFood: !this.state.collapseFood });
+    // }
+    // if (category === "activities") {
+    //   this.setState({ collapseActivities: !this.state.collapseActivities })
+    // }
+    // if (category === "where to stay") {
+    //   this.setState({ collapseStay: !this.state.collapseStay })
+    // }
   }
 
   render() {
-    console.log(this.state.selectedTrip)
+  
     const tipCard = []
 
     this.state.selectedTrip.map(e => {
     // Sort tips of trips based on category
     let tips = e.tripData._tip.sort((a,b) => (a.category > b.category ? 1 : -1))
-
+  
     // Push categories to array
     for (let i = 0; i < tips.length; i++) {
     if (i === 0 || tips[i].category !== tips[i-1].category) {
-        tipCard.push(
-        <p>{tips[i].category}</p>
-        )}
+      tipCard.push(
+      <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
+      )}
+
     // Push each tip to array
-    tipCard.push(
-          <div  key={tips[i]._id}> 
-                      <ul>
-                      <li>{tips[i].title}</li>
-                      <li>{tips[i].description}</li>
-                      <li>{tips[i].location}</li>
-                      <button onClick={() => this.handleAdd(tips[i]._id)}>Add</button>
-                      </ul>
-          </div>
-      )
+      tipCard.push(
+        <Collapse isOpen={this.state.collapse}>
+        {/* <Collapse isOpen={this.state.collapseFood}> */}
+        <Card>
+          <CardBody>
+            <SearchDetailTip 
+            tipId={tips[i]._id} 
+            title={tips[i].title} 
+            description={tips[i].description} 
+            location= {tips[i].location} 
+            id={this.props.match.params.id}
+            friendTripId={this.props.match.params.friendTripId}
+            />
+          </CardBody>
+        </Card>
+        </Collapse>
+        )
+        console.log("debug tipcard", tipCard)
     }
     })
 
@@ -57,11 +74,7 @@ class SearchDetail extends Component {
         <h2>Here are your friends' tips and recos</h2>
 
         {/* Take the selected trip from the friend and display the included tips */}
-        <div>
-        {this.state.isAdded && <div className="Btn-Tip-Added">Gone</div>}
-
-        {!this.state.isAdded && <div>{tipCard}</div>}
-        </div>
+        <div>{tipCard}</div>
 
       </div>
     );
