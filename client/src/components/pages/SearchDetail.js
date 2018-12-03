@@ -29,12 +29,11 @@ class SearchDetail extends Component {
     if (category === "where to stay") {
       this.setState({ collapseStay: !this.state.collapseStay })
     }
-    console.log("debug state", this.state.collapseActivities)
-    console.log("debug state", this.state.collapseFood)
   }
 
   render() {
-  
+    console.log("debug state food", this.state.collapseFood)
+    console.log("debug state activities", this.state.collapseActivities)
     const tipCard = []
 
     this.state.selectedTrip.map(e => {
@@ -51,7 +50,7 @@ class SearchDetail extends Component {
     // Push each tip to array
       tipCard.push(
         // <Collapse isOpen={this.state.collapse}>
-        <Collapse isOpen={this.state.collapseFood || this.state.collapseActivities || this.state.collapseStay}> 
+        <Collapse isOpen={this.state.collapseActivities || this.state.collapseFood || this.state.collapseStay}> 
         <Card>
           <CardBody>
             <SearchDetailTip 
@@ -65,8 +64,7 @@ class SearchDetail extends Component {
           </CardBody>
         </Card>
         </Collapse>
-        )
-        console.log("debug tipcard", tipCard)
+        ) 
     }
     })
 
