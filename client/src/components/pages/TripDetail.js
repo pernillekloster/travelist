@@ -18,8 +18,9 @@ class TripDetail extends Component {
       tips: [],
       location: "",
       description: "",
-      category: ""
+      category: "",
     };
+
   }
 
   toggle1() {
@@ -34,6 +35,16 @@ class TripDetail extends Component {
     this.setState({ collapse3: !this.state.collapse3 });
   }
 
+  
+
+  addTip(tip) {
+    console.log("DEBUG addTip", tip);
+    
+    this.setState({
+      tips: [...this.state.tips, tip]
+    })
+  }
+
   componentDidMount() {
     let id = this.props.match.params.id
     api.getTips(id)
@@ -44,6 +55,7 @@ class TripDetail extends Component {
       })
       .catch(err => console.log(err))
   }
+
 
   render() {
     let id = this.props.match.params.id
@@ -93,7 +105,10 @@ class TripDetail extends Component {
           </Card>
         </Collapse>
       </div> */}
-      <AddTip id={this.props.match.params.id} />
+      <AddTip 
+      id={this.props.match.params.id}
+      onAdd={tip => this.addTip(tip)}
+      />
       <br/>
       <Link to={`search/${id}`}>Search for friends´ tips</Link>
       </div>
