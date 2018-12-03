@@ -7,7 +7,6 @@ import Signup from './pages/Signup';
 import TripDetail from './pages/TripDetail';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
-// import Pernille from './pages/Pernille';
 import api from '../api';
 
 class App extends Component {
@@ -36,6 +35,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/trip-detail/:id" exact component={TripDetail} />
+          <Route path="/trip-detail/tip-search" component={Search} />          
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
