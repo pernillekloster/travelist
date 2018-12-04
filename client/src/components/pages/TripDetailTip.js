@@ -30,7 +30,7 @@ class TripDetailTip extends Component {
       <div >
          <div  className="TripDetailTip" key={this.props.tipId}> 
                 <p><strong>Title:</strong> {this.props.title}</p>
-                <p><strong>Description:</strong> {this.props.description}</p>
+                <p><strong>Description:</strong> <br/> {this.props.description}</p>
                 <p><strong>Location:</strong> {this.props.location}</p>
                 <button className="btn btn-trip-detail-delete" onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
           </div>

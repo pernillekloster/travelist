@@ -102,7 +102,7 @@ class TripDetail extends Component {
     return (
       <div>
 
-        <p className="site-heading">Your saved tips for {this.state.destination}</p>
+        <p className="site-heading">Your saved tips for {this.state.destination}:</p>
 
         <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
@@ -122,7 +122,7 @@ class TripDetail extends Component {
         <br/>
         <div>
           <Button className="btn-trip-detail-search" color="#1F5B66">
-          <Link className="btn-trip-detail-search" to={`search/${id}`}>See your friends' tips for {this.state.destination}</Link>
+          <Link className="btn-trip-detail-search" to={`search/${id}`}>Your friends' tips for {this.state.destination}</Link>
           </Button>
         </div>
 
