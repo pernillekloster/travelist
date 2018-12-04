@@ -8,6 +8,7 @@ import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
 import userProfile from './pages/User-profile'
+import Navbar from './pages/Navbar'
 
 class App extends Component {
   constructor(props) {
@@ -24,12 +25,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Travelist</h1>
-          <NavLink to="/" exact>Home</NavLink>
+      <div className="navbar" style={{ height: '88px' }}>
+      <NavLink to="/" exact style={{ height: '40%' }}>
+        <img src="../../../images/home.png" class="icon" />
+      </NavLink>
+      <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
           {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+      <NavLink to="/user-profile" exact style={{ height: '40%' }}>
+        <img src="../../../images/userprofile.png" class="icon" />
+      </NavLink>
+    </div>
+        <header className="App-header">
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
