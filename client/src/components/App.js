@@ -4,9 +4,9 @@ import Home from './pages/Home';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import TripDetail from './pages/TripDetail';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
-// import Pernille from './pages/trip-create/Pernille';
 import api from '../api';
 import userProfile from './pages/User-profile'
 
@@ -30,22 +30,20 @@ class App extends Component {
           <NavLink to="/" exact>Home</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+          {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
           <NavLink to="/secret">Secret</NavLink>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
           <Route path="/user-profile" component={userProfile} />
-          {/* Katrin */}
-          <Route path="/search/:id" exact component={Search} />
+          <Route path="/trip-detail/search/:id" exact component={Search} />
           <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-          {/* <Pernille /> */}
-
       </div>
     );
   }

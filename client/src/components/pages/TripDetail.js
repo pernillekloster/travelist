@@ -1,36 +1,45 @@
 import React, { Component } from 'react';
-import api from '../../api';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
-import SearchDetailTip from "./SearchDetailTip"
-// import './Sample.css';
+import api from '../../api';
+import AddTip from './AddTip';
+import { Link } from 'react-router-dom'
+import TripDetailTip from "./TripDetailTip"
 
-class SearchDetail extends Component {
+class TripDetail extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      selectedTrip: [],
-      isAdded: false,
+    super(props);
+    this.state = { 
       collapse: false, 
+      title: "",
+      selectedTrip: [],
+      tips: [],
+      location: "",
+      description: "",
       category: "",
-    }
+      categoryBtn: "",
+    };
   }
 
-  toggle  = (category) => {
+  addTip(tip) {
+    this.setState({
+      tips: [...this.state.tips, tip]
+    })
+  }
+
+  toggle  = (categoryBtn) => {
     this.setState({ 
-      category: category,
+      categoryBtn: categoryBtn,
       collapse: !this.state.collapse 
     });
   }
-  
+
   render() {
-    
-    console.log("debug state category", this.state.category )
+    let id = this.props.match.params.id
+
     const categories = []
     const tipArray = []
 
-    this.state.selectedTrip.map(e => {
-    // Sort tips of trips based on category
-    let tips = e.tripData._tip.sort((a,b) => (a.category > b.category ? 1 : -1))
+    let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
     
     // Push categories to array
     for (let i = 0; i < tips.length; i++) {
@@ -42,49 +51,65 @@ class SearchDetail extends Component {
 
     // Push filtered Tips into array
     let filteredTips = tips.filter(t => {
-      return t.category === this.state.category
+      return t.category === this.state.categoryBtn
     }) 
-    console.log("debug filteredTips", filteredTips)
+
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBody>
-              <SearchDetailTip 
+              <TripDetailTip 
               tipId={filteredTips[i]._id} 
               title={filteredTips[i].title} 
               category={filteredTips[i].category}
               description={filteredTips[i].description} 
               location= {filteredTips[i].location} 
               id={this.props.match.params.id}
-              friendTripId={this.props.match.params.friendTripId}
               />
             </CardBody>
           </Card>
           </Collapse>
         )
         console.log("debug tipArray", tipArray)
-      }
-  })
- 
+    }
+
     return (
-      <div className="SearchDetail">
-        <h2>Here are your friends' tips and recos</h2>
-        {/* Take the selected trip from the friend and display the included tips */}
+      <div>
+
         <div>{categories}</div>
         <div>{tipArray}</div>
+      
+        <div>
+          <AddTip 
+          id={this.props.match.params.id}
+          onAdd={tip => this.addTip(tip)}
+          destination={this.state.selectedTrip.destination}
+          />
+        </div>
+
+        <div>
+          <Link to={`search/${id}`}>Search for friends´ tips</Link>
+        </div>
+
       </div>
     );
   }
 
   componentDidMount() {
     let id = this.props.match.params.id
-    let friendTripId = this.props.match.params.friendTripId
 
-    api.getSelectedFriendsTrip(id, friendTripId)
-      .then(trip=> {
+    api.getTrip(id)
+      .then(trip => {
         this.setState({
-          selectedTrip: [trip],
+          selectedTrip: trip,
+        })
+        console.log("debug selected trip", this.state.selectedTrip)
+      })
+    api.getTips(id)
+      .then(tips => {
+        this.setState({
+          tips: tips
         })
       })
       .catch(err => console.log(err))
@@ -92,4 +117,4 @@ class SearchDetail extends Component {
 
 }
 
-export default SearchDetail;
+export default TripDetail;
