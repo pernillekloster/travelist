@@ -86,8 +86,8 @@ router.delete('/tip-delete/:tipId', (req, res, next)=>{
   let tipId = req.params.tipId
 
   Tip.findByIdAndRemove(tipId)
-    .then(() => {
-      res.json({message: `Tip with ${tipId} is removed successfully.`});
+    .then(tipDoc => {
+      res.json(tipDoc);
     })
     .catch(err => {
       res.json(err);

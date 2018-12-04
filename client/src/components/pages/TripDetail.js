@@ -28,6 +28,13 @@ class TripDetail extends Component {
     })
   }
 
+  deleteTip(tip) {
+    let newTipArr = this.state.tips.filter(t => t._id != tip._id)
+    this.setState({
+      tips: newTipArr
+    })
+  }
+
   toggle  = (categoryBtn) => {
     this.setState({ 
       categoryBtn: categoryBtn,
@@ -80,6 +87,7 @@ class TripDetail extends Component {
               description={filteredTips[i].description} 
               location= {filteredTips[i].location} 
               id={this.props.match.params.id}
+              onDelete={tip => this.deleteTip(tip)}
               />
             </CardBody>
           </Card>
