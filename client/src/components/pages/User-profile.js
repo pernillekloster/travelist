@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import api from "../../api";
-import {
-  Table,
-  Button,
-  Container,
-  Input,
-  Collapse,
-  CardBody,
-  Card,
-  Col,
-  Row
-} from "reactstrap";
-import "../../styles/Eullin.css";
+import { Table, Button, Container, Input, Collapse, CardBody, Card, Col, Row } from "reactstrap";
+import { Route, NavLink } from "react-router-dom";
+import AllUsers from "./AllUsers";
+//import Following from "./Following";
 
 class userProfile extends Component {
   constructor(props) {
@@ -23,25 +15,23 @@ class userProfile extends Component {
       following: [],
       collapse: false,
       isAdded: true,
-
+      followerShown: false
     };
   }
 
-  
-  togglefollowing = following => {
+/*   togglefollowing = following => {
     this.setState({
       following: following,
-      collapse: !this.state.collapse,
+      collapse: !this.state.collapse
     });
   };
-
 
   toggleFollowers = followers => {
     this.setState({
       followers: followers,
-      collapse: !this.state.collapse,
+      followerShown: !this.state.collapse
     });
-  };
+  }; */
 
   handleChange = event => {
     this.setState({
@@ -57,101 +47,63 @@ class userProfile extends Component {
   render() {
     return (
       <Container className="userProfile">
-        <h1>Username</h1>
+        <h1>Your profile</h1>
+        <div>
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile"
+          >
+            All users
+          </Button>
+          
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile/following"
+          >
+            Following
+          </Button>
+          
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile/followers"
+          >
+            Followers
+          </Button>
+        </div>
+
         <Input
           type="text"
           name="search"
           className="mb-3"
           value={this.state.search}
           onChange={this.handleChange}
+          placeholder="Username"
         />
-
-        <Table>
-          <tbody>
-            {this.state.users
-              .filter(users =>
-                users.username
-                  .toLowerCase()
-                  .includes(this.state.search.toLocaleLowerCase())
-              )
-              .map(user => (
-                <tr key={user._id}>
-                  <td>{user.username}</td>
-                  <td>
-                    <Button
-                      className="profile-follow"
-                      color="primary"
-                      outline={this.isFollowing(user)}
-                      style={{ width: 120 }}
-                      onClick={() => this.handleFollowClick(user._id)}
-                    >
-                      {this.isFollowing(user) ? "Unfollow" : "Follow"}
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-
-        <hr />
-
-        <Container>
-          <Row>
-            <Col xs="6">
-              <Button
-                color="primary"
-                onClick={this.togglefollowing}
-                style={{ marginBottom: "1rem" }}
-              >
-                Following
-              </Button>
-            </Col>
-
-            <Col xs="6">
-              <Button
-                color="white"
-                onClick={this.toggleFollowers}
-                style={{ marginBottom: "1rem" }}
-              >
-                Followers
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-
-        <Collapse isOpen={this.state.collapse}>
-          <Card>
-            <CardBody>
-              {this.state.users
-                .filter(user =>
-                  user.followers.includes(api.getLoggedInUserSync()._id)
-                )
-                .map(user => (
-                  <div>{user.username}</div>
-                ))}
-            </CardBody>
-          </Card>
-        </Collapse>
-
-{/*   <div>
-    {this.state.followerShown && 
-     <Collapse isOpen={this.state.collapse}>
-     <Card>
-       <CardBody>
-         {this.state.users
-           .filter(user =>
-             user.following.includes(api.getLoggedInUserSync()._id)
-           )
-           .map(user => (
-             <div>{user.username}</div>
-           ))}
-       </CardBody>
-     </Card>
-   </Collapse>
-  }
-  </div> */}
-  
-
+        
+        <Route
+          path="/user-profile"
+          exact
+          render={props => <AllUsers {...props} search={this.state.search} />}
+        />
+        <Route
+          path="/user-profile/following"
+          exact
+          render={() => <div>WIP</div>}
+        />
+        <Route
+          path="/user-profile/followers"
+          exact
+          render={() => <div>WIP</div>}
+        />
       </Container>
     );
   }
@@ -181,11 +133,9 @@ class userProfile extends Component {
     api
       .getFollowing()
       .then(followingData => {
-        console.log("debug following frontend", followingData);
         this.setState({
           following: followingData
         });
-        console.log("debug following", this.state.following);
       })
       .catch(err => console.log("error userprofile", err));
   };

@@ -1,4 +1,12 @@
-#btn-follow-ers-ing{
-display: flex;
+#btn-follow-ers-ing {
+  display: flex;
 }
 
+.profile-follow {
+  text-decoration-line: underline;
+  color: black;
+}
+
+.btn {
+  border-radius: 18px!important;
+}
