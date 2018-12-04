@@ -30,7 +30,7 @@ class Signup extends Component {
     api.signup(data)
       .then(result => {
         console.log('SUCCESS!')
-        this.props.history.push("/") // Redirect to the home page
+        this.props.history.push("/home") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))
       console.log("Fail signup")
@@ -39,9 +39,6 @@ class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        <div className="onboarding important-header">
-        Some inspirational travel quote here?
-        </div>
         <form>
           <input className="inputLogin" placeholder="username" type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
           <input className="inputLogin" placeholder="e-mail" type="text" value={this.state.email} onChange={(e) => this.handleInputChange("email", e)} /> <br />

@@ -8,6 +8,7 @@ import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
 import userProfile from './pages/User-profile'
+import Start from "./pages/Start"
 
 class App extends Component {
   constructor(props) {
@@ -24,8 +25,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
       <div className="navbar" style={{ height: '88px' }}>
-      <NavLink to="/" exact style={{ height: '40%' }}>
+      <NavLink to="/home" exact style={{ height: '40%' }}>
         <img src="../../../images/home.png" class="icon" />
       </NavLink>
       <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
@@ -36,10 +38,12 @@ class App extends Component {
         <img src="../../../images/userprofile.png" class="icon" />
       </NavLink>
     </div>
+    
         <header className="App-header">
         </header>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Start} />
+          <Route path="/home" exact component={Home} />
           <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />

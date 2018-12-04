@@ -25,7 +25,7 @@ class Login extends Component {
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
-        this.props.history.push("/") // Redirect to the home page
+        this.props.history.push("/home") // Redirect to the home page
       })
       .catch(err => 
        
@@ -36,9 +36,6 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <div className="onboarding important-header">
-        Some inspirational travel quote here?
-        </div>
         <form>
           <input className="inputLogin" placeholder="username" type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
           <input className="inputLogin" placeholder="password" type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
