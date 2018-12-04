@@ -1,0 +1,49 @@
+/* TripDetail component */
+
+.TripDetailTipCard {
+  width: 90%;
+  background-color: rgba(31, 91, 102, 0.3);
+  margin: 0 auto;
+}
+
+.btn-trip-detail-search {
+  width: 90%;
+  height: 70px;
+  color: white;
+  text-decoration: none;
+  margin: 0.5em;
+  border-radius: 18px;
+  background-color: #1F5B66;
+}
+
+.btn-trip-detail-dd {
+  width: 90%;
+  height: 70px;
+  color: white;
+  margin-top: 0.5em;
+  background-color: #1F5B66;
+}
+
+.btn-trip-detail-addTip {
+  width: 90%;
+  height: 70px;
+  color: white;
+  margin: 0.5em;
+  background-color: #FAAD8D;
+}
+
+/* TripDetailTip component */
+
+.TripDetailTip {
+  text-align: left;
+  margin: 0.5em;
+}
+
+.btn-trip-detail-delete {
+  width: 50%;
+  color: black;
+  border-radius: 18px;
+}
+
+/* addTip Component */
+

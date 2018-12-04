@@ -11,6 +11,7 @@ class TripDetail extends Component {
     this.state = { 
       collapse: false, 
       title: "",
+      destination: "",
       selectedTrip: [],
       tips: [],
       location: "",
@@ -77,7 +78,7 @@ class TripDetail extends Component {
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
         <Collapse isOpen={this.state.collapse}>
-          <Card>
+          <Card className="TripDetailTipCard" color=" rgba(31, 91, 102, 0.3)">
             <CardBody>
               <TripDetailTip 
               tipId={filteredTips[i]._id} 
@@ -110,37 +111,27 @@ class TripDetail extends Component {
     return (
       <div>
 
-        <h4>Here are your saved tips for {this.state.selectedTrip.destination}</h4>
+        <p>Here are your saved tips for {this.state.destination}</p>
 
-        <Button color="primary" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
         {this.state.categoryBtn === "food & drinks" && tipArray}
         </div>
 
-        <Button color="primary" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
         <div>
         {this.state.categoryBtn === "activities" && tipArray}
         </div>
 
-        <Button color="primary" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
         <div>
         {this.state.categoryBtn === "where to stay" && tipArray}
         </div>
-
-        {/* <div>
-        <Collapse isOpen={this.state.collapse}>
-          <AddTip 
-          id={this.props.match.params.id}
-          onAdd={tip => this.addTip(tip)}
-          destination={this.state.selectedTrip.destination}
-          />
-        </Collapse>
-        </div> */}
         
         <br/>
         <div>
-          <Button color="danger">
-          <Link to={`search/${id}`}>Search for friends´ tips</Link>
+          <Button className="btn btn-trip-detail-search" color="#1F5B66">
+          <Link className="btn-trip-detail-search" to={`search/${id}`}>See your friends' tips for {this.state.destination}</Link>
           </Button>
         </div>
         <div>
@@ -159,6 +150,7 @@ class TripDetail extends Component {
       .then(trip => {
         this.setState({
           selectedTrip: trip,
+          destination: trip.destination
         })
       })
     api.getTips(id)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 import api from '../../api';
 // import './Sample.css';
 
@@ -26,15 +27,13 @@ class TripDetailTip extends Component {
 
   render() {
     return (
-      <div className="TripDetailTip">
-         <div  key={this.props.tipId}> 
-                <ul>
-                <li>Title: {this.props.title}</li>
-                <li>Description: {this.props.description}</li>
-                <li>Location: {this.props.location}</li>
-                <button onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
-                </ul>
-            </div>
+      <div >
+         <div  className="TripDetailTip" key={this.props.tipId}> 
+                <p>Title: {this.props.title}</p>
+                <p>Description: {this.props.description}</p>
+                <p>Location: {this.props.location}</p>
+                <button className="btn btn-trip-detail-delete" onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
+          </div>
       
       </div>
     );
