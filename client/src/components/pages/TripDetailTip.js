@@ -19,7 +19,7 @@ class TripDetailTip extends Component {
       this.setState({
         isDeleted: true
       })
-      this.props.onDelete(tipDoc) // TODO: change
+      this.props.onDelete(tipDoc) 
     }
     ) 
   }
@@ -27,18 +27,15 @@ class TripDetailTip extends Component {
   render() {
     return (
       <div className="TripDetailTip">
-      {this.state.isDeleted && <div className="Btn-Tip-Added">Tip deleted</div>}
-      {!this.state.isDeleted && 
          <div  key={this.props.tipId}> 
                 <ul>
-                <li>Category: {this.props.category}</li>
                 <li>Title: {this.props.title}</li>
                 <li>Description: {this.props.description}</li>
                 <li>Location: {this.props.location}</li>
                 <button onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
                 </ul>
             </div>
-      }
+      
       </div>
     );
   }

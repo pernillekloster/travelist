@@ -65,19 +65,9 @@ class TripDetail extends Component {
 
   render() {
     let id = this.props.match.params.id
-
-    const categories = []
     const tipArray = []
 
     let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
-    
-    // Push categories to array
-    for (let i = 0; i < tips.length; i++) {
-    if (i === 0 || tips[i].category !== tips[i-1].category) {
-      categories.push(
-      <Button color="primary" onClick={() => this.toggle(tips[i].category)} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
-      )}
-    }
 
     // Push filtered Tips into array
     let filteredTips = tips.filter(t => {
@@ -104,21 +94,49 @@ class TripDetail extends Component {
         )
     }
 
+    tipArray.push(
+      <div>
+      <Collapse isOpen={this.state.collapse}>
+        <AddTip 
+        id={this.props.match.params.id}
+        onAdd={tip => this.addTip(tip)}
+        destination={this.state.selectedTrip.destination}
+        category={this.state.categoryBtn}
+        />
+      </Collapse>
+      </div>
+    )
+
     return (
       <div>
 
         <h4>Here are your saved tips for {this.state.selectedTrip.destination}</h4>
 
-        <div>{categories}</div>
-        <div>{tipArray}</div>
-      
+        <Button color="primary" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
+        {this.state.categoryBtn === "food & drinks" && tipArray}
+        </div>
+
+        <Button color="primary" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
+        <div>
+        {this.state.categoryBtn === "activities" && tipArray}
+        </div>
+
+        <Button color="primary" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
+        <div>
+        {this.state.categoryBtn === "where to stay" && tipArray}
+        </div>
+
+        {/* <div>
+        <Collapse isOpen={this.state.collapse}>
           <AddTip 
           id={this.props.match.params.id}
           onAdd={tip => this.addTip(tip)}
           destination={this.state.selectedTrip.destination}
           />
-        </div>
+        </Collapse>
+        </div> */}
+        
         <br/>
         <div>
           <Button color="danger">
