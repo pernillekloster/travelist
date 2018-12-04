@@ -16,7 +16,6 @@ class TripDetailTip extends Component {
 
     api.deleteTip(tipId, id)
     .then(tipDoc => {
-      console.log("debug frontent tipDelete", tipDoc)
       this.setState({
         isDeleted: true
       })

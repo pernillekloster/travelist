@@ -46,6 +46,7 @@ router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
 
   // Find selected friends trip and display details
   Trip.findById(friendsId)
+  .populate("_creator")
   .then(tripData => 
     res.json({
       tripData

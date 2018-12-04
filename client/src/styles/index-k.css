@@ -128,3 +128,38 @@ border-radius: 18px !important;
   margin: 0.5em;
   background-color: #FAAD8D;
 }
+
+/* Login/Singup component */
+
+.inputLogin {
+  width: 90%;
+  font-size: 22px;
+  border: none !important;
+  border-bottom: 1px solid grey !important;
+  margin-bottom: 1em;
+}
+
+.login-signup-link {
+  color:  #1F5B66;
+}
+
+.onboarding {
+  width: 90%;
+  height: 20vh;
+  background-color: rgba(110, 159, 168, 0.1);
+  border-radius: 18px;
+  margin: 1em auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.errormessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  color: white;
+  margin: 0.5em;
+  background-color: #F47645;
+}
