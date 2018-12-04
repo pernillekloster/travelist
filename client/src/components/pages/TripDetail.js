@@ -17,6 +17,7 @@ class TripDetail extends Component {
       description: "",
       category: "",
       categoryBtn: "",
+      istDeleted: false
     };
   }
 
@@ -32,6 +33,17 @@ class TripDetail extends Component {
       collapse: !this.state.collapse 
     });
   }
+
+  handleDelete(tripId) {
+    let id = this.props.id
+    api.deleteTrip(tipId, id)
+    .then(updateTrip =>
+      this.setState({
+        isDeleted: true
+      })
+    ) 
+  }
+
 
   render() {
     let id = this.props.match.params.id
@@ -71,7 +83,6 @@ class TripDetail extends Component {
           </Card>
           </Collapse>
         )
-        console.log("debug tipArray", tipArray)
     }
 
     return (
@@ -94,6 +105,9 @@ class TripDetail extends Component {
           <Button color="danger">
           <Link to={`search/${id}`}>Search for friends´ tips</Link>
           </Button>
+        </div>
+        <div>
+          <Button onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
         </div>
 
       </div>

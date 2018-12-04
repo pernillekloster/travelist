@@ -10,7 +10,6 @@ const userSchema = new Schema({
   },
   password: String,
   pictureUrl: String,
-  _trip: {type: Schema.Types.ObjectId, ref:"Trip"},
   following: [],
   followers: []
 }, {
