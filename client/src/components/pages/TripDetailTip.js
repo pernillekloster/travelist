@@ -12,13 +12,15 @@ class TripDetailTip extends Component {
 
   handleDelete(tipId) {
     let id = this.props.id
-    console.log("debug frontend tripId", id)
 
     api.deleteTip(tipId, id)
-    .then(updateTrip =>
+    .then(tipDoc => {
+      console.log("debug frontent tipDelete", tipDoc)
       this.setState({
         isDeleted: true
       })
+      this.props.onDelete(tipDoc) // TODO: change
+    }
     ) 
   }
 
