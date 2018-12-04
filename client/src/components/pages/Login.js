@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../api';
 
 class Login extends Component {
@@ -35,13 +36,18 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <h2>Login</h2>
+        <div className="onboarding important-header">
+        Some inspirational travel quote here?
+        </div>
         <form>
-          Username: <input type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
-          Password: <input type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
-          <button onClick={(e) => this.handleClick(e)}>Login</button>
+          <input className="inputLogin" placeholder="username" type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
+          <input className="inputLogin" placeholder="password" type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
+          <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleClick(e)}>Login</button>
         </form>
-        {this.state.message && <div className="info info-danger">
+        <p>Don't have an account yet? 
+          <Link className="login-signup-link" to="/signup"> Signup</Link>
+        </p>
+        {this.state.message && <div className="btn errormessage">
           {this.state.message}
         </div>}
       </div>

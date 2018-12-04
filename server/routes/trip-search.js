@@ -38,22 +38,21 @@ router.get('/:id', isLoggedIn, (req, res, next) => {
 });
 
 // GET detail of the selected trip from a friend
-// router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
-//   // Get id of friends trip
-//   let friendsId = req.params.friendsId
-//   // Store id of the users trip to use it in next route
-//   let id = req.params.id
+router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
+  // Get id of friends trip
+  let friendsId = req.params.friendsId
+  // Store id of the users trip to use it in next route
+  let id = req.params.id
 
-//   // Find selected friends trip and display details
-//   Trip.findById(friendsId)
-//   .populate("_tip")
-//   .then(tripData => 
-
-//     res.json({
-//       tripData
-//     })
-//   )
-// })
+  // Find selected friends trip and display details
+  Trip.findById(friendsId)
+  .populate("_creator")
+  .then(tripData => 
+    res.json({
+      tripData
+    })
+  )
+})
 
 // POST tip from friends' trip 
 router.post("/:id/:friendsId/:newTipId", isLoggedIn, (req, res, next) => {
