@@ -8,7 +8,6 @@ import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
 import userProfile from './pages/User-profile'
-import Navbar from './pages/Navbar'
 
 class App extends Component {
   constructor(props) {
