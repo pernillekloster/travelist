@@ -7,7 +7,7 @@ class AddTip extends Component {
     super(props);
     this.state = {
       modal: false,
-      category: "",
+      category: this.props.category,
       title: "",
       location: "",
       description: "",
@@ -36,7 +36,7 @@ class AddTip extends Component {
       location: this.state.location,
       description: this.state.description,
     }
-
+    console.log("debug api route", data)
     api.postTip(id, data)
       .then(data => {
         this.toggle()
@@ -46,7 +46,7 @@ class AddTip extends Component {
           location: '',
           description: '',
         })
-        this.props.onAdd(data.tip) // TODO: change
+        this.props.onAdd(data.tip)
       })
       .catch(err => console.log(err)
       )
@@ -55,18 +55,13 @@ class AddTip extends Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>Add new tip</Button>
+        <Button className="btn btn-trip-detail-addTip" color="#FAAD8D" onClick={this.toggle}>Add new tip</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add tip to your {this.props.destination} trip</ModalHeader>
           <form>
           <ModalBody>
-            Category: 
-            <select style={{border: 'solid'}} value={this.state.category} onChange={(e) => this.handleInputChange("category", e)} >
-              <option></option>
-              <option value="activities">Activities</option>
-              <option value="food & drinks">Food & Drinks</option>
-              <option value="where to stay">Where to stay</option>
-            </select>
+            Category: <span>{this.props.category}</span>
+            <input type="hidden" value={this.state.category} />
              <br/>
             Title: <input type="text" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
             Location: <input type="text" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>

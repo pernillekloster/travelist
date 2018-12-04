@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
+  font-family: 'Heebo', sans-serif; }
 
 .info {
   margin: 20px;
@@ -11,24 +11,11 @@ body {
   background-color: #5776e9;
   color: white; }
 
-.info.info-danger {
-  background-color: #e73f3f; }
-
 .App {
   text-align: center; }
   .App .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px; }
-  .App .App-header {
-    background-color: #32c3ff;
-    padding: 20px;
-    color: white; }
-    .App .App-header a {
-      color: white;
-      padding: 0 5px;
-      text-decoration: unset; }
-    .App .App-header a.active {
-      font-weight: bold; }
   .App .App-title {
     font-size: 1.5em; }
   .App .App-intro {
@@ -46,3 +33,15 @@ body {
 .Secret .result {
   font-size: 1.2em;
   color: #32c3ff; }
+
+.navbar {
+  border-bottom: 1px solid grey; }
+
+.travelist-icon {
+  margin-top: 5%; }
+
+.icon {
+  margin-top: 9%;
+  margin-left: 15%;
+  margin-right: 15%;
+  height: 90%; }

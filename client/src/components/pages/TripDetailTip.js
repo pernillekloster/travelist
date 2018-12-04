@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 import api from '../../api';
 // import './Sample.css';
 
@@ -12,31 +13,28 @@ class TripDetailTip extends Component {
 
   handleDelete(tipId) {
     let id = this.props.id
-    console.log("debug frontend tripId", id)
 
     api.deleteTip(tipId, id)
-    .then(updateTrip =>
+    .then(tipDoc => {
+      console.log("debug frontent tipDelete", tipDoc)
       this.setState({
         isDeleted: true
       })
+      this.props.onDelete(tipDoc) 
+    }
     ) 
   }
 
   render() {
     return (
-      <div className="TripDetailTip">
-      {this.state.isDeleted && <div className="Btn-Tip-Added">Tip deleted</div>}
-      {!this.state.isDeleted && 
-         <div  key={this.props.tipId}> 
-                <ul>
-                <li>Category: {this.props.category}</li>
-                <li>Title: {this.props.title}</li>
-                <li>Description: {this.props.description}</li>
-                <li>Location: {this.props.location}</li>
-                <button onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
-                </ul>
-            </div>
-      }
+      <div >
+         <div  className="TripDetailTip" key={this.props.tipId}> 
+                <p>Title: {this.props.title}</p>
+                <p>Description: {this.props.description}</p>
+                <p>Location: {this.props.location}</p>
+                <button className="btn btn-trip-detail-delete" onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
+          </div>
+      
       </div>
     );
   }

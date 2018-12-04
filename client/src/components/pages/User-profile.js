@@ -8,7 +8,8 @@ import {
   Collapse,
   CardBody,
   Card,
-  Link
+  Col,
+  Row
 } from "reactstrap";
 import "../../styles/Eullin.css";
 
@@ -20,24 +21,27 @@ class userProfile extends Component {
       users: [],
       followers: [],
       following: [],
-      isAdded: false,
-      collapse: false
+      collapse: false,
+      isAdded: true,
+
     };
   }
 
+  
   togglefollowing = following => {
     this.setState({
       following: following,
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   };
 
-  /*   toggleFollowers = (followers) => {
-    this.setState({ 
+
+  toggleFollowers = followers => {
+    this.setState({
       followers: followers,
-      collapse: !this.state.collapse 
+      collapse: !this.state.collapse,
     });
-  } */
+  };
 
   handleChange = event => {
     this.setState({
@@ -63,8 +67,6 @@ class userProfile extends Component {
         />
 
         <Table>
-          <thead>{/*             <tr>
-</tr> */}</thead>
           <tbody>
             {this.state.users
               .filter(users =>
@@ -91,74 +93,65 @@ class userProfile extends Component {
           </tbody>
         </Table>
 
-        <hr/>
-
-        <div id="btn-follow-ers-ing">
-          <Button
-            color="white"
-            onClick={this.togglefollowing}
-            style={{ marginBottom: "1rem" }}
-          >
-            Following
-          </Button>
-          <Collapse isOpen={this.state.collapse}>
-            <Card>
-              <CardBody>
-                {this.state.users
-                  .filter(user =>
-                    user.followers.includes(api.getLoggedInUserSync()._id)
-                  )
-                  .map(user => (
-                    <div>{user.username}</div>
-                  ))}
-              </CardBody>
-            </Card>
-          </Collapse>
-
-          <Button
-            color="primary"
-            onClick={this.toggleFollowers}
-            style={{ marginBottom: "1rem" }}
-          >
-            Followers
-          </Button>
-          <Collapse isOpen={this.state.collapse}>
-            <Card>
-              <CardBody>
-                {this.state.users
-                  .filter(user =>
-                    user.following.includes(api.getLoggedInUserSync()._id)
-                  )
-                  .map(user => (
-                    <div>{user.username}</div>
-                  ))}
-              </CardBody>
-            </Card>
-          </Collapse>
-        </div>
-        {/*         <br />
-        <br />
-         <hr />
-        <h2>Following</h2>
-        {this.state.users
-          .filter(user =>
-            user.followers.includes(api.getLoggedInUserSync()._id)
-          )
-          .map(user => (
-            <div>{user.username}</div>
-          ))}
-
         <hr />
-        <h2>Followers</h2>
-        {this.state.users
-          .filter(user =>
-            user.following.includes(api.getLoggedInUserSync()._id)
-          )
-          .map(user => (
-            <div>{user.username}</div>
-          ))}
 
-        <hr />  */}
+        <Container>
+          <Row>
+            <Col xs="6">
+              <Button
+                color="primary"
+                onClick={this.togglefollowing}
+                style={{ marginBottom: "1rem" }}
+              >
+                Following
+              </Button>
+            </Col>
+
+            <Col xs="6">
+              <Button
+                color="white"
+                onClick={this.toggleFollowers}
+                style={{ marginBottom: "1rem" }}
+              >
+                Followers
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+
+        <Collapse isOpen={this.state.collapse}>
+          <Card>
+            <CardBody>
+              {this.state.users
+                .filter(user =>
+                  user.followers.includes(api.getLoggedInUserSync()._id)
+                )
+                .map(user => (
+                  <div>{user.username}</div>
+                ))}
+            </CardBody>
+          </Card>
+        </Collapse>
+
+{/*   <div>
+    {this.state.followerShown && 
+     <Collapse isOpen={this.state.collapse}>
+     <Card>
+       <CardBody>
+         {this.state.users
+           .filter(user =>
+             user.following.includes(api.getLoggedInUserSync()._id)
+           )
+           .map(user => (
+             <div>{user.username}</div>
+           ))}
+       </CardBody>
+     </Card>
+   </Collapse>
+  }
+  </div> */}
+  
+
       </Container>
     );
   }

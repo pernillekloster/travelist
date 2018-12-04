@@ -29,7 +29,6 @@ class SearchDetailTip extends Component {
       {!this.state.isAdded && 
          <div  key={this.props.tipId}> 
                 <ul>
-                <li>Category: {this.props.category}</li>
                 <li>Title: {this.props.title}</li>
                 <li>Description: {this.props.description}</li>
                 <li>Location: {this.props.location}</li>

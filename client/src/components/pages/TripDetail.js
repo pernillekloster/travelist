@@ -11,18 +11,28 @@ class TripDetail extends Component {
     this.state = { 
       collapse: false, 
       title: "",
+      destination: "",
       selectedTrip: [],
       tips: [],
       location: "",
       description: "",
       category: "",
       categoryBtn: "",
+      istDeleted: false,
+      trips: []
     };
   }
 
   addTip(tip) {
     this.setState({
       tips: [...this.state.tips, tip]
+    })
+  }
+
+  deleteTip(tip) {
+    let newTipArr = this.state.tips.filter(t => t._id != tip._id)
+    this.setState({
+      tips: newTipArr
     })
   }
 
@@ -33,21 +43,32 @@ class TripDetail extends Component {
     });
   }
 
+  // handleDelete(trip){
+  //   let newTripArr = this.state.trips.filter(t =>
+  //     t._id != trip._id
+  //   )
+  //   this.setState({
+  //     tips: newTripArr
+  //   })
+  // }
+
+   async handleDelete() {
+     let id = this.props.match.params.id
+    await api.deleteTrip(id)
+    .then(updateTrip =>
+      this.setState({
+        isDeleted: true
+      })
+    ) 
+    this.props.history.push('/');
+  }
+
+
   render() {
     let id = this.props.match.params.id
-
-    const categories = []
     const tipArray = []
 
     let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
-    
-    // Push categories to array
-    for (let i = 0; i < tips.length; i++) {
-    if (i === 0 || tips[i].category !== tips[i-1].category) {
-      categories.push(
-      <Button color="primary" onClick={() => this.toggle(tips[i].category)} style={{ marginBottom: '1rem' }}>{tips[i].category}</Button>
-      )}
-    }
 
     // Push filtered Tips into array
     let filteredTips = tips.filter(t => {
@@ -57,7 +78,7 @@ class TripDetail extends Component {
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
         <Collapse isOpen={this.state.collapse}>
-          <Card>
+          <Card className="TripDetailTipCard" color=" rgba(31, 91, 102, 0.3)">
             <CardBody>
               <TripDetailTip 
               tipId={filteredTips[i]._id} 
@@ -66,34 +87,56 @@ class TripDetail extends Component {
               description={filteredTips[i].description} 
               location= {filteredTips[i].location} 
               id={this.props.match.params.id}
+              onDelete={tip => this.deleteTip(tip)}
               />
             </CardBody>
           </Card>
           </Collapse>
         )
-        console.log("debug tipArray", tipArray)
     }
+
+    tipArray.push(
+      <div>
+      <Collapse isOpen={this.state.collapse}>
+        <AddTip 
+        id={this.props.match.params.id}
+        onAdd={tip => this.addTip(tip)}
+        destination={this.state.selectedTrip.destination}
+        category={this.state.categoryBtn}
+        />
+      </Collapse>
+      </div>
+    )
 
     return (
       <div>
 
-        <h4>Here are your saved tips for {this.state.selectedTrip.destination}</h4>
+        <p>Here are your saved tips for {this.state.destination}</p>
 
-        <div>{categories}</div>
-        <div>{tipArray}</div>
-      
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
-          <AddTip 
-          id={this.props.match.params.id}
-          onAdd={tip => this.addTip(tip)}
-          destination={this.state.selectedTrip.destination}
-          />
+        {this.state.categoryBtn === "food & drinks" && tipArray}
         </div>
+
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
+        <div>
+        {this.state.categoryBtn === "activities" && tipArray}
+        </div>
+
+        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
+        <div>
+        {this.state.categoryBtn === "where to stay" && tipArray}
+        </div>
+        
         <br/>
         <div>
-          <Button color="danger">
-          <Link to={`search/${id}`}>Search for friends´ tips</Link>
+          <Button className="btn btn-trip-detail-search" color="#1F5B66">
+          <Link className="btn-trip-detail-search" to={`search/${id}`}>See your friends' tips for {this.state.destination}</Link>
           </Button>
+        </div>
+        <div>
+          <br/>
+          <Button onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
         </div>
 
       </div>
@@ -107,6 +150,7 @@ class TripDetail extends Component {
       .then(trip => {
         this.setState({
           selectedTrip: trip,
+          destination: trip.destination
         })
       })
     api.getTips(id)

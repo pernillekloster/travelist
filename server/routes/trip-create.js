@@ -70,24 +70,24 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
 
 // DELETE Trip from user
 router.delete('/trip-delete/:id', (req, res, next)=>{
-  let id = req.params.id
+  let tripId = req.params.id
 
-  Trip.findByIdAndRemove(id)
+  Trip.findByIdAndRemove(tripId)
     .then(() => {
-      res.json({message: `Trip with ${id} is removed successfully.`});
+      res.json({message: `Trip with ${tripId} is removed successfully.`});
     })
     .catch(err => {
       res.json(err);
     })
 })
 
-// DELETE Tip and update trip document
+// DELETE Tip
 router.delete('/tip-delete/:tipId', (req, res, next)=>{
   let tipId = req.params.tipId
 
   Tip.findByIdAndRemove(tipId)
-    .then(() => {
-      res.json({message: `Tip with ${tipId} is removed successfully.`});
+    .then(tipDoc => {
+      res.json(tipDoc);
     })
     .catch(err => {
       res.json(err);
