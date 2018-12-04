@@ -18,6 +18,8 @@ class TripDetail extends Component {
       description: "",
       category: "",
       categoryBtn: "",
+      istDeleted: false,
+      trips: []
     };
   }
 
@@ -40,6 +42,27 @@ class TripDetail extends Component {
       collapse: !this.state.collapse 
     });
   }
+
+  // handleDelete(trip){
+  //   let newTripArr = this.state.trips.filter(t =>
+  //     t._id != trip._id
+  //   )
+  //   this.setState({
+  //     tips: newTripArr
+  //   })
+  // }
+
+   async handleDelete() {
+     let id = this.props.match.params.id
+    await api.deleteTrip(id)
+    .then(updateTrip =>
+      this.setState({
+        isDeleted: true
+      })
+    ) 
+    this.props.history.push('/');
+  }
+
 
   render() {
     let id = this.props.match.params.id
@@ -110,6 +133,10 @@ class TripDetail extends Component {
           <Button className="btn btn-trip-detail-search" color="#1F5B66">
           <Link className="btn-trip-detail-search" to={`search/${id}`}>See your friends' tips for {this.state.destination}</Link>
           </Button>
+        </div>
+        <div>
+          <br/>
+          <Button onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
         </div>
 
       </div>
