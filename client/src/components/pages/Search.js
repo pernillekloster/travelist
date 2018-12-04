@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { Button } from 'reactstrap';
 // import './Sample.css';
 
 class Search extends Component {
@@ -20,11 +21,11 @@ class Search extends Component {
   render() {
     return (
       <div className="Search">
-        <h2>These friends have been to {this.state.destination} as well:</h2>
+        <h4>These friends have been to {this.state.destination} as well:</h4>
         {this.state.trips.map(t => 
         <div> 
-          <li key={t._id}>{t._creator.username}</li>
-          <button onClick={() => this.handleTrip(t._id)}>View this trip</button>
+          <p key={t._id}>{t._creator.username}</p>
+          <Button color="primary" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
         </div>
         )}
       </div>
@@ -32,6 +33,7 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    // id of users trip
     let id = this.props.match.params.id
 
     api.getFriendsTrips(id)

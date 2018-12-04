@@ -9,6 +9,7 @@ class SearchDetail extends Component {
     super(props)
     this.state = {
       selectedTrip: [],
+      tips: [],
       isAdded: false,
       collapse: false, 
       category: "",
@@ -27,10 +28,9 @@ class SearchDetail extends Component {
     console.log("debug state category", this.state.category )
     const categories = []
     const tipArray = []
+    // const destination = this.state.selectedTrip.tripData.destination
 
-    this.state.selectedTrip.map(e => {
-    // Sort tips of trips based on category
-    let tips = e.tripData._tip.sort((a,b) => (a.category > b.category ? 1 : -1))
+    let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
     
     // Push categories to array
     for (let i = 0; i < tips.length; i++) {
@@ -44,7 +44,7 @@ class SearchDetail extends Component {
     let filteredTips = tips.filter(t => {
       return t.category === this.state.category
     }) 
-    console.log("debug filteredTips", filteredTips)
+   
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
         <Collapse isOpen={this.state.collapse}>
@@ -63,14 +63,12 @@ class SearchDetail extends Component {
           </Card>
           </Collapse>
         )
-        console.log("debug tipArray", tipArray)
       }
-  })
  
+    // Check why destination display isnt working anymore  
     return (
       <div className="SearchDetail">
-        <h2>Here are your friends' tips and recos</h2>
-        {/* Take the selected trip from the friend and display the included tips */}
+        <h4>Here are your friends' tips and recos for {this.state.selectedTrip.destination}</h4>
         <div>{categories}</div>
         <div>{tipArray}</div>
       </div>
@@ -81,11 +79,19 @@ class SearchDetail extends Component {
     let id = this.props.match.params.id
     let friendTripId = this.props.match.params.friendTripId
 
+    api.getTips(friendTripId)
+     .then(friendTips => {
+       this.setState({
+         tips: friendTips
+       })
+       console.log("debug tips", this.state.tips)
+     })
     api.getSelectedFriendsTrip(id, friendTripId)
       .then(trip=> {
         this.setState({
-          selectedTrip: [trip],
+          selectedTrip: trip,
         })
+        console.log("debug selectedTrip", this.state.selectedTrip)
       })
       .catch(err => console.log(err))
   }

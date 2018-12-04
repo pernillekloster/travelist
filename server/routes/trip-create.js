@@ -7,7 +7,6 @@ const Tip = require("../models/Tip")
 
 
 router.use((req, res, next) => {
-  console.log('DEBUG routes/trips');
   next()
 })
 
@@ -35,8 +34,7 @@ router.get('/get-user-trip', isLoggedIn, (req, res, next) => {
 router.post('/create-trip', isLoggedIn, (req, res, next) => {
   let { destination } = req.body
   let _creator = req.user._id
-  let _tip= []
-  Trip.create({ _creator, _tip, destination })
+  Trip.create({ _creator, destination })
     .then(trip => {
       res.json(
         trip);
@@ -62,35 +60,12 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
 
     Tip.create({ _creator, _trip, category, description, title, location })
       .then(tipDoc => {
-        Trip.findByIdAndUpdate(_trip, { $push: { _tip: tipDoc._id } }, { new: true })
-          .then(tripDoc => {
             res.json({
               success: true,
               tip: tipDoc,
-              trip: tripDoc
             })
           })
-      })
       .catch(err => next(err))
-
-    // let p1 = Tip.create({ _creator, _trip, category, description, title, location })
-
-    // let p2 = Trip.findById(_trip)
-
-    // Promise.all([p1, p2])
-    //   .then(values => {
-    //     let tipId = values[0]._id
-    //     let tipArray = values[1]._tip
-    //     let newTipArray = [...tipArray, tipId]
-    //     Trip.findByIdAndUpdate(_trip, { _tip: newTipArray })
-    //       .then(newTripData => {
-    //         res.json({
-    //           success: true,
-    //           newTripData
-    //         })
-    //       })
-    //   })
-    //   .catch(err => next(err))
   })
 
 // DELETE Trip from user
@@ -106,12 +81,9 @@ router.delete('/trip-delete/:id', (req, res, next)=>{
     })
 })
 
-// DELETE Tip and update
-router.delete('/tip-delete/:id/:tipId', (req, res, next)=>{
-  let id = req.param.id
+// DELETE Tip and update trip document
+router.delete('/tip-delete/:tipId', (req, res, next)=>{
   let tipId = req.params.tipId
-
-  // Trip.findByIdAndUpdate(id, {_tip: })
 
   Tip.findByIdAndRemove(tipId)
     .then(() => {
