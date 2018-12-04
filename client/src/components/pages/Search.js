@@ -18,16 +18,33 @@ class Search extends Component {
     this.props.history.push('/search/'+ this.state.tripId +"/" +idFriendTrip)
   }
 
+  getTripColor(trip) {
+    let colors = ['#1F5B66', '#257888', '#6E9FA8']
+    let colorIndex = parseInt("0x" + trip._id.substr(-10)) % colors.length
+    return colors[colorIndex]
+  }
+
   render() {
     return (
       <div className="Search">
         <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
+
+        <div className="homeboxes">
+
         {this.state.trips.map(t => 
-        <div> 
-          <p className="detail-size" key={t._id}>{t._creator.username}</p>
-          <Button className="btn-trip-detail-search" color="#1F5B66" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
-        </div>
+        // <div className="destinationbox"> 
+        //   <p className="detail-size" key={t._id}>{t._creator.username}</p>
+        //   <Button className="btn-trip-detail-search" color="#1F5B66" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
+        // </div>
+           <Button className="btn-add-trip" onClick={() => this.handleTrip(t._id)}> 
+           <div key={t._id} style={{ backgroundColor: this.getTripColor(t) }}>
+             <a className="link-to-detailed-trip"style={{color: 'white'}}>{t._creator.username}</a>
+           </div>
+           </Button>
         )}
+
+        </div>
+  
       </div>
     );
   }
