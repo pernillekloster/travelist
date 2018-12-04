@@ -42,9 +42,18 @@ class TripDetail extends Component {
     });
   }
 
-  handleDelete() {
-    let id = this.props.match.params.id
-    api.deleteTrip(id)
+  // handleDelete(trip){
+  //   let newTripArr = this.state.trips.filter(t =>
+  //     t._id != trip._id
+  //   )
+  //   this.setState({
+  //     tips: newTripArr
+  //   })
+  // }
+
+   async handleDelete() {
+     let id = this.props.match.params.id
+    await api.deleteTrip(id)
     .then(updateTrip =>
       this.setState({
         isDeleted: true
@@ -117,6 +126,7 @@ class TripDetail extends Component {
           </Button>
         </div>
         <div>
+          <br/>
           <Button onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
         </div>
 
