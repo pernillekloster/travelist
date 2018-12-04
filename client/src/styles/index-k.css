@@ -1,9 +1,34 @@
+.btn {
+  border-radius: 18px !important;
+  font-size: 22px !important;
+}
+
+.site-heading {
+  font-size: 27px;
+}
+
+.important-header {
+  font-size: 22px;
+}
+
+.detail-size {
+  font-size: 17px;
+}
+
 /* TripDetail component */
+
+.TripDetailTipCardBody {
+  background-color: rgba(110, 159, 168, 0.1);
+  border: none !important;
+  border-radius: 18px !important;
+  margin-top: 0.1em;
+}
 
 .TripDetailTipCard {
   width: 90%;
-  background-color: rgba(31, 91, 102, 0.3);
   margin: 0 auto;
+  border: none !important;
+  border-radius: 18px !important;
 }
 
 .btn-trip-detail-search {
@@ -12,7 +37,6 @@
   color: white;
   text-decoration: none;
   margin: 0.5em;
-  border-radius: 18px;
   background-color: #1F5B66;
 }
 
@@ -20,8 +44,8 @@
   width: 90%;
   height: 70px;
   color: white;
-  margin-top: 0.5em;
-  background-color: #1F5B66;
+  margin: 0.5em !important;
+  background-color: #6E9FA8;
 }
 
 .btn-trip-detail-addTip {
@@ -32,11 +56,25 @@
   background-color: #FAAD8D;
 }
 
+.btn-trip-detail-delete {
+  width: 90%;
+  height: 50px;
+  color: black;
+  margin-top: 0.5;
+  background-color: white;
+}
+
+.hr-trip-detail {
+  color: #1F5B66;
+  width: 90%
+}
+
 /* TripDetailTip component */
 
 .TripDetailTip {
   text-align: left;
   margin: 0.5em;
+  font-size: 17px;
 }
 
 .btn-trip-detail-delete {
@@ -47,3 +85,46 @@
 
 /* addTip Component */
 
+.btn-trip-detail-saveTip {
+ background-color:  #1F5B66;
+ color: white;
+}
+
+.btn-trip-detail-cancelTip {
+  background-color: white;
+  color: black;
+  border: 1px solid #1F5B66;
+}
+
+.Modal {
+border-radius: 18px !important;
+}
+
+.inputAddTip {
+  width: 100%;
+  border: none !important;
+  border-bottom: 1px solid grey !important;
+  margin-bottom: 0.5em;
+}
+
+.inputCategoryTrip {
+  margin-bottom: 0.5em;
+}
+
+.modalHeader {
+  border-bottom: none !important;
+}
+
+.modalFooter {
+  border-top: none !important;
+}
+
+/* SearchDetail component */
+
+.btn-trip-detail-addFriendsTip {
+  width: 90%;
+  height: 50px;
+  color: white;
+  margin: 0.5em;
+  background-color: #FAAD8D;
+}

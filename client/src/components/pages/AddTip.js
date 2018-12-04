@@ -56,20 +56,22 @@ class AddTip extends Component {
     return (
       <div>
         <Button className="btn btn-trip-detail-addTip" color="#FAAD8D" onClick={this.toggle}>Add new tip</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add tip to your {this.props.destination} trip</ModalHeader>
+        <Modal className="Modal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add tip to your {this.props.destination} trip</ModalHeader>
           <form>
-          <ModalBody>
+          <ModalBody className="detail-size modalBody">
+          <div className="inputCategoryTrip">
             Category: <span>{this.props.category}</span>
             <input type="hidden" value={this.state.category} />
              <br/>
-            Title: <input type="text" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
-            Location: <input type="text" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
-            Description: <input type="text" style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
+          </div>
+            <input className="inputAddTip" type="text" placeholder="Title" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
+            <input className="inputAddTip" type="text" placeholder="Location" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
+            <input className="inputAddTip" type="text" placeholder="Description" style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.addTip}>Save tip</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          <ModalFooter className="modalFooter">
+            <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTip}>Save tip</Button>{' '}
+            <Button className="btn btn-trip-detail-cancelTip" color="white" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
           </form>
         </Modal> 

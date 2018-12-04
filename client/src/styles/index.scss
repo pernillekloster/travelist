@@ -37,6 +37,12 @@ body {
 .App {
   text-align: center;
 
+<<<<<<< HEAD
+  .App-header {
+    background-color: $primary;
+    padding: 20px;
+    color: white;
+=======
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
@@ -46,6 +52,7 @@ body {
   //   background-color: $primary;
   //   padding: 20px;
   //   color: white;
+>>>>>>> b2ad104712271eafa10c682c3670a82ed80dce47
 
   //   a {
   //     color: white;
@@ -66,15 +73,6 @@ body {
     font-size: large;
   }
 
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
 }
 
 // --------------------
@@ -86,13 +84,7 @@ body {
 }
 
 // --------------------
-// Style for Secret component
-.Secret {
-  .result {
-    font-size: 1.2em;
-    color: $primary;
-  }
-}
+
 
 .navbar{
   border-bottom: 1px solid grey;

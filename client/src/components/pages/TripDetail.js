@@ -43,15 +43,6 @@ class TripDetail extends Component {
     });
   }
 
-  // handleDelete(trip){
-  //   let newTripArr = this.state.trips.filter(t =>
-  //     t._id != trip._id
-  //   )
-  //   this.setState({
-  //     tips: newTripArr
-  //   })
-  // }
-
    async handleDelete() {
      let id = this.props.match.params.id
     await api.deleteTrip(id)
@@ -78,8 +69,8 @@ class TripDetail extends Component {
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
         <Collapse isOpen={this.state.collapse}>
-          <Card className="TripDetailTipCard" color=" rgba(31, 91, 102, 0.3)">
-            <CardBody>
+          <Card className="TripDetailTipCard">
+            <CardBody className="TripDetailTipCardBody">
               <TripDetailTip 
               tipId={filteredTips[i]._id} 
               title={filteredTips[i].title} 
@@ -111,33 +102,33 @@ class TripDetail extends Component {
     return (
       <div>
 
-        <p>Here are your saved tips for {this.state.destination}</p>
+        <p className="site-heading">Your saved tips for {this.state.destination}:</p>
 
-        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
+        <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
         {this.state.categoryBtn === "food & drinks" && tipArray}
         </div>
 
-        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
+        <Button className=" btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("activities")} style={{ marginBottom: '1rem' }}>Activities</Button>
         <div>
         {this.state.categoryBtn === "activities" && tipArray}
         </div>
 
-        <Button className="btn btn-trip-detail-dd" color="#1F5B66" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
+        <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("where to stay")} style={{ marginBottom: '1rem' }}>Where to stay</Button>
         <div>
         {this.state.categoryBtn === "where to stay" && tipArray}
         </div>
         
         <br/>
         <div>
-          <Button className="btn btn-trip-detail-search" color="#1F5B66">
-          <Link className="btn-trip-detail-search" to={`search/${id}`}>See your friends' tips for {this.state.destination}</Link>
+          <Button className="btn-trip-detail-search" color="#1F5B66">
+          <Link className="btn-trip-detail-search" to={`search/${id}`}>Your friends' tips for {this.state.destination}</Link>
           </Button>
         </div>
-        <div>
+
           <br/>
-          <Button onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
-        </div>
+          <Button className="btn-trip-detail-delete" color="white" onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
+          <hr className="hr-trip-detail" />
 
       </div>
     );

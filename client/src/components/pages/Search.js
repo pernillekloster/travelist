@@ -21,11 +21,11 @@ class Search extends Component {
   render() {
     return (
       <div className="Search">
-        <h4>These friends have been to {this.state.destination} as well:</h4>
+        <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
         {this.state.trips.map(t => 
         <div> 
-          <p key={t._id}>{t._creator.username}</p>
-          <Button color="primary" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
+          <p className="detail-size" key={t._id}>{t._creator.username}</p>
+          <Button className="btn-trip-detail-search" color="#1F5B66" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
         </div>
         )}
       </div>
