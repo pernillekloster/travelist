@@ -34,8 +34,6 @@ export default {
   },
 
   login(username, password) {
-    console.log("im in the api", username)
-    console.log("im in the api", password)
     return service
       .post("/login", {
         username,
@@ -43,7 +41,6 @@ export default {
       })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
-        console.log("im in the api")
         localStorage.setItem("user", JSON.stringify(res.data));
         return res.data;
       })
@@ -117,9 +114,9 @@ export default {
     .catch(errHandler)
   },
 
-  deleteTip(tipId, id){
+  deleteTip(tipId){
     return service
-    .delete('/trip-create/tip-delete/'+id+ "/" +tipId)
+    .delete('/trip-create/tip-delete/'+tipId)
     .then(res => res.data)
     .catch(errHandler)
   },

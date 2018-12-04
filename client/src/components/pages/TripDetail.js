@@ -77,6 +77,8 @@ class TripDetail extends Component {
     return (
       <div>
 
+        <h4>Here are your saved tips for {this.state.selectedTrip.destination}</h4>
+
         <div>{categories}</div>
         <div>{tipArray}</div>
       
@@ -87,9 +89,11 @@ class TripDetail extends Component {
           destination={this.state.selectedTrip.destination}
           />
         </div>
-
+        <br/>
         <div>
+          <Button color="danger">
           <Link to={`search/${id}`}>Search for friends´ tips</Link>
+          </Button>
         </div>
 
       </div>
@@ -104,7 +108,6 @@ class TripDetail extends Component {
         this.setState({
           selectedTrip: trip,
         })
-        console.log("debug selected trip", this.state.selectedTrip)
       })
     api.getTips(id)
       .then(tips => {

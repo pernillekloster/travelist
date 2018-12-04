@@ -17,7 +17,6 @@ class AddTip extends Component {
   }
 
   toggle() {
-    console.log("toogle");
     this.setState({
       modal: !this.state.modal
     });
