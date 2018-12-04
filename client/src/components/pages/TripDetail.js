@@ -17,7 +17,8 @@ class TripDetail extends Component {
       description: "",
       category: "",
       categoryBtn: "",
-      istDeleted: false
+      istDeleted: false,
+      trips: []
     };
   }
 
@@ -34,14 +35,15 @@ class TripDetail extends Component {
     });
   }
 
-  handleDelete(tripId) {
-    let id = this.props.id
-    api.deleteTrip(tipId, id)
+  handleDelete() {
+    let id = this.props.match.params.id
+    api.deleteTrip(id)
     .then(updateTrip =>
       this.setState({
         isDeleted: true
       })
     ) 
+    this.props.history.push('/');
   }
 
 

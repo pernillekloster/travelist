@@ -10,14 +10,16 @@ const userSchema = new Schema({
   },
   password: String,
   pictureUrl: String,
-  following: [],
-  followers: []
+  _trip: {type: Schema.Types.ObjectId, ref:"Trip"},
+  following: [{type: Schema.Types.ObjectId, ref: "User"}],
+  followers: [{type: Schema.Types.ObjectId, ref: "User"}]
 }, {
     timestamps: {
       createdAt: 'created_at',
       updatedAt: 'updated_at'
     }
   });
+  
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
