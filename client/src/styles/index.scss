@@ -96,6 +96,7 @@ body {
 
 .navbar{
   border-bottom: 1px solid grey;
+  margin-bottom: 22px;
 }
 
 .travelist-icon{
@@ -108,3 +109,27 @@ body {
   height: 90%;
 }
 
+.destinationbox{
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  width: 140px;
+  border-radius: 18px;
+}
+
+.destinationbox1{
+  height: 140px;
+  width: 140px;
+  border-radius: 18px;
+}
+
+.homeHeader{
+  font-size: 22px;
+}
+
+.plusicon{
+  height: 50%;
+  width: 50%;
+  display: flex;
+  justify-content: center;  
+}
