@@ -73,14 +73,16 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h4 className="homeHeader">Where is your next destination?</h4>
-        <div className="destinationbox1" style={{ backgroundColor: "#257888", opacity: 0.3 }}>
+      <h4 className="homeHeader">Where is your next destination?</h4>
+      <div className="homeboxes">
+
+      <div>
+        <div className="destinationbox" style={{ backgroundColor: "#257888", opacity: 0.3}}>
         <Button className="btn btn-add-trip" onClick={this.toggle}>
-          <div className="plusicon">
-            <img src="../../../images/plusSign.png" />
-          </div>
+            <img className="plusicon" src="../../../images/plusSign.png" />
         </Button>
         </div>
+      </div>
 
         {/* <Button className="btn btn-add-trip" onClick={this.toggle}>Add new tip</Button> */}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -94,28 +96,17 @@ class Home extends Component {
         </Modal>
 
 
-
-        <form>
-          <input type="text" value={this.state.destination} onChange={(e) => { this.handleInputChange("destination", e) }} />
-          <Button onClick={this.addTrip}> Add destination </Button>
-        </form>
-        <div className="destinationbox1" style={{ backgroundColor: "#257888", opacity: 0.3 }}>
-          <NavLink to="/" exact >
-            <div className="plusicon">
-              <img src="../../../images/plusSign.png" />
-            </div>
-          </NavLink>
-        </div>
-        <div style={{ margin: 'auto' }}>
+        {/* <div className="homeboxes" style={{ margin: 'auto' }}> */}
           {this.state.trips.map((t, i) => (
             <Link to={`trip-detail/${t._id}`}> 
             <div className="destinationbox" key={i} style={{ backgroundColor: this.getTripColor(t) }}>
-              {/* <tr key={t._id}> */}
               <a className="link-to-detailed-trip"style={{color: 'white'}}>{t.destination}</a>
             </div>
             </Link>
           ))}
-        </div>
+        {/* </div> */}
+
+      </div>
       </div>
     );
   }
