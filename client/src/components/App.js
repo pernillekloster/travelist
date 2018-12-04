@@ -24,20 +24,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+    <div className="App">
+      {!api.isLoggedIn() &&
+       <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+      }
 
+      {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
-      <NavLink to="/home" exact style={{ height: '40%' }}>
-        <img src="../../../images/home.png" class="icon" />
-      </NavLink>
-      <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
-          {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-      <NavLink to="/user-profile" exact style={{ height: '40%' }}>
-        <img src="../../../images/userprofile.png" class="icon" />
-      </NavLink>
-    </div>
+        <NavLink to="/home" exact style={{ height: '40%' }}>
+          <img src="../../../images/home.png" class="icon" />
+        </NavLink>
+
+        <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+
+        {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+
+        <NavLink to="/user-profile" exact style={{ height: '40%' }}>
+          <img src="../../../images/userprofile.png" class="icon" />
+        </NavLink>
+      </div>
+      }
     
         <header className="App-header">
         </header>
