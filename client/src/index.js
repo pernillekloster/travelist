@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
+import './styles/index-k.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css'
