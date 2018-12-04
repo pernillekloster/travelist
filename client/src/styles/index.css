@@ -6327,25 +6327,49 @@ body {
 
 .App {
   text-align: center; }
-  .App .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px; }
-  .App .App-title {
-    font-size: 1.5em; }
-  .App .App-intro {
-    font-size: large; }
-
-.Home p {
-  font-size: 1.2em; }
-
-.navbar {
-  border-bottom: 1px solid grey; }
-
-.travelist-icon {
-  margin-top: 5%; }
-
-.icon {
-  margin-top: 9%;
-  margin-left: 15%;
-  margin-right: 15%;
-  height: 90%; }
+  .App .App-header {
+    color: white; }
+    .App .App-header .App-title {
+      font-size: 1.5em; }
+    .App .App-header .App-intro {
+      font-size: large; }
+  .App .Home p {
+    font-size: 1.2em; }
+  .App .navbar {
+    border-bottom: 1px solid grey;
+    margin-bottom: 22px; }
+  .App .travelist-icon {
+    margin-top: 5%; }
+  .App .icon {
+    margin-top: 9%;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 90%; }
+  .App .destinationbox {
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    width: 140px;
+    border-radius: 18px;
+    margin: 1em; }
+  .App .btn-add-trip {
+    height: 140px;
+    width: 140px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #257888; }
+  .App .homeHeader {
+    font-size: 22px; }
+  .App .plusicon {
+    height: 50%;
+    width: 50%;
+    background-color: #257888; }
+  .App .link-to-detailed-trip {
+    text-decoration: none; }
+  .App .homeboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start; }

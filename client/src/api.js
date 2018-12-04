@@ -140,7 +140,7 @@ export default {
 
   deleteTip(tipId){
     return service
-    .delete('/trip-create/trip-delete/'+tipId)
+    .delete('/trip-create/tip-delete/'+tipId)
     .then(res => res.data)
     .catch(errHandler)
   },

@@ -35,10 +35,8 @@ body {
 .App {
   text-align: center;
 
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
+  .App-header {
+    color: white;
 
   // .App-header {
   //   background-color: $primary;
@@ -77,6 +75,7 @@ body {
 
 .navbar {
   border-bottom: 1px solid grey;
+  margin-bottom: 22px;
 }
 
 .travelist-icon {
@@ -87,4 +86,45 @@ body {
   margin-left: 15%;
   margin-right: 15%;
   height: 90%;
+}
+
+.destinationbox{
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  width: 140px;
+  border-radius: 18px;
+  margin: 1em;
+}
+
+.btn-add-trip {
+  height: 140px;
+  width: 140px; 
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #257888;
+}
+
+.homeHeader{
+  font-size: 22px;
+}
+
+.plusicon{
+  height: 50%;
+  width: 50%;
+  background-color: #257888;
+}
+
+.link-to-detailed-trip{
+  text-decoration: none;
+}
+
+.homeboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
 }
