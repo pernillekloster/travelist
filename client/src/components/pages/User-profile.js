@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import api from "../../api";
+import { Table, Button, Container, Input, Collapse, CardBody, Card, Col, Row } from "reactstrap";
+import { Route, NavLink } from "react-router-dom";
+import AllUsers from "./AllUsers";
+//import Following from "./Following";
 
 class userProfile extends Component {
   constructor(props) {
@@ -8,9 +12,26 @@ class userProfile extends Component {
       search: "",
       users: [],
       followers: [],
-      following: []
+      following: [],
+      collapse: false,
+      isAdded: true,
+      followerShown: false
     };
   }
+
+/*   togglefollowing = following => {
+    this.setState({
+      following: following,
+      collapse: !this.state.collapse
+    });
+  };
+
+  toggleFollowers = followers => {
+    this.setState({
+      followers: followers,
+      followerShown: !this.state.collapse
+    });
+  }; */
 
   handleChange = event => {
     this.setState({
@@ -25,63 +46,65 @@ class userProfile extends Component {
 
   render() {
     return (
-      <div className="userProfile">
-        <h1>Username</h1>
-        <input
+      <Container className="userProfile">
+        <h1>Your profile</h1>
+        <div>
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile"
+          >
+            All users
+          </Button>
+          
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile/following"
+          >
+            Following
+          </Button>
+          
+          <Button
+            tag={NavLink}
+            outline
+            color="primary"
+            exact
+            to="/user-profile/followers"
+          >
+            Followers
+          </Button>
+        </div>
+
+        <Input
           type="text"
           name="search"
+          className="mb-3"
           value={this.state.search}
           onChange={this.handleChange}
+          placeholder="Username"
         />
-        <ul>
-          {this.state.users
-            .filter(users =>
-              users.username
-                .toLowerCase()
-                .includes(this.state.search.toLocaleLowerCase())
-            )
-            .map(user => (
-              <li>
-                {user.username}
-                <button
-                  className="profile-follow"
-                  onClick={() => this.handleFollowClick(user._id)}
-                >
-                  {this.isFollowing(user) ? "Unfollow" : "Follow"}
-                </button>
-              </li>
-            ))}
-        </ul>
-        <br />
-        <br />
-        <button onClick={this.followersHandler}>followers</button>
-        <ul>
-          {this.state.followers.map(e => (
-            <li>{e.username}
-                  <button
-                  className="profile-follow"
-                  onClick={() => this.handleFollowClick(e._id)}
-                >
-                  {this.isFollowing(e) ? "Unfollow" : "Follow"}
-                </button>
-            </li>
-          ))}
-        </ul>
-        <button onClick={this.followingHandler}>following</button>
-        <ul>
-          {this.state.following.map(e => (
-            <li>
-              {e.username}
-              <button
-                className="profile-follow"
-                onClick={() => this.handleFollowClick(e._id)}
-              >
-                {this.isFollowing(e) ? "Unfollow" : "Follow"}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+        
+        <Route
+          path="/user-profile"
+          exact
+          render={props => <AllUsers {...props} search={this.state.search} />}
+        />
+        <Route
+          path="/user-profile/following"
+          exact
+          render={() => <div>WIP</div>}
+        />
+        <Route
+          path="/user-profile/followers"
+          exact
+          render={() => <div>WIP</div>}
+        />
+      </Container>
     );
   }
 
@@ -110,11 +133,9 @@ class userProfile extends Component {
     api
       .getFollowing()
       .then(followingData => {
-        console.log("debug following frontend", followingData);
         this.setState({
           following: followingData
         });
-        console.log("debug following", this.state.following);
       })
       .catch(err => console.log("error userprofile", err));
   };
