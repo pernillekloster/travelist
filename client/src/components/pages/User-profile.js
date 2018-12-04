@@ -1,5 +1,16 @@
 import React, { Component } from "react";
 import api from "../../api";
+import {
+  Table,
+  Button,
+  Container,
+  Input,
+  Collapse,
+  CardBody,
+  Card,
+  Link
+} from "reactstrap";
+import "../../styles/Eullin.css";
 
 class userProfile extends Component {
   constructor(props) {
@@ -8,9 +19,25 @@ class userProfile extends Component {
       search: "",
       users: [],
       followers: [],
-      following: []
+      following: [],
+      isAdded: false,
+      collapse: false
     };
   }
+
+  togglefollowing = following => {
+    this.setState({
+      following: following,
+      collapse: !this.state.collapse
+    });
+  };
+
+  /*   toggleFollowers = (followers) => {
+    this.setState({ 
+      followers: followers,
+      collapse: !this.state.collapse 
+    });
+  } */
 
   handleChange = event => {
     this.setState({
@@ -25,63 +52,114 @@ class userProfile extends Component {
 
   render() {
     return (
-      <div className="userProfile">
+      <Container className="userProfile">
         <h1>Username</h1>
-        <input
+        <Input
           type="text"
           name="search"
+          className="mb-3"
           value={this.state.search}
           onChange={this.handleChange}
         />
-        <ul>
-          {this.state.users
-            .filter(users =>
-              users.username
-                .toLowerCase()
-                .includes(this.state.search.toLocaleLowerCase())
-            )
-            .map(user => (
-              <li>
-                {user.username}
-                <button
-                  className="profile-follow"
-                  onClick={() => this.handleFollowClick(user._id)}
-                >
-                  {this.isFollowing(user) ? "Unfollow" : "Follow"}
-                </button>
-              </li>
-            ))}
-        </ul>
+
+        <Table>
+          <thead>{/*             <tr>
+</tr> */}</thead>
+          <tbody>
+            {this.state.users
+              .filter(users =>
+                users.username
+                  .toLowerCase()
+                  .includes(this.state.search.toLocaleLowerCase())
+              )
+              .map(user => (
+                <tr key={user._id}>
+                  <td>{user.username}</td>
+                  <td>
+                    <Button
+                      className="profile-follow"
+                      color="primary"
+                      outline={this.isFollowing(user)}
+                      style={{ width: 120 }}
+                      onClick={() => this.handleFollowClick(user._id)}
+                    >
+                      {this.isFollowing(user) ? "Unfollow" : "Follow"}
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+
+        <hr/>
+
+        <div id="btn-follow-ers-ing">
+          <Button
+            color="white"
+            onClick={this.togglefollowing}
+            style={{ marginBottom: "1rem" }}
+          >
+            Following
+          </Button>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                {this.state.users
+                  .filter(user =>
+                    user.followers.includes(api.getLoggedInUserSync()._id)
+                  )
+                  .map(user => (
+                    <div>{user.username}</div>
+                  ))}
+              </CardBody>
+            </Card>
+          </Collapse>
+
+          <Button
+            color="primary"
+            onClick={this.toggleFollowers}
+            style={{ marginBottom: "1rem" }}
+          >
+            Followers
+          </Button>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                {this.state.users
+                  .filter(user =>
+                    user.following.includes(api.getLoggedInUserSync()._id)
+                  )
+                  .map(user => (
+                    <div>{user.username}</div>
+                  ))}
+              </CardBody>
+            </Card>
+          </Collapse>
+        </div>
+        {/*         <br />
         <br />
-        <br />
-        <button onClick={this.followersHandler}>followers</button>
-        <ul>
-          {this.state.followers.map(e => (
-            <li>{e.username}
-                  <button
-                  className="profile-follow"
-                  onClick={() => this.handleFollowClick(e._id)}
-                >
-                  {this.isFollowing(e) ? "Unfollow" : "Follow"}
-                </button>
-            </li>
+         <hr />
+        <h2>Following</h2>
+        {this.state.users
+          .filter(user =>
+            user.followers.includes(api.getLoggedInUserSync()._id)
+          )
+          .map(user => (
+            <div>{user.username}</div>
           ))}
-        </ul>
-        <button onClick={this.followingHandler}>following</button>
-        <ul>
-          {this.state.following.map(e => (
-            <li>
-              {e.username}
-              <button
-                className="profile-follow"
-                onClick={() => this.handleFollowClick(e._id)}
-              >
-                {this.isFollowing(e) ? "Unfollow" : "Follow"}
-              </button>
-            </li>
+
+        <hr />
+        <h2>Followers</h2>
+        {this.state.users
+          .filter(user =>
+            user.following.includes(api.getLoggedInUserSync()._id)
+          )
+          .map(user => (
+            <div>{user.username}</div>
           ))}
-        </ul>
-      </div>
+
+        <hr />  */}
+      </Container>
     );
   }
 

@@ -161,6 +161,7 @@ export default {
       .then(res => res.data)
       .catch(errHandler);
   },
+  
   getFollowing() {
     return service
       .get("/users/following")

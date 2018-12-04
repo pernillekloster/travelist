@@ -28,8 +28,7 @@ class App extends Component {
           <h1 className="App-title">Travelist</h1>
           <NavLink to="/" exact>Home</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}           {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
