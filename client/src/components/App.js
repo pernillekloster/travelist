@@ -7,6 +7,7 @@ import TripDetail from './pages/TripDetail';
 import Search from "./pages/Search"
 import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
+import userProfile from './pages/User-profile'
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
+          <Route path="/user-profile" component={userProfile} />
           <Route path="/trip-detail/search/:id" exact component={Search} />
           <Route path="/search/:id/:friendTripId" exact component={SearchDetail} />
           <Route render={() => <h2>404</h2>} />
