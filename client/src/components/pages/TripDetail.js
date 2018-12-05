@@ -79,6 +79,8 @@ class TripDetail extends Component {
               location= {filteredTips[i].location} 
               id={this.props.match.params.id}
               onDelete={tip => this.deleteTip(tip)}
+              destination={this.state.selectedTrip.destination}
+              // tips={this.state.tips}
               />
             </CardBody>
           </Card>

@@ -32,9 +32,9 @@ router.get('/get-user-trip', isLoggedIn, (req, res, next) => {
 
 // POST Route to create a Trip
 router.post('/create-trip', isLoggedIn, (req, res, next) => {
-  let { destination } = req.body
+  let destination = req.body.destination.substring(0,1).toUpperCase() + req.body.destination.substring(1).toLowerCase()
   let _creator = req.user._id
-  Trip.create({ _creator, destination })
+  Trip.create({ _creator, destination})
     .then(trip => {
       res.json(
         trip);
@@ -42,7 +42,7 @@ router.post('/create-trip', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
-//GET the tips added to the DB
+//GET Route tips from a trip
 router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
   let _trip = req.params.id
   Tip.find({_trip: _trip})
@@ -52,7 +52,7 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
     .catch(err => next(err))
 });
 
-//POST Route to add Tip to trip
+//POST Route create tip
   router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
     let _trip = req.params.id
     let { category, description, title, location } = req.body
@@ -67,6 +67,23 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
           })
       .catch(err => next(err))
   })
+
+// Route to update a tip
+router.put('/create-tip/edit/:id/:tipId', isLoggedIn, (req, res, next) => {
+  let _trip = req.params.id
+  let {description, title, location } = req.body
+
+  let _creator = req.user._id
+  let _tipId = req.params.tipId
+  
+  Tip.findByIdAndUpdate(_tipId, {description, title, location })
+    .then(tipDoc => {
+      res.json({
+        tipDoc
+      })
+    })
+    .catch(err => next(err))
+})
 
 // DELETE Trip from user
 router.delete('/trip-delete/:id', (req, res, next)=>{
