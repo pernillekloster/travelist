@@ -27,21 +27,21 @@ class App extends Component {
     return (
     <div className="App">
       {!api.isLoggedIn() &&
-       <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+       <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
       }
 
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
         <NavLink to="/home" exact style={{ height: '40%' }}>
-          <img src="../../../images/home.png" class="icon" />
+          <img src="../../../images/home.png" className="icon" />
         </NavLink>
 
-        <h3 class="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+        <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
 
         {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
 
         <NavLink to="/user-profile" exact style={{ height: '40%' }}>
-          <img src="../../../images/userprofile.png" class="icon" />
+          <img src="../../../images/userprofile.png" className="icon" />
         </NavLink>
       </div>
       }

@@ -92,7 +92,7 @@ class Home extends Component {
             <ModalBody className="detail-size modalBody">
           <div className="inputCategoryTrip">
 
-            <input className="inputAddTip" type="text" Placeholder="Destination" style={{ border: 'solid' }} value={this.state.destination} onChange={(e) => this.handleInputChange("destination", e)} /> <br />
+            <input className="inputAddTip" type="text" placeholder="Destination" style={{ border: 'solid' }} value={this.state.destination} onChange={(e) => this.handleInputChange("destination", e)} /> <br />
             </div>
               <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTrip}>Save trip</Button>{' '}
             </ModalBody>
