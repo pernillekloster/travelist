@@ -64,11 +64,9 @@ class Search extends Component {
   componentDidMount() {
     // id of users trip
     let id = this.props.match.params.id
-    console.log("search id", id)
 
     api.getFriendsTrips(id)
       .then(matchedTrips=> {
-        console.log("search matchedTrips", matchedTrips)
         this.setState({
           // Set tripId to id of users trip
           tripId: id,

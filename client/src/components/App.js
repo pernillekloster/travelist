@@ -38,7 +38,7 @@ class App extends Component {
 
         <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
 
-        {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+        {/* {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>} */}
 
         <NavLink to="/user-profile" exact style={{ height: '40%' }}>
           <img src="../../../images/userprofile.png" className="icon" />

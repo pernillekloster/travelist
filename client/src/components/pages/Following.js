@@ -69,11 +69,9 @@ export default class Following extends Component {
     api
       .getFollowing()
       .then(followingData => {
-        console.log("debug following frontend", followingData);
         this.setState({
           following: followingData
         });
-        console.log("debug following", this.state.following);
       })
       .catch(err => console.log("error userprofile", err));
   };

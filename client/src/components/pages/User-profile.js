@@ -69,8 +69,6 @@ class userProfile extends Component {
           placeholder="Search username"
         />
 
-        <br />
-
         <Route
           path="/user-profile"
           exact
@@ -86,7 +84,14 @@ class userProfile extends Component {
           exact
           render={props => <Followers {...props} search={this.state.search} />}
         />
+
+      <br/>
+      <Link className="logout" to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>
+      <hr className="hr-trip-detail" />
+      <br />
+
       </Container>
+
     );
   }
 }

@@ -61,7 +61,6 @@ class Home extends Component {
   componentDidMount() {
     api.getTrips()
       .then(allTrips => {
-        console.log("debug frontend addtripsearch", allTrips)
         this.setState({
           allTrips: allTrips,
         })
@@ -92,6 +91,7 @@ class Home extends Component {
           t.toLowerCase().includes(this.state.destination.toLowerCase())
         )
       .sort()
+    
     // Passed on to render
     
   
