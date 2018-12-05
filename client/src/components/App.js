@@ -27,22 +27,24 @@ class App extends Component {
     return (
     <div className="App">
       {!api.isLoggedIn() &&
-       <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+       <div className="navbar" style={{ margin: 'auto' }}>
+       <img src="../../images/travelistgray.png" className="travelisticon" />
+       </div>
       }
 
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
-        <NavLink to="/home" exact style={{ height: '40%' }}>
-          <img src="../../../images/home.png" className="icon" />
+
+        
+        <NavLink className="" to="/home" exact>
+       <img src="../../images/travelistgray.png" className="travelisticon" />
+       </NavLink>
+        
+        <NavLink to="/user-profile" exact  className="icon">
+          <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
 
-        <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
 
-        {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-
-        <NavLink to="/user-profile" exact style={{ height: '40%' }}>
-          <img src="../../../images/userprofile.png" className="icon" />
-        </NavLink>
       </div>
       }
     
