@@ -1,16 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import api from "../../api";
-import {
-  Button,
-  Container,
-  Input,
-  Collapse,
-  CardBody,
-  Card,
-  Col,
-  Row
-} from "reactstrap";
-
+import { Table, Button, Container } from "reactstrap";
 
 export default class Following extends Component {
   constructor(props) {
@@ -19,14 +9,9 @@ export default class Following extends Component {
       search: "",
       users: [],
       followers: [],
-      following: [],
+      following: []
     };
   }
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
 
   isFollowing(user) {
     let idLoggedInUser = api.getLoggedInUserSync()._id;
@@ -34,47 +19,69 @@ export default class Following extends Component {
   }
 
   render() {
-    return  (
-      <div>
-      aloha
-        {this.state.users
-          .filter(user =>
-            user.followers.includes(api.getLoggedInUserSync()._id)
-          )
-          .map(user => (
-            <div>{user.username}</div>
-          ))}
-    </div>
-      )
-    }
-    followingHandler = () => {
-      api
-        .getFollowing()
-        .then(followingData => {
-          console.log("debug following frontend", followingData);
-          this.setState({
-            following: followingData
-          });
-          console.log("debug following", this.state.following);
-        })
-        .catch(err => console.log("error userprofile", err));
-    };
+    return (
+      <Container className="userProfile">
+        <Table>
+          <tbody>
+            {this.state.users
+              .filter(users => {
+                if (users._id !== api.getLoggedInUserSync()._id) return true;
+              })
+              .filter(user =>
+                user.followers.includes(api.getLoggedInUserSync()._id)
+              )
+              .filter(user =>
+                user.username
+                  .toLowerCase()
+                  .includes(this.props.search.toLocaleLowerCase())
+              )
+              .map(user => (
+                <tr>
+                  <td>{user.username}</td>
+                  <td>
+                    <button
+                      className="btn user"
+                      onClick={() => this.handleFollowClick(user._id)}
+                      style={{ marginBottom: "1rem" }}
+                    >
+                      {this.isFollowing(user) ? "Unfollow" : "Follow"}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      </Container>
+    );
   }
 
- 
-      
-
-
-{/* <Collapse isOpen={this.state.collapse}>
-  <Card>
-    <CardBody>
-      {this.state.users
-        .filter(user =>
-          user.following.includes(api.getLoggedInUserSync()._id)
+  handleFollowClick = userId => {
+    api.postFollowStatus(userId).then(newUser => {
+      this.setState({
+        users: this.state.users.map(user =>
+          userId === user._id ? newUser : user
         )
-        .map(user => (
-          <div>{user.username}</div>
-        ))}
-    </CardBody>
-  </Card>
-</Collapse> */}
+      });
+    });
+  };
+
+  followingHandler = () => {
+    api
+      .getFollowing()
+      .then(followingData => {
+        console.log("debug following frontend", followingData);
+        this.setState({
+          following: followingData
+        });
+        console.log("debug following", this.state.following);
+      })
+      .catch(err => console.log("error userprofile", err));
+  };
+  componentDidMount() {
+    api.getAllUsers().then(users => {
+      this.setState({
+        users: users
+      });
+    });
+  }
+}

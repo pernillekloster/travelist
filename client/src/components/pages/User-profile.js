@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import api from "../../api";
-import { Table, Button, Container, Input, Collapse, CardBody, Card, Col, Row } from "reactstrap";
-import { Route, NavLink } from "react-router-dom";
+import { Container, Input } from "reactstrap";
+import { Route, NavLink, Link } from "react-router-dom";
 import AllUsers from "./AllUsers";
-//import Following from "./Following";
+import Following from "./Following";
+import Followers from "./Followers";
+//import "../../styles/Eullin.css"
+import "../../styles/index.css";
 
 class userProfile extends Component {
   constructor(props) {
@@ -12,26 +15,9 @@ class userProfile extends Component {
       search: "",
       users: [],
       followers: [],
-      following: [],
-      collapse: false,
-      isAdded: true,
-      followerShown: false
+      following: []
     };
   }
-
-/*   togglefollowing = following => {
-    this.setState({
-      following: following,
-      collapse: !this.state.collapse
-    });
-  };
-
-  toggleFollowers = followers => {
-    this.setState({
-      followers: followers,
-      followerShown: !this.state.collapse
-    });
-  }; */
 
   handleChange = event => {
     this.setState({
@@ -48,47 +34,43 @@ class userProfile extends Component {
     return (
       <Container className="userProfile">
         <h1>Your profile</h1>
-        <div>
-          <Button
-            tag={NavLink}
-            outline
-            color="primary"
-            exact
-            to="/user-profile"
-          >
+
+        <div id="NavBar-Profile">
+          <Link className="aColor" tag={NavLink} exact to="/user-profile">
             All users
-          </Button>
-          
-          <Button
+          </Link>{" "}
+          <Link
+            className="aColor"
             tag={NavLink}
             outline
-            color="primary"
             exact
             to="/user-profile/following"
           >
             Following
-          </Button>
-          
-          <Button
+          </Link>
+          {"   "} {"   "}
+          <Link
+            className="aColor"
             tag={NavLink}
             outline
-            color="primary"
             exact
             to="/user-profile/followers"
           >
             Followers
-          </Button>
+          </Link>
         </div>
 
         <Input
           type="text"
           name="search"
-          className="mb-3"
+          className="mb-3 inputLogin"
           value={this.state.search}
           onChange={this.handleChange}
-          placeholder="Username"
+          placeholder="Search username"
         />
-        
+
+        <br />
+
         <Route
           path="/user-profile"
           exact
@@ -97,55 +79,15 @@ class userProfile extends Component {
         <Route
           path="/user-profile/following"
           exact
-          render={() => <div>WIP</div>}
+          render={props => <Following {...props} search={this.state.search} />}
         />
         <Route
           path="/user-profile/followers"
           exact
-          render={() => <div>WIP</div>}
+          render={props => <Followers {...props} search={this.state.search} />}
         />
       </Container>
     );
-  }
-
-  handleFollowClick = userId => {
-    api.postFollowStatus(userId).then(newUser => {
-      this.setState({
-        users: this.state.users.map(user =>
-          userId === user._id ? newUser : user
-        )
-      });
-    });
-  };
-
-  followersHandler = () => {
-    api
-      .getFollowers()
-      .then(followersData => {
-        this.setState({
-          followers: followersData
-        });
-      })
-      .catch(err => console.log("error userprofile", err));
-  };
-
-  followingHandler = () => {
-    api
-      .getFollowing()
-      .then(followingData => {
-        this.setState({
-          following: followingData
-        });
-      })
-      .catch(err => console.log("error userprofile", err));
-  };
-
-  componentDidMount() {
-    api.getAllUsers().then(users => {
-      this.setState({
-        users: users
-      });
-    });
   }
 }
 

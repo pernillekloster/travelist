@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 import api from "../../api";
-import {
-  Table,
-  Button,
-  Container,
-  Input,
-  Collapse,
-  CardBody,
-  Card,
-  Col,
-  Row
-} from "reactstrap";
+import { Table, Button, Container } from "reactstrap";
+import "../../styles/index.css";
+import "../../styles/Eullin.css"
 
 export default class AllUsers extends Component {
   constructor(props) {
@@ -26,26 +18,6 @@ export default class AllUsers extends Component {
     };
   }
 
-  togglefollowing = following => {
-    this.setState({
-      following: following,
-      collapse: !this.state.collapse
-    });
-  };
-
-  toggleFollowers = followers => {
-    this.setState({
-      followers: followers,
-      followerShown: !this.state.collapse
-    });
-  };
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
   isFollowing(user) {
     let idLoggedInUser = api.getLoggedInUserSync()._id;
     return user.followers.includes(idLoggedInUser);
@@ -57,6 +29,9 @@ export default class AllUsers extends Component {
         <Table>
           <tbody>
             {this.state.users
+              .filter(users => {
+                if (users._id !== api.getLoggedInUserSync()._id) return true;
+              })
               .filter(users =>
                 users.username
                   .toLowerCase()
@@ -66,77 +41,26 @@ export default class AllUsers extends Component {
                 <tr key={user._id}>
                   <td>{user.username}</td>
                   <td>
-                    <Button
-                      className="profile-follow"
-                      color="primary"
+                    <button
+                      className="btn user"
                       outline={this.isFollowing(user)}
                       style={{ width: 120 }}
                       onClick={() => this.handleFollowClick(user._id)}
                     >
                       {this.isFollowing(user) ? "Unfollow" : "Follow"}
-                    </Button>
+                    </button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
         <hr />
-        <Container>
-        {/*   <Row>
-            <Col xs="6">
-              <Button
-                color="white"
-                onClick={this.togglefollowing}
-                style={{ marginBottom: "1rem" }}
-              >
-                Following
-              </Button>
-            </Col>
-
-            <Col xs="6">
-              <Button
-                color="white"
-                onClick={this.toggleFollowers}
-                style={{ marginBottom: "1rem" }}
-              >
-                Followers
-              </Button>
-            </Col>
-          </Row> */}
-        </Container>
-        <Collapse isOpen={this.state.collapse}>
-          <Card>
-            <CardBody>
-              {this.state.users
-                .filter(user =>
-                  user.followers.includes(api.getLoggedInUserSync()._id)
-                )
-                .map(user => (
-                  <div>{user.username}</div>
-                ))}
-            </CardBody>
-          </Card>
-        </Collapse>
-        <div>
-          {this.state.followerShown && (
-            <Collapse isOpen={this.state.collapse}>
-              <Card>
-                <CardBody>
-                  {this.state.users
-                    .filter(user =>
-                      user.following.includes(api.getLoggedInUserSync()._id)
-                    )
-                    .map(user => (
-                      <div>{user.username}</div>
-                    ))}
-                </CardBody>
-              </Card>
-            </Collapse>
-          )}
-        </div>
       </Container>
     );
   }
+  bgcolorHandler = e => {
+    e.target.style.backgroundColor = "red";
+  };
 
   handleFollowClick = userId => {
     api.postFollowStatus(userId).then(newUser => {
@@ -148,30 +72,6 @@ export default class AllUsers extends Component {
     });
   };
 
-  followersHandler = () => {
-    api
-      .getFollowers()
-      .then(followersData => {
-        this.setState({
-          followers: followersData
-        });
-      })
-      .catch(err => console.log("error userprofile", err));
-  };
-
-  followingHandler = () => {
-    api
-      .getFollowing()
-      .then(followingData => {
-        console.log("debug following frontend", followingData);
-        this.setState({
-          following: followingData
-        });
-        console.log("debug following", this.state.following);
-      })
-      .catch(err => console.log("error userprofile", err));
-  };
-
   componentDidMount() {
     api.getAllUsers().then(users => {
       this.setState({
@@ -180,5 +80,3 @@ export default class AllUsers extends Component {
     });
   }
 }
-
-
