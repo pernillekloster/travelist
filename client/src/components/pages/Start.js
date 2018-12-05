@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap'
 
 
 class Start extends Component {
@@ -21,7 +22,7 @@ class Start extends Component {
     return (
       <div className="Start">
         <div className="onboarding important-header">
-        Some inspirational travel quote here?
+          I haven't been everywhere, but it's on my list
         </div>
 
           <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleSignup(e)}>
