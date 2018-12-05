@@ -131,6 +131,13 @@ export default {
       .catch(errHandler);
   },
 
+  editTip(id, tipId, data) {
+  return service
+  .put("/trip-create/create-tip/edit/" + id + "/" + tipId, data)
+  .then(res => res.data)
+  .catch(errHandler);
+  },
+
   deleteTrip(tripId) {
     return service
       .delete("/trip-create/trip-delete/" + tripId)

@@ -44,7 +44,7 @@ class Search extends Component {
         )}
 
         </div>
-  
+
       </div>
     );
   }

@@ -83,6 +83,18 @@
   border-radius: 18px;
 }
 
+.btn-trip-detail-edit {
+  width: 100%;
+  color: white;
+  border-radius: 18px;
+}
+
+.trip-detail-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 /* addTip Component */
 
 .btn-trip-detail-saveTip {
