@@ -53,9 +53,20 @@ body {
     width: 50%;
     background-color: #257888; }
   .App .link-to-detailed-trip {
-    text-decoration: none; }
+    text-decoration: none;
+    text-decoration-color: 'white';
+    text-align: left;
+    font-size: 17px;
+    margin-top: 70%;
+    margin-bottom: 10%;
+    margin-left: 10%; }
   .App .homeboxes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: flex-start; }
+    justify-content: flex-start;
+    align-content: stretch;
+    margin: 0 auto; }
+  .App .allBoxes {
+    display: flex;
+    justify-content: center;
+    margin-left: 4%; }

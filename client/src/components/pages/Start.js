@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap'
 
 
 class Start extends Component {
@@ -16,13 +17,13 @@ class Start extends Component {
         Some inspirational travel quote here?
         </div>
 
-          <button className="btn btn-trip-detail-search" color="#1F5B66">
+          <Button className="btn btn-trip-detail-search" color="#1F5B66">
           <Link className="btn-trip-detail-search" to="/signup">Signup</Link>
-          </button>
+          </Button>
 
-          <button className="btn btn-trip-detail-search" color="#1F5B66">
+          <Button className="btn btn-trip-detail-search" color="#1F5B66">
           <Link className="btn-trip-detail-search" to="/login">Login</Link>
-          </button>
+          </Button>
       
       </div>
     );

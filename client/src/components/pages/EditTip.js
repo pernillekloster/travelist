@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import api from '../../api'
 
-class AddTip extends Component {
+class EditTip extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
       category: this.props.category,
-      title: "",
-      location: "",
-      description: "",
+      title: this.props.title,
+      location: this.props.location,
+      description: this.props.description,
     };
     this.toggle = this.toggle.bind(this);
-    this.addTip = this.addTip.bind(this);
+    this.editTip = this.editTip.bind(this);
   }
 
   toggle() {
@@ -28,16 +28,18 @@ class AddTip extends Component {
     this.setState(newState)
   }
 
-  addTip(e) {
+  editTip(e) {
     let id = this.props.id
+    let tipId = this.props.tipId
+
     let data = {
       category: this.state.category,
       title: this.state.title,
       location: this.state.location,
       description: this.state.description,
     }
-    
-    api.postTip(id, data)
+
+    api.editTip(id, tipId, data)
       .then(data => {
         this.toggle()
         this.setState({
@@ -46,18 +48,20 @@ class AddTip extends Component {
           location: '',
           description: '',
         })
-        this.props.onAdd(data.tip)
+        this.props.onEdit(data.tip)
       })
       .catch(err => console.log(err)
       )
+
+      this.props.history.push("/trip-detail/:id");
   }
 
   render() {
     return (
       <div>
-        <Button className="btn btn-trip-detail-addTip" color="#FAAD8D" onClick={this.toggle}>Add new tip</Button>
+        <Button className="btn btn-trip-detail-edit" onClick={this.toggle}>Edit</Button>
         <Modal className="Modal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add tip to your {this.props.destination} trip</ModalHeader>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Edit your tip:</ModalHeader>
           <form>
           <ModalBody className="detail-size modalBody">
           <div className="inputCategoryTrip">
@@ -65,12 +69,12 @@ class AddTip extends Component {
             <input type="hidden" value={this.state.category} />
              <br/>
           </div>
-            <input className="inputAddTip" type="text" placeholder="Title" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
-            <input className="inputAddTip" type="text" placeholder="Location" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
-            <input className="inputAddTip" type="text" placeholder="Description" style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
+            <input className="inputAddTip" type="text" placeholder={this.state.title} style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
+            <input className="inputAddTip" type="text" placeholder={this.state.location} style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>
+            <input className="inputAddTip" type="text" placeholder={this.state.description} style={{border: 'solid'}} value={this.state.description} onChange={(e) => this.handleInputChange("description", e)} /> <br/>
           </ModalBody>
           <ModalFooter className="modalFooter">
-            <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTip}>Save tip</Button>{' '}
+            <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.editTip}>Edit tip</Button>{' '}
             <Button className="btn btn-trip-detail-cancelTip" color="white" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
           </form>
@@ -81,4 +85,4 @@ class AddTip extends Component {
   }
 }
 
-export default AddTip;
+export default EditTip;

@@ -20,8 +20,6 @@ class Login extends Component {
 
   handleClick(e) {
     e.preventDefault()
-    console.log("debug handleclick login", this.state.username)
-    console.log("debug handleclick login", this.state.password)
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
@@ -44,7 +42,7 @@ class Login extends Component {
         <p>Don't have an account yet? 
           <Link className="login-signup-link" to="/signup"> Signup</Link>
         </p>
-        {this.state.message && <div className="btn errormessage">
+        {this.state.message && <div className="errormessage">
           {this.state.message}
         </div>}
       </div>

@@ -18,16 +18,45 @@ class Search extends Component {
     this.props.history.push('/search/'+ this.state.tripId +"/" +idFriendTrip)
   }
 
+  getTripColor(trip) {
+    let colors = ['#1F5B66', '#257888', '#6E9FA8']
+    let colorIndex = parseInt("0x" + trip._id.substr(-10)) % colors.length
+    return colors[colorIndex]
+  }
+
   render() {
+    let id = this.state.tripId
     return (
       <div className="Search">
         <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
-        {this.state.trips.map(t => 
-        <div> 
-          <p className="detail-size" key={t._id}>{t._creator.username}</p>
-          <Button className="btn-trip-detail-search" color="#1F5B66" onClick={() => this.handleTrip(t._id)}>View this trip</Button>
-        </div>
+
+        <div className="homeboxesSearch">
+
+
+        {this.state.trips.map((t) => (
+
+          //  <Button className="destinationbox" style={{ backgroundColor: this.getTripColor(t) }} onClick={() => this.handleTrip(t._id)}> 
+          //  <div className="destinationbox" key={t._id} >
+          //    <a className="link-to-detailed-trip"style={{color: 'white'}}>{t._creator.username}</a>
+          //  </div>
+          //  </Button>
+
+           // <Link to={`trip-detail/search/${id}/${t._id}`}> 
+          //  <div className="destinationbox" key={t._id} style={{ backgroundColor: this.getTripColor(t) }}>
+          //    <a className="link-to-detailed-trip" style={{color: 'white'}}>{t._creator.username}</a>
+          //  </div>
+           // </Link>
+
+            // <Link to={`trip-detail/search/${id}/${t._id}`}> 
+            <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
+            onClick={() => this.handleTrip(t._id)}>
+              <a className="link-to-detailed-trip-search" style={{color: 'white'}}>{t._creator.username}</a>
+            </Button>
+            // </Link>
+        )
         )}
+
+        </div>
       </div>
     );
   }
@@ -35,9 +64,11 @@ class Search extends Component {
   componentDidMount() {
     // id of users trip
     let id = this.props.match.params.id
+    console.log("search id", id)
 
     api.getFriendsTrips(id)
       .then(matchedTrips=> {
+        console.log("search matchedTrips", matchedTrips)
         this.setState({
           // Set tripId to id of users trip
           tripId: id,

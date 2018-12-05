@@ -12,7 +12,6 @@ const errHandler = err => {
   console.log("im in the err handler");
   console.error(err);
   if (err.response && err.response.data) {
-    console.error("API response", err.response.data);
     throw err.response.data.message;
   }
   throw err;
@@ -41,8 +40,6 @@ export default {
   },
 
   login(username, password) {
-    console.log("im in the api", username)
-    console.log("im in the api", password)
     return service
       .post("/login", {
         username,
@@ -50,7 +47,6 @@ export default {
       })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
-        console.log("im in the api")
         localStorage.setItem("user", JSON.stringify(res.data));
         return res.data;
       })
@@ -61,20 +57,6 @@ export default {
     localStorage.removeItem("user");
     return service.get("/logout");
   },
-
-  // getCountries() {
-  //   return service
-  //     .get('/countries')
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
-
-  // postCountries(data) {
-  //   return service
-  //     .post('/countries', data)
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
 
   getSecret() {
     return service
@@ -129,6 +111,13 @@ export default {
       .post("/trip-create/create-tip/" + id, data)
       .then(res => res.data)
       .catch(errHandler);
+  },
+
+  editTip(id, tipId, data) {
+  return service
+  .put("/trip-create/create-tip/edit/" + id + "/" + tipId, data)
+  .then(res => res.data)
+  .catch(errHandler);
   },
 
   deleteTrip(tripId) {
