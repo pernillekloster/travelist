@@ -27,7 +27,7 @@ class Start extends Component {
           <div>
             <Button onClick={this.toggle}>
 
-              Are you ready to start plan your trip?
+              Signup
         </Button>
           </div>
         </div>

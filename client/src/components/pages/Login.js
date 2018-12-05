@@ -20,8 +20,6 @@ class Login extends Component {
 
   handleClick(e) {
     e.preventDefault()
-    console.log("debug handleclick login", this.state.username)
-    console.log("debug handleclick login", this.state.password)
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
