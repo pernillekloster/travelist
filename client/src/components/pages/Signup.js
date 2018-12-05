@@ -73,7 +73,7 @@ class Signup extends Component {
           <Link className="login-signup-link" to="/login"> Login</Link>
         </p>
         {this.state.message && 
-        <div className="btn errormessage">
+        <div className="errormessage">
           {this.state.message}
         </div>}
       </div>

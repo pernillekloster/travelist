@@ -172,8 +172,10 @@ border-radius: 18px !important;
   width: 90%;
   height: 70px;
   color: white;
-  margin: 0.5em;
+  margin: 0 auto;
   background-color: #F47645;
+  border-radius: 18px !important;
+  font-size: 22px !important;
 }
 
 .Login {
@@ -182,4 +184,33 @@ border-radius: 18px !important;
 
 .Signup {
  margin-top: 25vh;
+}
+
+/* Search component */
+
+.destinationboxSearch{
+  display: flex;
+  flex-direction: wrap;
+  height: 140px;
+  width: 140px;
+  border-radius: 18px;
+  margin: 1em;
+  border: none !important;
+}
+
+.link-to-detailed-trip-search{
+  text-decoration: none;
+  text-decoration-color: 'white';
+  font-size: 17px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 70%;
+}
+
+.homeboxesSearch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  margin: 0 auto;
 }
