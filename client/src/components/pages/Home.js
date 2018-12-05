@@ -78,33 +78,23 @@ class Home extends Component {
 
   render() {
 
-    // const reducedArr =
-    // this.state.allTrips.slice()
+    // Remove duplicates from code
+    let array = []
+    for (let i = 0; i < this.state.allTrips.length; i++) {
+      if (!array.includes(this.state.allTrips[i].destination)) {
+        array.push(this.state.allTrips[i].destination)
+      }
+    }
 
-    // const newArr = (reducedArr) => {
-    //   for (let i = 0; i < reducedArr.length; i++) {
-    //     if (reducedArr[i].destination !== reducedArr[i+1].destination) {
-    //       newArr.push(reducedArr[i].destination)
-    //     }
-    //   }
-    //   return newArr
-    // }
-
-    // console.log("KATRIN", newArr)    
-    // const newNewArr = reducedArr.filter((v,i) => reducedArr.indexOf(v.destination) === i)
-    // console.log("debug search", newNewArr)
-
-    const  filteredArr = 
-    this.state.allTrips
+    // Filter cities based on search query
+    const filteredArr = array
       .filter(t => 
-          t.destination
-            .toLowerCase()
-            .includes(this.state.destination.toLocaleLowerCase())
+          t.toLowerCase().includes(this.state.destination.toLowerCase())
         )
-      .sort((a,b) => (a.destination > b.destination ? 1 : -1))
-
+      .sort()
+    // Passed on to render
+    
   
-
     return (
       <div>
       <h4 className="homeHeader">Where is your next destination?</h4>
@@ -132,9 +122,9 @@ class Home extends Component {
             <Table>
             <tbody>
               {filteredArr
-              .map(t => (
-                <tr className="create-trip-search" key={"table"-t._id}>
-                  <button className="create-trip-search"  onClick={(e) => this.chooseDestination(e, t.destination)}>{t.destination}</button>
+              .map((t, i) => (
+                <tr key={"t"-i} className="create-trip-search">
+                  <button className="create-trip-search"  onClick={(e) => this.chooseDestination(e, t)}>{t}</button>
                 </tr>
               ))}
              </tbody>
