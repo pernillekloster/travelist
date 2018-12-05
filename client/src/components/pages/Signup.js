@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import { Link } from 'react-router-dom';
+import { Modal, ModalHeader, ModalBody, Button } from 'reactstrap';
+
 
 
 class Signup extends Component {
@@ -10,8 +12,16 @@ class Signup extends Component {
       username: "",
       email: "",
       password: "",
-      message: null
+      message: null,
+      modal: false
     }
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
   handleInputChange(stateFieldName, event) {
@@ -43,7 +53,21 @@ class Signup extends Component {
           <input className="inputLogin" placeholder="username" type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
           <input className="inputLogin" placeholder="e-mail" type="text" value={this.state.email} onChange={(e) => this.handleInputChange("email", e)} /> <br />
           <input className="inputLogin" placeholder="password" type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
-          <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleClick(e)}>Signup</button>
+          <Button className="btn btn-trip-detail-search" color="#1F5B66" onClick={this.toggle}>Signup</Button>
+          {/* <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleClick(e)}>Signup</button> */}
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add your new destination</ModalHeader>
+            <ModalBody className="detail-size modalBody">
+              <div className="">
+                Some onboarding stuff here
+            </div>
+              <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
+                <Link className="btn-trip-detail-search" to="/home">
+                  Get started
+              </Link>
+              </Button>{' '}
+            </ModalBody>
+        </Modal>
         </form>
         <p>Do you already have an account?
           <Link className="login-signup-link" to="/login"> Login</Link>

@@ -6,7 +6,7 @@ $primary:  #1F5B66;
 // To install Boostrap:
 // 1) Run in the client folder: $ npm i bootstrap
 // 2) Import bootstrap with the following line
- @import 'bootstrap/scss/bootstrap';
+//  @import 'bootstrap/scss/bootstrap';
 // ----------------------------------------
 
 // --------------------
@@ -95,6 +95,7 @@ body {
   width: 140px;
   border-radius: 18px;
   margin: 1em;
+  
 }
 
 .btn-add-trip {
@@ -119,12 +120,25 @@ body {
 
 .link-to-detailed-trip{
   text-decoration: none;
+  text-decoration-color: 'white';
+  text-align: left;
+  font-size: 17px;
+  margin-top: 70%;
+  margin-bottom: 10%;
+  margin-left: 10%;
 }
 
 .homeboxes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: stretch;
+  margin: 0 auto;
+}
+
+.allBoxes{
+ display: flex;
+ justify-content: center;
+ margin-left: 4%;
 }
 }

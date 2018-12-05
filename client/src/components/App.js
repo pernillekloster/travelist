@@ -9,6 +9,7 @@ import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
 import userProfile from './pages/User-profile'
 import Start from "./pages/Start"
+import Onboarding from "./pages/Onboarding"
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/home" exact component={Home} />
           <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
+          <Route path="/onboarding" component={Onboarding} />
           <Route path="/login" component={Login} />
           <Route path="/user-profile" component={userProfile} />
           <Route path="/trip-detail/search/:id" exact component={Search} />

@@ -74,11 +74,12 @@ class Home extends Component {
     return (
       <div>
       <h4 className="homeHeader">Where is your next destination?</h4>
+      <div className="allBoxes" >
       <div className="homeboxes">
 
       <div>
         <div className="destinationbox" style={{ backgroundColor: "#257888", opacity: 0.3}}>
-        <Button className="btn btn-add-trip" onClick={this.toggle}>
+        <Button className="btn btn-add-trip " onClick={this.toggle}>
             <img className="plusicon" src="../../../images/plusSign.png" />
         </Button>
         </div>
@@ -86,11 +87,14 @@ class Home extends Component {
 
         {/* <Button className="btn btn-add-trip" onClick={this.toggle}>Add new tip</Button> */}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add your new destination</ModalHeader>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add your new destination</ModalHeader>
           <form>
-            <ModalBody>
-              Destination: <input type="text" style={{ border: 'solid' }} value={this.state.destination} onChange={(e) => this.handleInputChange("destination", e)} /> <br />
-              <Button color="primary" onClick={this.addTrip}>Save trip</Button>{' '}
+            <ModalBody className="detail-size modalBody">
+          <div className="inputCategoryTrip">
+
+            <input className="inputAddTip" type="text" Placeholder="Destination" style={{ border: 'solid' }} value={this.state.destination} onChange={(e) => this.handleInputChange("destination", e)} /> <br />
+            </div>
+              <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTrip}>Save trip</Button>{' '}
             </ModalBody>
           </form>
         </Modal>
@@ -100,12 +104,13 @@ class Home extends Component {
           {this.state.trips.map((t, i) => (
             <Link to={`trip-detail/${t._id}`}> 
             <div className="destinationbox" key={i} style={{ backgroundColor: this.getTripColor(t) }}>
-              <a className="link-to-detailed-trip"style={{color: 'white'}}>{t.destination}</a>
+              <a className="link-to-detailed-trip" style={{color: 'white'}}>{t.destination}</a>
             </div>
             </Link>
           ))}
         {/* </div> */}
 
+      </div>
       </div>
       </div>
     );

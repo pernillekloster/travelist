@@ -51,7 +51,7 @@ class TripDetail extends Component {
         isDeleted: true
       })
     ) 
-    this.props.history.push('/');
+    this.props.history.push('/home');
   }
 
 
