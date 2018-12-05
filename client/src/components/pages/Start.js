@@ -9,6 +9,14 @@ class Start extends Component {
     }
   }
 
+  handleSignup(e){
+    this.props.history.push("/signup") // Redirect to the home page
+  }
+
+  handleLogin(e){
+    this.props.history.push("/login") // Redirect to the home page
+  }
+
   render() {
     return (
       <div className="Start">
@@ -16,14 +24,13 @@ class Start extends Component {
         Some inspirational travel quote here?
         </div>
 
-          <button className="btn btn-trip-detail-search" color="#1F5B66">
+          <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleSignup(e)}>
           <Link className="btn-trip-detail-search" to="/signup">Signup</Link>
           </button>
 
-          <button className="btn btn-trip-detail-search" color="#1F5B66">
+          <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleLogin(e)}>
           <Link className="btn-trip-detail-search" to="/login">Login</Link>
           </button>
-      
       </div>
     );
   }
