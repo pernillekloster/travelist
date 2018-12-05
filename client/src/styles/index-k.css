@@ -214,3 +214,12 @@ border-radius: 18px !important;
   align-content: stretch;
   margin: 0 auto;
 }
+
+.create-trip-search {
+ width: 90%;
+ height: 40px;
+ border: none;
+ margin: 0 auto;
+ text-align: left;
+ background-color: white;
+}
