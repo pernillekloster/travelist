@@ -57,7 +57,7 @@ class App extends Component {
       
       <div class="col-3"> 
         <Link to="/user-profile" exact className="user-btn">
-          <img src="../../../images/userprofile.png" className="h-icon" />
+          <img src="../../../images/search.png" className="h-icon" />
         </Link>
       </div>
 
