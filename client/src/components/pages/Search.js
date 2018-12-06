@@ -46,17 +46,17 @@ class Search extends Component {
 
         {this.state.trips.length === 0 && 
         <div className="noFriendsYet-box"> 
-          <p className="detail-size">
+          <h4 className="homeHeader">
           None of your friends have been<br/> to {this.state.destination} <br/>
     <br/><button className="link-to-user-profile" onClick={this.goToUserProfile}>Find other TraveListers</button> <br/>
           {/* to follow others for inspiration */}
-          </p>
+          </h4>
         </div>
         }
 
         {this.state.trips.length > 0 && 
         <div>
-          <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
+          <h4 className="homeHeader">Your friends' trips to {this.state.destination}</h4>
           {this.state.trips.map((t) => (
               <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
               onClick={() => this.handleTrip(t._id)}>

@@ -25,6 +25,10 @@ class SearchDetail extends Component {
     });
   }
 
+  goToUserProfile = () => {
+    this.props.history.push("/user-profile" )
+  }
+
   goBack = () => {
     let id = this.props.match.params.id
     // Redirects the user to '/search/'+ id of the selected trip
@@ -72,9 +76,25 @@ class SearchDetail extends Component {
     // Check why destination display isnt working anymore  
     return (
       <div className="SearchDetail">
-        <button onClick={this.goBack}>Go back</button>
 
-        <p className="site-heading">{this.state.friend}{this.state.friend.slice(-1) === "s" ? "'" : "'s"} tips for {this.state.destination}</p>
+       <div className="back-btn" onClick={this.goBack}>
+        <img className="back-btn-img" src="../../../images/back.png"/>
+       </div>
+
+      {this.state.tips.length === 0 &&
+      <div className="noFriendsYet-box"> 
+      <h4 className="homeHeader">
+      {this.state.friend} doesn't have any tips <br/> for {this.state.destination} yet <br/>
+      <br/><button className="link-to-user-profile" onClick={this.goToUserProfile}>Find other TraveListers</button> <br/>
+      {/* to follow others for inspiration */}
+      </h4>
+    </div>
+      }
+
+      {this.state.tips.length > 0 &&
+      <div>
+
+        <h4 className="homeHeader">{this.state.friend}{this.state.friend.slice(-1) === "s" ? "'" : "'s"} tips for {this.state.destination}</h4>
 
         { arrayLength("food & drinks", this.state.tips) &&
         <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
@@ -96,10 +116,10 @@ class SearchDetail extends Component {
         <div>
         {this.state.category === "where to stay" && tipArray}
         </div>
+        </div>
+      }
+   
         
-
-        {/* <div>{categories}</div>
-        <div>{tipArray}</div> */}
       </div>
     );
   }
