@@ -36,6 +36,20 @@ class TripDetail extends Component {
     })
   }
 
+  doneTip(tip) {
+    let doneTipArr = this.state.tips
+    this.setState({
+      tips: doneTipArr
+    })
+  }
+
+  undoTip(tip) {
+    let undoneTipArr = this.state.tips
+    this.setState({
+      tips: undoneTipArr
+    })
+  }
+
   toggle  = (categoryBtn) => {
     this.setState({ 
       categoryBtn: categoryBtn,
@@ -79,14 +93,17 @@ class TripDetail extends Component {
               location= {filteredTips[i].location} 
               id={this.props.match.params.id}
               onDelete={tip => this.deleteTip(tip)}
+              onDone={tip => this.doneTip(tip)}
+              onUndo={tip => this.undoTip(tip)}
+              isDone={filteredTips[i].isDone}
               destination={this.state.selectedTrip.destination}
               // tips={this.state.tips}
               />
             </CardBody>
           </Card>
           </Collapse>
-        )
-    }
+        )}
+    
 
     tipArray.push(
       <div>
