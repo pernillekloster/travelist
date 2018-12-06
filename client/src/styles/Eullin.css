@@ -57,9 +57,12 @@
   border: none !important;
 }
 
-p .roboto{
-  font-family: 'Varela Round', sans-serif;
-  font-size: 20px;
-  text-align: center;
+/* .playfair{
+  font-family: 'Playfair Display', serif;
+  color: red;
+} */
+
+.second-word-formatting{
+  font-family: 'Playfair Display', serif;
 }
 
