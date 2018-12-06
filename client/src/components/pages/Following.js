@@ -40,7 +40,7 @@ export default class Following extends Component {
                   <td className="usernamesRow usernames">{user.username}</td>
                   <td className="usernamesRow">
                     <button
-                      className="btn user"
+                      className="btn user buttons"
                       onClick={() => this.handleFollowClick(user._id)}
                       style={{ marginBottom: "1rem" }}
                     >

@@ -54,7 +54,7 @@ export default class followers extends Component {
                 <td className="usernamesRow usernames">{user.username}</td>
                 <td className="usernamesRow">
                   <button
-                    className="btn"
+                    className="btn buttons"
                     onClick={() => this.handleFollowClick(user._id)}
                     style={{ marginBottom: "1rem" }}
                   >

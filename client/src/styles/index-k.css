@@ -213,7 +213,7 @@ border-radius: 18px !important;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: stretch;
-  margin: 0 auto;
+  margin-top: 100px;
 }
 
 .create-trip-search {
@@ -250,4 +250,16 @@ border-radius: 18px !important;
     color: black;
     font-size: 22px;
     border-radius: 0;
+}
+
+.back-btn{
+  background-color: white !important;
+  color: none;
+  border: none;
+  width: 70px;
+  height: 20%;
+}
+
+.back-btn-img{
+  height: 30px;
 }
