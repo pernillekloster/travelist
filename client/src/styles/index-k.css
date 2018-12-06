@@ -225,6 +225,17 @@ border-radius: 18px !important;
  color: black;
 }
 
+.link-to-user-profile {
+  background-color: white;
+  border: none;
+  color:  #1F5B66;
+  font-size: 22px;
+}
+
+.noFriendsYet-box {
+  margin: 0 auto;
+}
+
 .logout {
   color: black;
   text-decoration: none;

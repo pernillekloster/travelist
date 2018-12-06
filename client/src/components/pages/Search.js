@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Link } from 'react';
 import api from '../../api';
 import { Button } from 'reactstrap';
 // import './Sample.css';
@@ -18,6 +18,15 @@ class Search extends Component {
     this.props.history.push('/search/'+ this.state.tripId +"/" +idFriendTrip)
   }
 
+  goBack = () => {
+    let id = this.props.match.params.id
+    this.props.history.push('/trip-detail/'+ id )
+  }
+
+  goToUserProfile = () => {
+    this.props.history.push("/user-profile" )
+  }
+
   getTripColor(trip) {
     let colors = ['#1F5B66', '#257888', '#6E9FA8']
     let colorIndex = parseInt("0x" + trip._id.substr(-10)) % colors.length
@@ -28,33 +37,35 @@ class Search extends Component {
     let id = this.state.tripId
     return (
       <div className="Search">
-        <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
+
+        <button onClick={this.goBack}>Go back</button>
 
         <div className="homeboxesSearch">
 
+        {this.state.trips.length === 0 && 
+        <div className="noFriendsYet-box"> 
+          <p className="detail-size">
+          No trips from friends yet - <br/>
+          head over to your <br/>
+          
+          <button className="link-to-user-profile" onClick={this.goToUserProfile}>Go to user profile</button> <br/>
+        
+          and follow others for inspiration!
+          </p>
+        </div>
+        }
 
-        {this.state.trips.map((t) => (
-
-          //  <Button className="destinationbox" style={{ backgroundColor: this.getTripColor(t) }} onClick={() => this.handleTrip(t._id)}> 
-          //  <div className="destinationbox" key={t._id} >
-          //    <a className="link-to-detailed-trip"style={{color: 'white'}}>{t._creator.username}</a>
-          //  </div>
-          //  </Button>
-
-           // <Link to={`trip-detail/search/${id}/${t._id}`}> 
-          //  <div className="destinationbox" key={t._id} style={{ backgroundColor: this.getTripColor(t) }}>
-          //    <a className="link-to-detailed-trip" style={{color: 'white'}}>{t._creator.username}</a>
-          //  </div>
-           // </Link>
-
-            // <Link to={`trip-detail/search/${id}/${t._id}`}> 
-            <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
-            onClick={() => this.handleTrip(t._id)}>
-              <a className="link-to-detailed-trip-search" style={{color: 'white'}}>{t._creator.username}</a>
-            </Button>
-            // </Link>
-        )
-        )}
+        {this.state.trips.length > 0 && 
+        <div>
+          <p className="site-heading">These friends have been to {this.state.destination} as well:</p>
+          {this.state.trips.map((t) => (
+              <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
+              onClick={() => this.handleTrip(t._id)}>
+                <a className="link-to-detailed-trip-search" style={{color: 'white'}}>{t._creator.username}</a>
+              </Button>
+          ))}
+        </div>
+        }
 
         </div>
       </div>
