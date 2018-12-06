@@ -9,7 +9,6 @@ import SearchDetail from "./pages/SearchDetail"
 import api from '../api';
 import userProfile from './pages/User-profile'
 import Start from "./pages/Start"
-import Onboarding from "./pages/Onboarding"
 
 class App extends Component {
   constructor(props) {
@@ -19,20 +18,17 @@ class App extends Component {
     // api.loadUser();
   }
 
-  handleLogoutClick(e) {
-    api.logout()
-  }
-
+  
   render() {
     return (
     <div className="App">
+
       {!api.isLoggedIn() &&
        <div className="navbar" style={{ margin: 'auto' }}>
        <img src="../../images/travelistgray.png" className="travelisticon" />
        </div>
       }
-
-      <div>
+      
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
 
@@ -47,9 +43,12 @@ class App extends Component {
         <NavLink to="/user-profile" exact  className="up-icon">
           <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a679921270dc43365dc9971fee94ee9f924d826
       </div>
       }
-      </div>
     
         <header className="App-header">
         </header>
@@ -58,7 +57,6 @@ class App extends Component {
           <Route path="/home" exact component={Home} />
           <Route path="/trip-detail/:id" exact component={TripDetail} />      
           <Route path="/signup" component={Signup} />
-          <Route path="/onboarding" component={Onboarding} />
           <Route path="/login" component={Login} />
           <Route path="/user-profile" component={userProfile} />
           <Route path="/trip-detail/search/:id" exact component={Search} />

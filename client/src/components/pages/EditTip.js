@@ -61,13 +61,11 @@ class EditTip extends Component {
       <div>
         <Button className="btn btn-trip-detail-edit" onClick={this.toggle}>Edit</Button>
         <Modal className="Modal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Edit your tip:</ModalHeader>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Edit your tip</ModalHeader>
           <form>
           <ModalBody className="detail-size modalBody">
           <div className="inputCategoryTrip">
-            Category: <span>{this.props.category}</span>
             <input type="hidden" value={this.state.category} />
-             <br/>
           </div>
             <input className="inputAddTip" type="text" placeholder={this.state.title} style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
             <input className="inputAddTip" type="text" placeholder={this.state.location} style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>

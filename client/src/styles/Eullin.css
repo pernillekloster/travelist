@@ -4,10 +4,12 @@
   background-color: #1F5B66;
 } */
 
-
-
 #NavBar-Profile {
-  margin: 30px;
+  font-size: 22px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1em auto;
 }
 
 .profile-follow {
@@ -17,14 +19,41 @@
   border-radius: 18px;
 }
 
-.aColor {
-  color: #6E9FA8 !important;
+.middleLink {
+  padding-left: 10px;
+  padding-right: 10px;
 }
-.aColor:hover {
-  color: Buttons #1F5B66!important;
+
+.aColor {
+  color: black;
+}
+.aColor:active {
+  color: black !important;
+}
+
+.inputSearch {
+  width: 90%;
+  font-size: 22px;
+  border: none !important;
+  border-bottom: 1px solid grey !important;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 button{
   background-color: #1f5b66;
   color: white;
+  font-size: 20px !important;
 }
+
+.usernames {
+  font-size: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.usernamesRow {
+  border: none !important;
+}
+

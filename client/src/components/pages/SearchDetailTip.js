@@ -25,12 +25,12 @@ class SearchDetailTip extends Component {
   render() {
     return (
       <div className="SearchDetailTip">
-      {this.state.isAdded && <div className="addedStatus">Whoop, Tip added to your trip!</div>}
+      {this.state.isAdded && <div className="addedStatus">Whoop, tip added to your trip!</div>}
       {!this.state.isAdded && 
          <div  className="TripDetailTip" key={this.props.tipId}> 
-                <p><strong>Title:</strong> {this.props.title}</p>
-                <p><strong>Description:</strong> <br/> {this.props.description}</p>
-                <p><strong>Location:</strong> {this.props.location}</p>
+                <p><strong>Title</strong> <br/>{this.props.title}</p>
+                <p><strong>Description</strong> <br/> {this.props.description}</p>
+                <p><strong>Location</strong> <br/> {this.props.location}</p>
                 <button className="btn btn-trip-detail-addFriendsTip" color="#FAAD8D" onClick={() => this.handleAdd(this.props.tipId)}>Add</button>
         </div>
       }
