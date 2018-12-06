@@ -23,7 +23,7 @@ class Start extends Component {
     return (
       <div className="Start">
         <div className="onboarding important-header test">
-        <span>All your <span className="second-word-formatting">travel tips</span> <br/> in one place.</span>
+        <span>All your  <span className="second-word-formatting">travel tips</span> <br/> in one place.</span>
         </div>
 
           <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleSignup(e)}>
