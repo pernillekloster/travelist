@@ -22,7 +22,7 @@ class Start extends Component {
     return (
       <div className="Start">
         <div className="onboarding important-header">
-          Just go. Go see 
+            <p className="roboto"> All your travel tips <br/> in one place. </p>
         </div>
 
           <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleSignup(e)}>

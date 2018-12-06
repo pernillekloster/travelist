@@ -68,14 +68,13 @@ class SearchDetail extends Component {
         })
         return newArray.length > 0 ? true : false
       }
-
- 
+      
     // Check why destination display isnt working anymore  
     return (
       <div className="SearchDetail">
         <button onClick={this.goBack}>Go back</button>
 
-        <p className="site-heading">{this.state.friend}'s tips for {this.state.destination}:</p>
+        <p className="site-heading">{this.state.friend}{this.state.friend.slice(-1) === "s" ? "'" : "'s"} tips for {this.state.destination}</p>
 
         { arrayLength("food & drinks", this.state.tips) &&
         <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>

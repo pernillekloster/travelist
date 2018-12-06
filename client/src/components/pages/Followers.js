@@ -51,8 +51,8 @@ export default class followers extends Component {
             )
             .map(user => (
               <tr>
-                <td>{user.username}</td>
-                <td>
+                <td className="usernamesRow usernames">{user.username}</td>
+                <td className="usernamesRow">
                   <button
                     className="btn"
                     onClick={() => this.handleFollowClick(user._id)}

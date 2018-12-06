@@ -97,7 +97,7 @@ class Home extends Component {
   
     return (
       <div>
-      <h4 className="homeHeader">Where is your next destination?</h4>
+      <h4 className="homeHeader">Where are you going next?</h4>
       <div className="allBoxes" >
       <div className="homeboxes">
 
@@ -130,7 +130,7 @@ class Home extends Component {
              </tbody>
             </Table>
 
-              <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTrip}>Save trip</Button>{' '}
+              <Button className="btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTrip}>Save trip</Button>{' '}
             </ModalBody>
           </form>
         </Modal>

@@ -37,8 +37,8 @@ export default class Following extends Component {
               )
               .map(user => (
                 <tr>
-                  <td>{user.username}</td>
-                  <td>
+                  <td className="usernamesRow usernames">{user.username}</td>
+                  <td className="usernamesRow">
                     <button
                       className="btn user"
                       onClick={() => this.handleFollowClick(user._id)}

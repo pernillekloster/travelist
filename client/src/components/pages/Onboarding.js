@@ -38,7 +38,7 @@ class Start extends Component {
           <form>
             <ModalBody className="detail-size modalBody">
               <div className="">
-                Some onboarding stuff here
+                TEst Some onboarding stuff here
             </div>
               <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={this.addTrip}>
                 <Link className="btn-trip-detail-search" to="/home">

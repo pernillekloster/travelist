@@ -59,13 +59,14 @@ class Signup extends Component {
           <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add your new destination</ModalHeader>
             <ModalBody className="detail-size modalBody">
               <div className="">
-                Some onboarding stuff here
+              See where your friends have been, and add it to your travel list.
             </div>
-              <button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
-                <Link className="btn-trip-detail-search" to="/home">
+              <Button className="btn btn-trip-detail-saveTip" to="/home" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
+                {/* <Link className="btn-trip-detail-search" to="/home">
                   Get started
-              </Link>
-              </button>{' '}
+              </Link> */}
+              Get started
+              </Button>{' '}
             </ModalBody>
         </Modal>
         </form>

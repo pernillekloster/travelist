@@ -38,6 +38,7 @@
   text-decoration: none;
   margin: 0.5em;
   background-color: #1F5B66;
+  font-size: 22px;
 }
 
 .btn-trip-detail-dd {
@@ -46,6 +47,7 @@
   color: white;
   margin: 0.5em !important;
   background-color: #6E9FA8;
+  font-size: 22px;
 }
 
 .btn-trip-detail-addTip {
@@ -57,10 +59,7 @@
 }
 
 .btn-trip-detail-delete {
-  width: 90%;
-  height: 50px;
   color: black;
-  margin-top: 0.5;
   background-color: white;
 }
 
@@ -98,8 +97,10 @@
 /* addTip Component */
 
 .btn-trip-detail-saveTip {
- background-color:  #1F5B66;
- color: white;
+  width: 35%;
+  background-color:  #1F5B66;
+  color: white;
+  font-size: 20px !important;
 }
 
 .btn-trip-detail-cancelTip {
@@ -116,7 +117,7 @@ border-radius: 18px !important;
   width: 100%;
   border: none !important;
   border-bottom: 1px solid grey !important;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 .inputCategoryTrip {
@@ -236,8 +237,17 @@ border-radius: 18px !important;
   margin: 0 auto;
 }
 
-.logout {
-  color: black;
-  text-decoration: none;
-  font-size: 22px;
+.stickyFooter {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    background-color: white;
+    padding: 0.6em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-left: 0 !important;
+    color: black;
+    font-size: 22px;
+    border-radius: 0;
 }
