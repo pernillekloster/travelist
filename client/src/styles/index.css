@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   padding: 0;
   font-family: "Heebo", sans-serif; }
 
@@ -12,7 +11,9 @@ body {
   color: white; }
 
 .App {
-  text-align: center; }
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 55px; }
   .App .App-header {
     color: white; }
     .App .App-header .App-title {
@@ -22,17 +23,33 @@ body {
   .App .Home p {
     font-size: 1.2em; }
   .App .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0px;
     border-bottom: 1px solid grey;
     margin-bottom: 22px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center; }
+    align-items: center;
+    background: white; }
+  .App .navbarLogout {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    height: 88px; }
   .App .col-3 {
     width: 30%;
     display: flex;
     justify-content: center; }
   .App .tl-icon {
-    height: 88px; }
+    height: 80px; }
   .App .h-icon {
     height: 60%; }
   .App .travelist-btn {
@@ -71,7 +88,8 @@ body {
   .App .homeHeader {
     font-size: 22px;
     margin-top: 0.5em;
-    margin-bottom: 0.5em; }
+    margin-bottom: 0.5em;
+    margin: 0 auto; }
   .App .plusicon {
     height: 50%;
     width: 50%;

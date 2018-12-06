@@ -33,7 +33,7 @@ class App extends Component {
     <div className="App">
 
       {!api.isLoggedIn() &&
-       <div className="navbar nav">
+       <div className="navbarLogout">
        <div id="pernille">
        <img src="../../images/travelistgray.png" className="tl-icon" />
        </div>

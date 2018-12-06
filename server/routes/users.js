@@ -38,6 +38,16 @@ router.get("/followers", isLoggedIn, (req, res, next) => {
   });
 });
 
+
+// DELETE Route for users
+router.delete("/delete/:id", isLoggedIn, (req, res, next) => {
+  let id = req.user._id
+  User.findByIdAndDelete(id)
+  .then(userData => {
+    res.json(userData)
+  })
+})
+
 // POST Route to follow users - id in url is NOT of the logged in user but 
 // the id of the person the user wants to follow!
 router.post("/:id/follow", isLoggedIn, (req, res, next) => {

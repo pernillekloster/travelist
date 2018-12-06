@@ -40,22 +40,21 @@ class Search extends Component {
 
         <div className="back-btn" onClick={this.goBack}>
         <img className="back-btn-img" src="../../../images/back.png"/>
-       </div>
+        </div>
 
-        <div className="homeboxesSearch">
 
         {this.state.trips.length === 0 && 
         <div className="noFriendsYet-box"> 
           <h4 className="homeHeader">
           None of your friends have been<br/> to {this.state.destination} <br/>
-    <br/><button className="link-to-user-profile" onClick={this.goToUserProfile}>Find other TraveListers</button> <br/>
+          <br/><button className="link-to-user-profile" onClick={this.goToUserProfile}>Find other TraveListers</button> <br/>
           {/* to follow others for inspiration */}
           </h4>
         </div>
         }
 
         {this.state.trips.length > 0 && 
-        <div>
+        <div className="homeboxesSearch">
           <h4 className="homeHeader">Your friends' trips to {this.state.destination}</h4>
           {this.state.trips.map((t) => (
               <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
@@ -66,7 +65,6 @@ class Search extends Component {
         </div>
         }
 
-        </div>
       </div>
     );
   }

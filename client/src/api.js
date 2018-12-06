@@ -148,6 +148,13 @@ export default {
     .catch(errHandler)
   },
 
+  deleteUser(id){
+    return service
+    .delete("/users/delete/" + id)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
   getFriendsTrips(id) {
     return service
       .get("/trip-search/" + id)

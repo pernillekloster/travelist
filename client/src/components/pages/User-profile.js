@@ -35,6 +35,17 @@ class userProfile extends Component {
     return user.followers.includes(idLoggedInUser);
   }
 
+  handleUserDelete(e) {
+    let idLoggedInUser = api.getLoggedInUserSync()._id
+
+    api.deleteUser(idLoggedInUser)
+    .then(userData => {
+      console.log("DELETED")
+    })
+    api.logout()
+    this.props.history.push('/signup');
+  }
+
   render() {
     return (
     <div>
@@ -91,8 +102,11 @@ class userProfile extends Component {
           render={props => <Followers {...props} search={this.state.search} />}
         />
 
-
       </Container>
+
+      <div>
+      <Button className="btn-delete-profile" color="white" onClick={(e) => this.handleUserDelete(e)}>Delete profile</Button>
+      </div>
 
       <div class="stickyFooter">
       <Button className="stickyFooter" color="white" onClick={(e) => this.handleLogoutClick(e)}>Logout</Button>
