@@ -24,11 +24,15 @@ class SearchDetail extends Component {
       collapse: !this.state.collapse 
     });
   }
+
+  goBack = () => {
+    let id = this.props.match.params.id
+    // Redirects the user to '/search/'+ id of the selected trip
+    this.props.history.push('/trip-detail/search/'+ id )
+  }
   
   render() {
 
-
-    
     const tipArray = []
 
     let tips = this.state.tips.sort((a,b) => (a.category > b.category ? 1 : -1))
@@ -69,6 +73,8 @@ class SearchDetail extends Component {
     // Check why destination display isnt working anymore  
     return (
       <div className="SearchDetail">
+        <button onClick={this.goBack}>Go back</button>
+
         <p className="site-heading">{this.state.friend}'s tips for {this.state.destination}:</p>
 
         { arrayLength("food & drinks", this.state.tips) &&

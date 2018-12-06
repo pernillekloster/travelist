@@ -16,7 +16,6 @@ router.get("/", isLoggedIn, (req, res, next) => {
 router.get("/all", isLoggedIn, (req, res, next) => {
   User.find()
     .then(data => {
-      console.log("debug users backend", data)
     res.json(data);
   });
 });
@@ -26,7 +25,6 @@ router.get("/following", isLoggedIn, (req, res, next) => {
   User.findById(id)
     .populate("following")
     .then(data => {
-      console.log("debug data following backend", data)
     res.json(data.following);
   });
 });

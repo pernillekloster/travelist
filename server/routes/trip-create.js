@@ -101,7 +101,6 @@ router.delete('/trip-delete/:id', (req, res, next)=>{
 // DELETE Tip
 router.delete('/tip-delete/:tipId', (req, res, next)=>{
   let tipId = req.params.tipId
-  console.log("backend")
   Tip.findByIdAndRemove(tipId)
     .then(tipDoc => {
       res.json(tipDoc);
