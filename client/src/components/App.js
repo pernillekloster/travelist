@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
+import { Button } from 'reactstrap'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -18,31 +19,40 @@ class App extends Component {
     // api.loadUser();
   }
 
+  // handleRedirectToProfile = () => {
+  //   this.props.history.push("/user-profile") // Redirect to the home page
+  // }
+
+  // handleRedirectToHome = () => {
+  //   this.props.history.push("/home") // Redirect to the home page
+  // }
+
   
   render() {
     return (
     <div className="App">
 
       {!api.isLoggedIn() &&
-       <div className="navbar" style={{ margin: 'auto' }}>
-       <img src="../../images/travelistgray.png" className="travelisticon" />
+       <div className="navbar nav">
+       <div id="pernille">
+       <img src="../../images/travelistgray.png" className="tl-icon" />
+       </div>
        </div>
       }
       
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
-
-         <NavLink to="/home" exact style={{ height: '40%' }}>
+        <Link to="/home" exact className="home-btn">
           <img src="../../../images/home.png" className="h-icon" />
-        </NavLink>
+        </Link>
         
-        <NavLink className="" to="/home" exact>
+        <Link  to="/home" exact className="travelist-btn" >
        <img src="../../images/travelistgray.png" className="travelisticon" />
-       </NavLink>
+       </Link>
         
-        <NavLink to="/user-profile" exact  className="up-icon">
-          <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
-        </NavLink>
+        <Link to="/user-profile" exact className="home-btn">
+          <img src="../../../images/userprofile.png" className="h-icon" />
+        </Link>
       </div>
       }
     

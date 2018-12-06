@@ -97,7 +97,7 @@ class Home extends Component {
   
     return (
       <div>
-      <h4 className="homeHeader">Where are you going next?</h4>
+      <h4 className="homeHeader">Where are you traveling next?</h4>
       <div className="allBoxes" >
       <div className="homeboxes">
 
