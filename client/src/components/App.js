@@ -43,10 +43,6 @@ class App extends Component {
         <NavLink to="/user-profile" exact  className="up-icon">
           <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a679921270dc43365dc9971fee94ee9f924d826
       </div>
       }
     

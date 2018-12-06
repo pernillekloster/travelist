@@ -38,16 +38,18 @@ class Search extends Component {
     return (
       <div className="Search">
 
-        <button onClick={this.goBack}>Go back</button>
+        <div className="back-btn" onClick={this.goBack}>
+        <img className="back-btn-img" src="../../../images/back.png"/>
+       </div>
 
         <div className="homeboxesSearch">
 
         {this.state.trips.length === 0 && 
         <div className="noFriendsYet-box"> 
           <p className="detail-size">
-          None of your friends have been to {this.state.destination} <br/>
-          <button className="link-to-user-profile" onClick={this.goToUserProfile}>Go to your profile</button> <br/>
-          to follow others for inspiration
+          None of your friends have been<br/> to {this.state.destination} <br/>
+    <br/><button className="link-to-user-profile" onClick={this.goToUserProfile}>Find other TraveListers</button> <br/>
+          {/* to follow others for inspiration */}
           </p>
         </div>
         }
