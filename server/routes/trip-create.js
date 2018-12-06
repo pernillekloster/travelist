@@ -68,6 +68,39 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
       .catch(err => next(err))
   })
 
+//POST Route mark tip as done
+router.put('/create-tip/done/:id/:tipId', isLoggedIn, (req, res, next) => {
+ let id = req.params.id
+ let _tipId = req.params.tipId
+
+  Tip.findByIdAndUpdate(_tipId, {isDone: true})
+    .then(tipDoc => {
+      console.log("debug backend do ", tipDoc)
+          res.json({
+            success: true,
+            tip: tipDoc,
+          })
+        })
+    .catch(err => next(err))
+})
+
+
+//POST Route mark tip as undone
+router.put('/create-tip/undo/:id/:tipId', isLoggedIn, (req, res, next) => {
+  let id = req.params.id
+  let _tipId = req.params.tipId
+ 
+   Tip.findByIdAndUpdate(_tipId, {isDone: false})
+     .then(tipDoc => {
+       console.log("debug backend undo", tipDoc)
+           res.json({
+             success: true,
+             tip: tipDoc,
+           })
+         })
+     .catch(err => next(err))
+ })
+
 // Route to update a tip
 router.put('/create-tip/edit/:id/:tipId', isLoggedIn, (req, res, next) => {
   let _trip = req.params.id

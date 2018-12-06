@@ -77,9 +77,23 @@
 }
 
 .btn-trip-detail-delete {
-  width: 50%;
-  color: black;
+  color: black !important;
   border-radius: 18px;
+  font-size: 22px !important;
+  background-color: white !important;
+  border: none !important;
+}
+
+.btn-trip-detail-done{
+  color: white !important;
+  border-radius: 18px;
+  font-size: 22px !important;
+  background-color:#6E9FA8 !important;
+  border: none !important;
+}
+
+.doneBox {
+  text-align: left;
 }
 
 .btn-trip-detail-edit {

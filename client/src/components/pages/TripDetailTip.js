@@ -8,7 +8,7 @@ class TripDetailTip extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isDeleted: false,
+      isDoneFrontend: false,
       collapse: true, 
     }
   }
@@ -18,13 +18,36 @@ class TripDetailTip extends Component {
 
     api.deleteTip(tipId, id)
     .then(tipDoc => {
-      this.setState({
-        isDeleted: true
-      })
       this.props.onDelete(tipDoc) 
     }
     ) 
   }
+
+  handleIsDone(tipId){
+  console.log("hey im not supposed to be called")
+  let id = this.props.id
+
+  api.markTipAsDone(tipId, id)
+  .then (tipDoc => {
+    this.setState({
+      isDoneFrontend: true,
+    })
+    // this.props.onDone(tipDoc)
+  })
+  }
+
+  handleUndo(tipId){
+    console.log("hey im called")
+    let id = this.props.id
+  
+    api.markTipUndo(tipId, id)
+    .then (tipDoc => {
+      this.setState({
+        isDoneFrontend: false,
+      })
+      // this.props.onUndo(tipDoc)
+    })
+    }
 
   // editTip(tip) {
   //   this.setState({
@@ -35,6 +58,13 @@ class TripDetailTip extends Component {
   render() {
     return (
       <div >
+      {this.props.isDone &&
+      <div >
+        <p className="doneBox"><strong>Title:</strong> {this.props.title}</p>
+        <Button className="btn-trip-detail-done" onClick={() => this.handleUndo(this.props.tipId)}>Do again!</Button>
+      </div>
+      }
+      {!this.props.isDone && 
          <div  className="TripDetailTip" key={this.props.tipId}> 
                 <p><strong>Title</strong> <br/> {this.props.title}</p>
                 <p><strong>Description</strong> <br/> {this.props.description}</p>
@@ -55,11 +85,12 @@ class TripDetailTip extends Component {
                       />
                     </Collapse>
                   </div>
-                <button className="btn btn-trip-detail-delete" onClick={() => this.handleDelete(this.props.tipId)}>Delete</button>
+                  <Button className="btn btn-trip-detail-done" onClick={() => this.handleIsDone(this.props.tipId)}>Done!</Button>
+                  <Button className="btn btn-trip-detail-delete" onClick={() => this.handleDelete(this.props.tipId)}>Delete</Button>
                 </div>
 
           </div>
-      
+      }
       </div>
     );
   }
