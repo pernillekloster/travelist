@@ -56,11 +56,12 @@ class Signup extends Component {
           <Button className="btn btn-trip-detail-search" color="#1F5B66" onClick={this.toggle}>Signup</Button>
           {/* <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleClick(e)}>Signup</button> */}
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Start planning your next trip.</ModalHeader>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Start planning your next trip!</ModalHeader>
             <ModalBody className="detail-size modalBody">
               <div className="">
-             See where your friends have been, if there's one place you would like to visit, just click it 
-            and add it to your guide travel list.
+             See where your friends have been, <br/>
+             if there's one place you would like to visit, <br/>
+              just click it and add it to your travel list.
             </div>
             <br/>
               <Button className="btn btn-trip-detail-saveTip" to="/home" color="#1F5B66" onClick={(e) => this.handleClick(e)}>

@@ -25,40 +25,34 @@ body {
     border-bottom: 1px solid grey;
     margin-bottom: 22px;
     display: flex;
-    justify-content: space-between; }
-  .App #pernille {
-    width: 100%; }
-  .App .navbar2 {
-    border-bottom: 1px solid grey;
-    height: 88px;
-    margin-bottom: 22px; }
+    flex-wrap: wrap;
+    align-items: center; }
+  .App .col-3 {
+    width: 30%;
+    display: flex;
+    justify-content: center; }
   .App .tl-icon {
     height: 88px; }
   .App .h-icon {
-    height: 60%;
-    margin-top: 50%; }
-  @media only screen and (max-width: 600px) {
-    .App .travelist-btn {
-      width: 20%;
-      height: 80%;
-      margin-top: 3%; } }
+    height: 60%; }
   .App .travelist-btn {
-    width: 20%;
-    height: 80%;
-    margin-top: 3%; }
-  .App .travelisticon {
-    height: 100%;
+    display: flex;
+    justify-content: center;
     width: 100%; }
+  .App .travelisticon {
+    height: 60px; }
   .App .home-btn {
     height: 50px;
     width: 50px;
     display: flex;
-    justify-content: space-around;
-    margin-top: -3%; }
-  .App .up-icon {
-    height: 95%;
-    margin-left: 87%;
-    margin-bottom: 80%; }
+    align-items: center;
+    justify-content: flex-start; }
+  .App .user-btn {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; }
   .App .destinationbox {
     display: flex;
     flex-direction: column;

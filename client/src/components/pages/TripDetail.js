@@ -172,6 +172,18 @@ class TripDetail extends Component {
       .catch(err => console.log(err))
   }
 
+  componentDidUpdate(){
+    let id = this.props.match.params.id
+
+    api.getTips(id)
+    .then(tips => {
+      this.setState({
+        tips: tips
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
 }
 
 export default TripDetail;
