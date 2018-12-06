@@ -32,21 +32,27 @@ class App extends Component {
        </div>
       }
 
+      <div>
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
 
+         <NavLink to="/home" exact style={{ height: '40%' }}>
+          <img src="../../../images/home.png" className="h-icon" />
+        </NavLink>
         
         <NavLink className="" to="/home" exact>
        <img src="../../images/travelistgray.png" className="travelisticon" />
        </NavLink>
         
-        <NavLink to="/user-profile" exact  className="icon">
+        <NavLink to="/user-profile" exact  className="up-icon">
           <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
 
+             
 
       </div>
       }
+      </div>
     
         <header className="App-header">
         </header>

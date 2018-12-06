@@ -77,8 +77,8 @@ body {
   border-bottom: 1px solid grey;
   margin-bottom: 22px;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  justify-content: flex-start;
+  // flex-direction: row;
 }
 
 // .travelist-icon {
@@ -93,6 +93,20 @@ body {
 
 .icon {
   height: 95%;
+  // display: flex;
+  // flex-direction: row;
+  // margin-left: 80%;
+  // margin-top: -8%;
+}
+
+.h-icon{
+  height: 95%;
+  margin-right: 10%;
+}
+.up-icon{
+  height: 95%;
+  margin-left: 87%;
+  margin-bottom: 80%;
 }
 
 .destinationbox{

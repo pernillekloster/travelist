@@ -25,14 +25,20 @@ body {
     border-bottom: 1px solid grey;
     margin-bottom: 22px;
     display: flex;
-    justify-content: center;
-    flex-direction: row; }
+    justify-content: flex-start; }
   .App .travelisticon {
     height: 30%;
     width: 30%;
     margin-top: 20px; }
   .App .icon {
     height: 95%; }
+  .App .h-icon {
+    height: 95%;
+    margin-right: 10%; }
+  .App .up-icon {
+    height: 95%;
+    margin-left: 87%;
+    margin-bottom: 80%; }
   .App .destinationbox {
     display: flex;
     flex-direction: column;
