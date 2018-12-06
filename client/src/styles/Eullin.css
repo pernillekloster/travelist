@@ -1,12 +1,30 @@
-#btn-follow-ers-ing {
-  display: flex;
+/* .btn {
+  border-radius: 18px !important;
+  font-size: 22px !important;
+  background-color: #1F5B66;
+} */
+
+
+
+#NavBar-Profile {
+  margin: 30px;
 }
 
 .profile-follow {
-  text-decoration-line: underline;
-  color: black;
+  background-color: #1f5b66;
+  color: white;
+  border-color: none;
+  border-radius: 18px;
 }
 
-.btn {
-  border-radius: 18px!important;
+.aColor {
+  color: #6E9FA8 !important;
+}
+.aColor:hover {
+  color: Buttons #1F5B66!important;
+}
+
+button{
+  background-color: #1f5b66;
+  color: white;
 }

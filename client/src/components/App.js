@@ -48,7 +48,11 @@ class App extends Component {
           <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
 
+<<<<<<< HEAD
              
+=======
+        {/* {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>} */}
+>>>>>>> 144d83688bd9daa6aceacabf6354b0a7ed082c9b
 
       </div>
       }
