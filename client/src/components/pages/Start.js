@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap'
+import "../../styles/Eullin.css";
 
 
 class Start extends Component {
@@ -21,8 +22,8 @@ class Start extends Component {
   render() {
     return (
       <div className="Start">
-        <div className="onboarding important-header">
-          Just go. Go see 
+        <div className="onboarding important-header test">
+        <span>All your  <span className="second-word-formatting">travel tips</span> <br/> in one place.</span>
         </div>
 
           <button className="btn btn-trip-detail-search" color="#1F5B66" onClick={(e) => this.handleSignup(e)}>
