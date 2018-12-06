@@ -77,31 +77,71 @@ body {
   border-bottom: 1px solid grey;
   margin-bottom: 22px;
   display: flex;
-  justify-content: flex-start;
+  // flex-direction: row;
+  justify-content: space-between;
+  
   // flex-direction: row;
 }
 
-// .travelist-icon {
-//   margin-top: 5%;
-// }
-
-.travelisticon{
-  height: 30%;
-  width: 30%;
-  margin-top: 20px;
+#pernille{
+width: 100%;
 }
 
-.icon {
-  height: 95%;
+.navbar2 {
+  border-bottom: 1px solid grey;
+  height: 88px;
+  margin-bottom: 22px;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // flex-direction: row;
+}
+
+.tl-icon{
+  height: 88px;
+  // margin-left: 16%;
   // display: flex;
-  // flex-direction: row;
-  // margin-left: 80%;
-  // margin-top: -8%;
+  // align-items: center;
+  // justify-content: center;
 }
+
+
+
 
 .h-icon{
-  height: 95%;
-  margin-right: 10%;
+  height: 60%;
+  margin-top: 50%;
+  // margin-right: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+  .travelist-btn{
+    width: 20%;
+    height: 80%;
+    // border: solid black;
+    margin-top: 3%;  
+  }
+}
+
+.travelist-btn{
+  width: 20%;
+  height: 80%;
+  // border: solid black;
+  margin-top: 3%;
+}
+
+.travelisticon{
+  // border: solid black;
+  height: 100%;
+  width: 100%;
+}
+
+.home-btn{
+  height: 50px;
+  width: 50px;
+  // border: solid;
+  display: flex;
+  justify-content: space-around;
+  margin-top: -3%;
 }
 .up-icon{
   height: 95%;
