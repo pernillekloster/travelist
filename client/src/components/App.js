@@ -27,24 +27,36 @@ class App extends Component {
     return (
     <div className="App">
       {!api.isLoggedIn() &&
-       <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
+       <div className="navbar" style={{ margin: 'auto' }}>
+       <img src="../../images/travelistgray.png" className="travelisticon" />
+       </div>
       }
 
+      <div>
       {api.isLoggedIn() &&
       <div className="navbar" style={{ height: '88px' }}>
-        <NavLink to="/home" exact style={{ height: '40%' }}>
-          <img src="../../../images/home.png" className="icon" />
+
+         <NavLink to="/home" exact style={{ height: '40%' }}>
+          <img src="../../../images/home.png" className="h-icon" />
+        </NavLink>
+        
+        <NavLink className="" to="/home" exact>
+       <img src="../../images/travelistgray.png" className="travelisticon" />
+       </NavLink>
+        
+        <NavLink to="/user-profile" exact  className="up-icon">
+          <img src="../../../images/userprofile.png" className="hello" style={{ height: '40%' }} />
         </NavLink>
 
-        <h3 className="travelist-icon" style={{ margin: 'auto' }}>Travelist</h3>
-
+<<<<<<< HEAD
+             
+=======
         {/* {api.isLoggedIn() && <Link to="/login" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>} */}
+>>>>>>> 144d83688bd9daa6aceacabf6354b0a7ed082c9b
 
-        <NavLink to="/user-profile" exact style={{ height: '40%' }}>
-          <img src="../../../images/userprofile.png" className="icon" />
-        </NavLink>
       </div>
       }
+      </div>
     
         <header className="App-header">
         </header>

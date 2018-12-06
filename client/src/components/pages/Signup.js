@@ -61,11 +61,11 @@ class Signup extends Component {
               <div className="">
                 Some onboarding stuff here
             </div>
-              <Button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
+              <button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
                 <Link className="btn-trip-detail-search" to="/home">
                   Get started
               </Link>
-              </Button>{' '}
+              </button>{' '}
             </ModalBody>
         </Modal>
         </form>
@@ -73,7 +73,7 @@ class Signup extends Component {
           <Link className="login-signup-link" to="/login"> Login</Link>
         </p>
         {this.state.message && 
-        <div className="errormessage">
+        <div className="btn errormessage">
           {this.state.message}
         </div>}
       </div>
