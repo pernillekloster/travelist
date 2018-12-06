@@ -61,11 +61,12 @@ class Signup extends Component {
               <div className="">
                 Some onboarding stuff here
             </div>
-              <button className="btn btn-trip-detail-saveTip" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
-                <Link className="btn-trip-detail-search" to="/home">
+              <Button className="btn btn-trip-detail-saveTip" to="/home" color="#1F5B66" onClick={(e) => this.handleClick(e)}>
+                {/* <Link className="btn-trip-detail-search" to="/home">
                   Get started
-              </Link>
-              </button>{' '}
+              </Link> */}
+              Get started
+              </Button>{' '}
             </ModalBody>
         </Modal>
         </form>
