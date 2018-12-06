@@ -120,6 +120,20 @@ export default {
   .catch(errHandler);
   },
 
+  markTipAsDone(tipId, id) {
+    return service
+    .put("/trip-create/create-tip/done/" + id + "/" + tipId )
+    .then(res => res.data)
+    .catch(errHandler);
+    },
+
+  markTipUndo(tipId, id) {
+    return service
+    .put("/trip-create/create-tip/undo/" + id + "/" + tipId )
+    .then(res => res.data)
+    .catch(errHandler);
+    },
+
   deleteTrip(tripId) {
     return service
       .delete("/trip-create/trip-delete/" + tripId)

@@ -59,7 +59,7 @@ class EditTip extends Component {
   render() {
     return (
       <div>
-        <Button className="btn btn-trip-detail-edit" onClick={this.toggle}>Edit</Button>
+        <Button className="btn btn-trip-detail-delete" onClick={this.toggle}>Edit</Button>
         <Modal className="Modal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Edit your tip</ModalHeader>
           <form>
