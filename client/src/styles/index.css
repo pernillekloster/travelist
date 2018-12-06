@@ -55,7 +55,8 @@ body {
     align-items: center;
     background-color: #257888; }
   .App .homeHeader {
-    font-size: 22px; }
+    font-size: 22px;
+    margin-bottom: 0.5em; }
   .App .plusicon {
     height: 50%;
     width: 50%;

@@ -57,13 +57,14 @@ class AddTip extends Component {
       <div>
         <Button className="btn btn-trip-detail-addTip" color="#FAAD8D" onClick={this.toggle}>Add new tip</Button>
         <Modal className="Modal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>Add tip to your {this.props.destination} trip</ModalHeader>
+          <ModalHeader className="important-header modalHeader" toggle={this.toggle}>
+          <span className="important-header">Your {this.props.destination} trip</span> <br/>
+          Add tip to {this.props.category} 
+          </ModalHeader>
           <form>
           <ModalBody className="detail-size modalBody">
           <div className="inputCategoryTrip">
-            Category: <span>{this.props.category}</span>
             <input type="hidden" value={this.state.category} />
-             <br/>
           </div>
             <input className="inputAddTip" type="text" placeholder="Title" style={{border: 'solid'}} value={this.state.title} onChange={(e) => this.handleInputChange("title", e)} /> <br/>
             <input className="inputAddTip" type="text" placeholder="Location" style={{border: 'solid'}} value={this.state.location} onChange={(e) => this.handleInputChange("location", e)} /> <br/>

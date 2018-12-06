@@ -26,7 +26,7 @@ export default class AllUsers extends Component {
   render() {
     return (
       <Container className="userProfile">
-        <Table>
+        <Table >
           <tbody>
             {this.state.users
               .filter(users => {
@@ -39,8 +39,8 @@ export default class AllUsers extends Component {
               )
               .map(user => (
                 <tr key={user._id}>
-                  <td>{user.username}</td>
-                  <td>
+                  <td className="usernamesRow usernames">{user.username}</td>
+                  <td  className="usernamesRow">
                     <button
                       className="btn user"
                       outline={this.isFollowing(user)}
@@ -54,7 +54,6 @@ export default class AllUsers extends Component {
               ))}
           </tbody>
         </Table>
-        <hr />
       </Container>
     );
   }

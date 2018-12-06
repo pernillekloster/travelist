@@ -45,12 +45,9 @@ class Search extends Component {
         {this.state.trips.length === 0 && 
         <div className="noFriendsYet-box"> 
           <p className="detail-size">
-          No trips from friends yet - <br/>
-          head over to your <br/>
-          
-          <button className="link-to-user-profile" onClick={this.goToUserProfile}>Go to user profile</button> <br/>
-        
-          and follow others for inspiration!
+          None of your friends have been to {this.state.destination} <br/>
+          <button className="link-to-user-profile" onClick={this.goToUserProfile}>Go to your profile</button> <br/>
+          to follow others for inspiration
           </p>
         </div>
         }
@@ -76,6 +73,14 @@ class Search extends Component {
     // id of users trip
     let id = this.props.match.params.id
 
+    api.getTrip(id) 
+    .then(tripDoc => {
+      this.setState({
+        // Set destination to users chosen destination to display in headline
+        destination: tripDoc.destination
+      })
+    })
+
     api.getFriendsTrips(id)
       .then(matchedTrips=> {
         this.setState({
@@ -83,8 +88,6 @@ class Search extends Component {
           tripId: id,
           // Set state of trips to all trips that match search criteria (place and following)
           trips: matchedTrips,
-          // Set destination to users chosen destination to display in headline
-          destination: matchedTrips[0].destination,
         })
       })
       .catch(err => console.log(err))

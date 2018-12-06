@@ -104,7 +104,7 @@ class TripDetail extends Component {
     return (
       <div>
 
-        <p className="site-heading">Your saved tips for {this.state.destination}:</p>
+        <h4 className="homeHeader">Your saved tips for {this.state.destination}</h4>
 
         <Button className="btn btn-trip-detail-dd" color="#6E9FA8" onClick={() => this.toggle("food & drinks")} style={{ marginBottom: '1rem' }}>Food & Drinks</Button>
         <div>
@@ -128,9 +128,9 @@ class TripDetail extends Component {
           </Button>
         </div>
 
-          <br/>
-          <Button className="btn-trip-detail-delete" color="white" onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
-          <hr className="hr-trip-detail" />
+          <div className="stickyFooter">
+          <Button className="stickyFooter" color="white" onClick={() => this.handleDelete(this.props.id)}> Delete this trip </Button>
+          </div>
 
       </div>
     );
