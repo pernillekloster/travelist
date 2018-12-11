@@ -216,6 +216,13 @@ font-family: 'Roboto', sans-serif;
   border: none !important;
 }
 
+@media (max-width: 350px) {
+  .destinationboxSearch {
+    height: 115px;
+    width: 115px;
+  }
+}
+
 .link-to-detailed-trip-search{
   text-decoration: none;
   text-decoration-color: 'white';

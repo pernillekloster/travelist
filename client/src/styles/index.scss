@@ -149,6 +149,13 @@ body {
   margin: 1em;
 }
 
+@media (max-width: 350px) {
+  .destinationbox {
+    height: 115px;
+    width: 115px;
+  }
+}
+
 .btn-add-trip {
   height: 140px;
   width: 140px; 
@@ -157,6 +164,13 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #257888;
+}
+
+@media (max-width: 350px) {
+  .btn-add-trip {
+    height: 115px;
+    width: 115px;
+  }
 }
 
 .homeHeader{
@@ -182,6 +196,12 @@ body {
   margin-left: 10%;
 }
 
+.allBoxes{
+ display: flex;
+ justify-content: center;
+ margin-left: 4%;
+}
+
 .homeboxes {
   display: flex;
   flex-wrap: wrap;
@@ -190,11 +210,6 @@ body {
   margin: 0 auto;
 }
 
-.allBoxes{
- display: flex;
- justify-content: center;
- margin-left: 4%;
-}
 
 
 }

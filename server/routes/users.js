@@ -40,11 +40,21 @@ router.get("/followers", isLoggedIn, (req, res, next) => {
 
 
 // DELETE Route for users
-router.delete("/delete/:id", isLoggedIn, (req, res, next) => {
-  let id = req.user._id
+router.delete("/delete/:id", (req, res, next) => {
+  let id = req.params.id
   User.findByIdAndDelete(id)
   .then(userData => {
     res.json(userData)
+  })
+  Trip.find({_creator: id})
+  .then(tripData => {
+    console.log(tripData)
+    for (let i = 0; i < tripData.length; i++) {
+      Trip.findByIdAndRemove(tripData[i]._id)
+      .then(tripDoc => {
+        res.json(tripDoc)
+      })
+    }
   })
 })
 
