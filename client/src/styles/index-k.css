@@ -1,6 +1,8 @@
 .btn {
   border-radius: 18px !important;
   font-size: 22px !important;
+  text-align: center !important ;
+  overflow-y: visible;
 }
 
 .site-heading {
