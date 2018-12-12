@@ -48,10 +48,11 @@ class SearchDetail extends Component {
    
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
-        <Collapse isOpen={this.state.collapse}>
+        <Collapse key={i} isOpen={this.state.collapse}>
           <Card className="TripDetailTipCard">
             <CardBody className="TripDetailTipCardBody">
               <SearchDetailTip 
+              key={i}
               tipId={filteredTips[i]._id} 
               title={filteredTips[i].title} 
               category={filteredTips[i].category}

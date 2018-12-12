@@ -1,4 +1,4 @@
-import React, { Component, Link } from 'react';
+import React, { Component } from 'react';
 import api from '../../api';
 import { Button } from 'reactstrap';
 // import './Sample.css';
@@ -34,12 +34,12 @@ class Search extends Component {
   }
 
   render() {
-    let id = this.state.tripId
+    
     return (
       <div className="Search">
 
         <div className="back-btn" onClick={this.goBack}>
-        <img className="back-btn-img" src="../../../images/back.png"/>
+        <img className="back-btn-img" alt="back-btn" src="../../../images/back.png"/>
         </div>
 
 
@@ -56,8 +56,8 @@ class Search extends Component {
         {this.state.trips.length > 0 && 
         <div className="homeboxesSearch">
           <h4 className="homeHeader">Your friends' trips to {this.state.destination}</h4>
-          {this.state.trips.map((t) => (
-              <Button className="destinationboxSearch" key={t._id} style={{ backgroundColor: this.getTripColor(t) }} 
+          {this.state.trips.map((t, i) => (
+              <Button className="destinationboxSearch" key={i} style={{ backgroundColor: this.getTripColor(t) }} 
               onClick={() => this.handleTrip(t._id)}>
                 <a className="link-to-detailed-trip-search" style={{color: 'white'}}>{t._creator.username}</a>
               </Button>

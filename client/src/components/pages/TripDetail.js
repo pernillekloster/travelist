@@ -30,7 +30,7 @@ class TripDetail extends Component {
   }
 
   deleteTip(tip) {
-    let newTipArr = this.state.tips.filter(t => t._id != tip._id)
+    let newTipArr = this.state.tips.filter(t => t._id !== tip._id)
     this.setState({
       tips: newTipArr
     })
@@ -41,6 +41,16 @@ class TripDetail extends Component {
     this.setState({
       tips: doneTipArr
     })
+    console.log("done");
+    
+    let id = this.props.match.params.id
+    api.getTips(id)
+    .then(tips => {
+      this.setState({
+        tips: tips
+      })
+    })
+    .catch(err => console.log(err))
   }
 
   undoTip(tip) {
@@ -48,6 +58,14 @@ class TripDetail extends Component {
     this.setState({
       tips: undoneTipArr
     })
+    let id = this.props.match.params.id
+    api.getTips(id)
+    .then(tips => {
+      this.setState({
+        tips: tips
+      })
+    })
+    .catch(err => console.log(err))
   }
 
   toggle  = (categoryBtn) => {
@@ -57,15 +75,16 @@ class TripDetail extends Component {
     });
   }
 
-   async handleDelete() {
-     let id = this.props.match.params.id
-    await api.deleteTrip(id)
-    .then(updateTrip =>
-      this.setState({
-        isDeleted: true
+  handleDelete() {
+    let id = this.props.match.params.id
+    api.deleteTrip(id)
+      .then(updateTrip => {
+        this.setState({
+          isDeleted: true
+        }, () => {
+          this.props.history.push('/home');
+        })
       })
-    ) 
-    this.props.history.push('/home');
   }
 
 
@@ -82,10 +101,11 @@ class TripDetail extends Component {
 
     for (let i = 0; i < filteredTips.length; i++) {
       tipArray.push(
-        <Collapse isOpen={this.state.collapse}>
+        <Collapse key={filteredTips[i]._id} isOpen={this.state.collapse}>
           <Card className="TripDetailTipCard">
             <CardBody className="TripDetailTipCardBody">
               <TripDetailTip 
+              key={i}
               tipId={filteredTips[i]._id} 
               title={filteredTips[i].title} 
               category={filteredTips[i].category}
@@ -106,8 +126,8 @@ class TripDetail extends Component {
     
 
     tipArray.push(
-      <div>
-      <Collapse isOpen={this.state.collapse}>
+      <div key={tipArray.length+1}>
+      <Collapse key="add-tip" isOpen={this.state.collapse}>
         <AddTip 
         id={this.props.match.params.id}
         onAdd={tip => this.addTip(tip)}
@@ -170,18 +190,6 @@ class TripDetail extends Component {
         })
       })
       .catch(err => console.log(err))
-  }
-
-  componentDidUpdate(){
-    let id = this.props.match.params.id
-
-    api.getTips(id)
-    .then(tips => {
-      this.setState({
-        tips: tips
-      })
-    })
-    .catch(err => console.log(err))
   }
 
 }

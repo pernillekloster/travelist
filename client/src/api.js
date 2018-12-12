@@ -58,13 +58,6 @@ export default {
     return service.get("/logout");
   },
 
-  getSecret() {
-    return service
-      .get("/secret")
-      .then(res => res.data)
-      .catch(errHandler);
-  },
-
   addPicture(file) {
     const formData = new FormData();
     formData.append("picture", file);
@@ -150,7 +143,7 @@ export default {
 
   deleteUser(id){
     return service
-    .delete("/users/delete/" + id)
+    .delete("/users/delete/"+ id)
     .then(res => res.data)
     .catch(errHandler)
   },

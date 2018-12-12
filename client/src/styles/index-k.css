@@ -1,8 +1,6 @@
 .btn {
   border-radius: 18px !important;
   font-size: 22px !important;
-  text-align: center !important ;
-  overflow-y: visible;
 }
 
 .site-heading {
@@ -41,6 +39,7 @@
   margin: 0.5em;
   background-color: #1F5B66;
   font-size: 22px;
+  overflow-wrap: normal !important;
 }
 
 .btn-trip-detail-dd {

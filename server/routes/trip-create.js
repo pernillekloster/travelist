@@ -5,14 +5,8 @@ const User = require("../models/User")
 const Trip = require("../models/Trip")
 const Tip = require("../models/Tip")
 
-
-router.use((req, res, next) => {
-  next()
-})
-
 // GET Route to get all trips
 router.get('/get-trip', isLoggedIn, (req, res, next) => {
-  let _trip = req.params.id
   Trip.find()
     .then(trip => {
       res.json(trip);
@@ -53,25 +47,26 @@ router.get('/get-tip/:id', isLoggedIn, (req, res, next) => {
 });
 
 //POST Route create tip
-  router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
-    let _trip = req.params.id
-    let { category, description, title, location } = req.body
-    let _creator = req.user._id
+router.post('/create-tip/:id', isLoggedIn, (req, res, next) => {
+  let _trip = req.params.id
+  let { category, description, title, location } = req.body
+  let _creator = req.user._id
 
-    Tip.create({ _creator, _trip, category, description, title, location })
-      .then(tipDoc => {
-            res.json({
-              success: true,
-              tip: tipDoc,
-            })
+  Tip.create({ _creator, _trip, category, description, title, location })
+    .then(tipDoc => {
+          res.json({
+            success: true,
+            tip: tipDoc,
           })
-      .catch(err => next(err))
-  })
+        })
+    .catch(err => next(err))
+})
 
 //POST Route mark tip as done
 router.put('/create-tip/done/:id/:tipId', isLoggedIn, (req, res, next) => {
- let id = req.params.id
+//  let id = req.params.id
  let _tipId = req.params.tipId
+ // TODO, if you want to merge, you can send req.body.isDone with true or false
 
   Tip.findByIdAndUpdate(_tipId, {isDone: true})
     .then(tipDoc => {
@@ -103,10 +98,12 @@ router.put('/create-tip/undo/:id/:tipId', isLoggedIn, (req, res, next) => {
 
 // Route to update a tip
 router.put('/create-tip/edit/:id/:tipId', isLoggedIn, (req, res, next) => {
-  let _trip = req.params.id
+  // let _trip = req.params.id
+  // TODO: you don t need ":id"
+  // TODO: make sure the connected user is the owner of the tip
   let {description, title, location } = req.body
 
-  let _creator = req.user._id
+  // let _creator = req.user._id
   let _tipId = req.params.tipId
   
   Tip.findByIdAndUpdate(_tipId, {description, title, location })
@@ -120,6 +117,7 @@ router.put('/create-tip/edit/:id/:tipId', isLoggedIn, (req, res, next) => {
 
 // DELETE Trip from user
 router.delete('/trip-delete/:id', (req, res, next)=>{
+  // TODO: make sure the connected user is the owner of the tip
   let tripId = req.params.id
 
   Trip.findByIdAndRemove(tripId)
@@ -133,6 +131,7 @@ router.delete('/trip-delete/:id', (req, res, next)=>{
 
 // DELETE Tip
 router.delete('/tip-delete/:tipId', (req, res, next)=>{
+  // TODO: make sure the connected user is the owner of the tip
   let tipId = req.params.tipId
   Tip.findByIdAndRemove(tipId)
     .then(tipDoc => {

@@ -123,7 +123,7 @@ class Home extends Component {
             <tbody>
               {filteredArr
               .map((t, i) => (
-                <tr key={"t"-i} className="create-trip-search">
+                <tr key={i} className="create-trip-search">
                   <button className="create-trip-search"  onClick={(e) => this.chooseDestination(e, t)}>{t}</button>
                 </tr>
               ))}
@@ -135,14 +135,12 @@ class Home extends Component {
           </form>
         </Modal>
 
-
-        
           {this.state.trips.map((t, i) => (
-            <Link to={`trip-detail/${t._id}`}> 
             <div className="destinationbox" key={i} style={{ backgroundColor: this.getTripColor(t) }}>
-              <a className="link-to-detailed-trip" style={{color: 'white'}}>{t.destination}</a>
-            </div>
+            <Link key={t._id} to={`trip-detail/${t._id}` } className="link-to-detailed-trip" style={{color: 'white'}}> 
+              {t.destination}
             </Link>
+            </div>
           ))}
       
 

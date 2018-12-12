@@ -109,7 +109,8 @@ body {
     font-size: 17px;
     margin-top: 70%;
     margin-bottom: 10%;
-    margin-left: 10%; }
+    margin-left: 10%;
+    overflow-wrap: normal !important; }
   .App .allBoxes {
     display: flex;
     justify-content: center;

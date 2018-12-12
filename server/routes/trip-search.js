@@ -21,14 +21,14 @@ router.get('/:id', isLoggedIn, (req, res, next) => {
 
   // Find Users trip to get info about destination and the people the user follow (via populate)
   Trip.findById(id)
-  .populate("_creator")
+  .populate("_creator", "following")
   .then(tripData => {
     let tripDestination = tripData.destination
 
     let following = tripData._creator.following
 
       Trip.find({destination: tripDestination, _creator: {$in: following}, _id: {$ne: id}})
-      .populate("_creator")
+      .populate("_creator", "following followers username")
       .then(tripsData => {
         res.json(
           tripsData
@@ -42,7 +42,7 @@ router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
   // Get id of friends trip
   let friendsId = req.params.friendsId
   // Store id of the users trip to use it in next route
-  let id = req.params.id
+  let id = req.params.id  // Not used anymore
 
   // Find selected friends trip and display details
   Trip.findById(friendsId)
@@ -58,7 +58,7 @@ router.get("/:id/:friendsId", isLoggedIn, (req, res, next) => {
 router.post("/:id/:friendsId/:newTipId", isLoggedIn, (req, res, next) => {
   // Get id of users trip
   let id = req.params.id
-  let friendsId = req.params.friendsId
+  let friendsId = req.params.friendsId // Not used anymore
   let newTipId = req.params.newTipId
 
   // Create copy of tip based on newTipId and pass on that TipId to be added to array

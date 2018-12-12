@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import { Collapse, Button } from 'reactstrap';
 import api from '../../api';
 import EditTip from "./EditTip"
 // import './Sample.css';
@@ -26,13 +26,13 @@ class TripDetailTip extends Component {
   handleIsDone(tipId){
   console.log("hey im not supposed to be called")
   let id = this.props.id
-
+  
   api.markTipAsDone(tipId, id)
   .then (tipDoc => {
+    this.props.onDone(tipDoc)
     this.setState({
       isDoneFrontend: true,
     })
-    // this.props.onDone(tipDoc)
   })
   }
 
@@ -45,7 +45,7 @@ class TripDetailTip extends Component {
       this.setState({
         isDoneFrontend: false,
       })
-      // this.props.onUndo(tipDoc)
+      this.props.onUndo(tipDoc)
     })
     }
 

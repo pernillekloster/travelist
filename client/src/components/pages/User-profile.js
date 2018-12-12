@@ -108,7 +108,7 @@ class userProfile extends Component {
       <Button className="btn-delete-profile" color="white" onClick={(e) => this.handleUserDelete(e)}>Delete profile</Button>
       </div>
 
-      <div class="stickyFooter">
+      <div className="stickyFooter">
       <Button className="stickyFooter" color="white" onClick={(e) => this.handleLogoutClick(e)}>Logout</Button>
       </div>
 

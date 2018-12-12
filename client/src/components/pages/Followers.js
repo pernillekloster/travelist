@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
-import { Button, Container, Input, Table } from "reactstrap";
+import { Table } from "reactstrap";
 
 export default class followers extends Component {
   constructor(props) {
